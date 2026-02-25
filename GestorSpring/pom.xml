@@ -30,23 +30,76 @@
 		<java.version>25</java.version>
 	</properties>
 	<dependencies>
+
+		<!-- JPA + Hibernate + Spring Data.
+             Permite usar JpaRepository, @Entity, @Query y manejar la persistencia
+             hacia la base de datos automáticamente. -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc</artifactId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
+		<!-- Driver JDBC para PostgreSQL.
+             Permite que la aplicación se conecte a la base de datos PostgreSQL en runtime. -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Starter Web.
+             Incluye Spring MVC, Tomcat embebido y soporte para crear APIs REST
+             usando @RestController, @GetMapping, etc. -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- Starter base de Spring Boot.
+             Proporciona auto-configuración y logging.
+             (Es redundante porque spring-boot-starter-web ya lo incluye). -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<!-- Dependencias para testing.
+             Incluye JUnit, Mockito y Spring Test para pruebas unitarias e integración. -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Librería para conversión entre objetos Java y JSON.
+             Spring Boot ya la incluye dentro de starter-web,
+             por lo que esta dependencia es redundante. -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.16.0</version>
+		</dependency>
+
+		<!-- Actuator.
+             Permite exponer endpoints de monitoreo como /actuator/health
+             para métricas, estado de la aplicación y observabilidad. -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<!-- DevTools.
+             Habilita reinicio automático en desarrollo cuando se detectan cambios
+             en el código. Solo se usa en entorno de desarrollo. -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+
 	</dependencies>
+
 
 	<build>
 		<plugins>
