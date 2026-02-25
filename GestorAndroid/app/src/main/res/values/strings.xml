@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">Gestor_gasolina</string>
+
+    <string name="app_name">Gestor Gasolina</string>
+
+    <string name="registro_titulo">Registro de Usuario</string>
+    <string name="nombre">Nombre</string>
+    <string name="correo">Correo</string>
+    <string name="password">Contraseña</string>
+    <string name="registrarse">Registrarse</string>
+
+    <string-array name="roles_usuario">
+        <item>CLIENTE</item>
+        <item>ADMINISTRADOR</item>
+        <item>DISTRIBUIDOR</item>
+    </string-array>
+
 </resources>
