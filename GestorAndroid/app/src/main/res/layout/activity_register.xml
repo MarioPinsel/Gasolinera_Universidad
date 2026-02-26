@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"/>
 
     <EditText
-        android:id="@+id/etCorreo"
+        android:id="@+id/etEmail"
         android:hint="@string/correo"
         android:inputType="textEmailAddress"
         android:layout_marginTop="10dp"

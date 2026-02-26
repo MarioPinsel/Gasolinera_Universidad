@@ -5,56 +5,64 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import efm.gasolina.model.LoginRequest;
-import efm.gasolina.model.User;
-import efm.gasolina.network.ApiClient;
-import efm.gasolina.network.ApiService;
+import efm.gasolina.model.LoginResponse;
+import efm.gasolina.repository.UserRepository;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
 
-    private final ApiService apiService;
-    private final MutableLiveData<String> loginResult = new MutableLiveData<>();
+    private final UserRepository repository;
+    private final MutableLiveData<LoginResponse> loginSuccess = new MutableLiveData<>();
+    private final MutableLiveData<String> loginError = new MutableLiveData<>();
 
     public LoginViewModel() {
-        apiService = ApiClient.getClient().create(ApiService.class);
+        repository = new UserRepository();
     }
 
-    public LiveData<String> getLoginResult() {
-        return loginResult;
-    }
+    public LiveData<LoginResponse> getLoginSuccess() { return loginSuccess; }
+    public LiveData<String> getLoginError() { return loginError; }
 
-    public void login(String correo, String password) {
+    public void login(String email, String password) {
 
-        if (correo.isEmpty() || password.isEmpty()) {
-            loginResult.setValue("ERROR:Ingresa correo y contraseña");
+        if (email.isEmpty() && password.isEmpty()) {
+            loginError.setValue("All fields are required");
             return;
         }
 
-        LoginRequest request = new LoginRequest(correo, password);
-        // primero creas el objeto LoginRequest
-        // luego se lo mandas a la API
+        if (email.isEmpty()) {
+            loginError.setValue("Email is required");
+            return;
+        }
 
-        apiService.login(request).enqueue(new Callback<User>() {
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            loginError.setValue("Enter a valid email");
+            return;
+        }
+
+        if (password.isEmpty()) {
+            loginError.setValue("Password is required");
+            return;
+        }
+
+        repository.login(new LoginRequest(email, password)).enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(Call<User> call,
-                                   Response<User> response) {
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    String rol = response.body().getRole();
-                    loginResult.setValue("OK:" + rol);
+                    loginSuccess.setValue(response.body());
                 } else if (response.code() == 401) {
-                    loginResult.setValue("ERROR:Credenciales incorrectas");
+                    loginError.setValue("Incorrect credentials");
                 } else if (response.code() == 403) {
-                    loginResult.setValue("ERROR:Tu cuenta está pendiente de aprobación");
+                    loginError.setValue("Account pending approval");
                 } else {
-                    loginResult.setValue("ERROR:Error " + response.code());
+                    loginError.setValue("Server error " + response.code());
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                loginResult.setValue("ERROR:Sin conexión");
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                loginError.setValue("No internet connection");
             }
         });
     }
