@@ -16,7 +16,7 @@ public interface ApiService {
     Call<User> login(@Body LoginRequest request);
 
     @POST("api/session/forgotPassword")
-    Call<String> forgotPassword(@Body String request);
+    Call<Void> forgotPassword(@Body String request);
 
     @POST("api/session/codeVerifier")
     Call<Void> codeVerifier(@Body String request);

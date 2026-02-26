@@ -35,20 +35,18 @@ public class RecoverByEmailViewModel extends ViewModel {
         // primero creas el objeto LoginRequest
         // luego se lo mandas a la API
 
-        apiService.forgotPassword(request).enqueue(new Callback<TokenResponse>() {
+        apiService.forgotPassword(request).enqueue(new Callback<Void>() {
 
             @Override
-            public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    String token = response.body().getToken();
-                    tokenManager.saveToken(token);
                     requestRecoverResult.setValue("OK");
                 } else if (response.code() == 404) {
                     requestRecoverResult.setValue("ERROR:Correo no encontrado");
                 }
             }
             @Override
-            public void onFailure(Call<TokenResponse> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 requestRecoverResult.setValue("ERROR:Sin conexión");
             }
         });
