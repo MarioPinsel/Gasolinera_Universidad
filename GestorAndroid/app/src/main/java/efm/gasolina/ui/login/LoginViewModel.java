@@ -41,7 +41,7 @@ public class LoginViewModel extends ViewModel {
             public void onResponse(Call<User> call,
                                    Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    String rol = response.body().getRol();
+                    String rol = response.body().getRole();
                     loginResult.setValue("OK:" + rol);
                 } else if (response.code() == 401) {
                     loginResult.setValue("ERROR:Credenciales incorrectas");

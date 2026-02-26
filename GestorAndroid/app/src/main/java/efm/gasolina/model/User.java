@@ -2,22 +2,22 @@ package efm.gasolina.model;
 
 public class User {
 
-    private String nombre;
-    private String correo;
+    private String name;
+    private String email;
     private String password;
-    private String rol;
+    private String role;
 
-    public User(String nombre, String correo,
-                String password, String rol) {
+    public User(String name, String email,
+                String password, String role) {
 
-        this.nombre = nombre;
-        this.correo = correo;
+        this.name = name;
+        this.email = email;
         this.password = password;
-        this.rol = rol;
+        this.role = role;
     }
 
-    public String getNombre() { return nombre; }
-    public String getCorreo() { return correo; }
+    public String getName() { return name; }
+    public String getEmail() { return email; }
     public String getPassword() { return password; }
-    public String getRol() { return rol; }
+    public String getRole() { return role; }
 }
