@@ -1,6 +1,5 @@
 package efm.gasolina.ui.login;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,40 +12,33 @@ import efm.gasolina.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText etCorreo, etPassword;
-    Button btnLogin;
-    LoginViewModel viewModel;
+    private EditText etEmail, etPassword;
+    private Button btnLogin;
+    private LoginViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        etCorreo = findViewById(R.id.etCorreo);
+        etEmail    = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-        btnLogin = findViewById(R.id.btnLogin);
+        btnLogin   = findViewById(R.id.btnLogin);
 
-        viewModel = new ViewModelProvider(this)
-                .get(LoginViewModel.class);
+        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
-        viewModel.getLoginResult().observe(this, result -> {
-            if (result.startsWith("OK:")) {
-                String rol = result.substring(3);
-                // Aquí navegas a la pantalla según el rol
-                Toast.makeText(this,
-                        "Bienvenido, rol: " + rol, Toast.LENGTH_SHORT).show();
-                // TODO: redirigir según rol
-            } else {
-                Toast.makeText(this,
-                        result.substring(7), Toast.LENGTH_SHORT).show();
-            }
+        viewModel.getLoginSuccess().observe(this, user -> {
+            Toast.makeText(this, "Welcome, role: " + user.getRol(), Toast.LENGTH_SHORT).show();
+            // TODO: redirigir según rol
         });
 
-        btnLogin.setOnClickListener(v -> {
-            viewModel.login(
-                    etCorreo.getText().toString().trim(),
-                    etPassword.getText().toString().trim()
-            );
+        viewModel.getLoginError().observe(this, error -> {
+            Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
         });
+
+        btnLogin.setOnClickListener(v -> viewModel.login(
+                etEmail.getText().toString().trim(),
+                etPassword.getText().toString().trim()
+        ));
     }
 }

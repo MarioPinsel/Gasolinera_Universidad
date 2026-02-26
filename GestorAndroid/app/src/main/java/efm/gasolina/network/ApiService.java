@@ -1,6 +1,7 @@
 package efm.gasolina.network;
 
 import efm.gasolina.model.LoginRequest;
+import efm.gasolina.model.LoginResponse;
 import efm.gasolina.model.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -12,5 +13,5 @@ public interface ApiService {
     Call<Void> registerUser(@Body User user);
 
     @POST("api/users/login")
-    Call<User> login(@Body LoginRequest request);
+    Call<LoginResponse> login(@Body LoginRequest request);
 }
