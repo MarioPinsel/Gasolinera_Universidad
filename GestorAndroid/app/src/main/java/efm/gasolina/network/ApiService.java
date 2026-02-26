@@ -12,6 +12,6 @@ public interface ApiService {
     @POST("/sesion/register")
     Call<Void> registerUser(@Body User user);
 
-    @POST("api/users/login")
+    @POST("/sesion/login")
     Call<LoginResponse> login(@Body LoginRequest request);
 }
