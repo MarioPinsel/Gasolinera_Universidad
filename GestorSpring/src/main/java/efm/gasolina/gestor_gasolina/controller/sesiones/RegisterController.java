@@ -18,12 +18,5 @@ public class RegisterController {
     @PostMapping("/register")
     public RegisterDTO register(@RequestBody RegisterDTO request) {
         return sesionService.registro(request);
-    }
-
-    @PostMapping("/forgotPasword")
-    public void forgotPassword(@RequestBody String email) {                
-        sesionService.sendEmail("esteguz06@gmail.com");
-    }
-    
-
+    }    
 }
