@@ -20,4 +20,10 @@ public class RegisterController {
         return sesionService.registro(request);
     }
 
+    @PostMapping("/forgotPasword")
+    public void forgotPassword(@RequestBody String email) {                
+        sesionService.sendEmail("esteguz06@gmail.com");
+    }
+    
+
 }
