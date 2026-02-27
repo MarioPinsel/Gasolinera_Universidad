@@ -1,14 +1,15 @@
 package efm.gasolina.model;
 
 public class LoginRequest {
-    private String correo;
+
+    private String email;
     private String password;
 
-    public LoginRequest(String correo, String password) {
-        this.correo = correo;
+    public LoginRequest(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
-    public String getCorreo() { return correo; }
+    public String getEmail() { return email; }
     public String getPassword() { return password; }
 }

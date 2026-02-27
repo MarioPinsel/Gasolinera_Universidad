@@ -24,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         etNombre = findViewById(R.id.etNombre);
-        etCorreo = findViewById(R.id.etCorreo);
+        etCorreo = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         spinnerRoles = findViewById(R.id.spinnerRoles);
         btnRegistrar = findViewById(R.id.btnRegistrar);

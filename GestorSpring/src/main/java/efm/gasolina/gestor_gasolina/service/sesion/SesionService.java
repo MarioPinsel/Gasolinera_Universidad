@@ -1,10 +1,14 @@
 package efm.gasolina.gestor_gasolina.service.sesion;
 
+import efm.gasolina.gestor_gasolina.dto.sesion.LoginDTO;
+import efm.gasolina.gestor_gasolina.dto.sesion.LoginResponseDTO;
 import efm.gasolina.gestor_gasolina.dto.sesion.RegisterDTO;
 import efm.gasolina.gestor_gasolina.model.sesion.RegisterModel;
 import efm.gasolina.gestor_gasolina.repository.sesion.SesionRepository;
 
 import java.util.Random;
+import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -28,6 +32,7 @@ public class SesionService {
         return request;
     }
 
+
     public void sendEmail(String email){
         String values = "0123456789";
         Random random = new Random();
@@ -41,5 +46,20 @@ public class SesionService {
         message.setSubject("Password Recovery Code");
         message.setText("Your verification code is: " + code);
         mailSender.send(message);
+    }
+
+    public LoginResponseDTO login(LoginDTO request) {
+
+    Optional<RegisterModel> user = sesionRepository.findByEmail(request.getEmail());
+
+    if (user.isEmpty()) {
+        return null;
+    }
+
+    if (!user.get().getPassword().equals(request.getPassword())) {
+        return null;
+    }
+
+    return new LoginResponseDTO(user.get().getRole().name());
     }
 }
