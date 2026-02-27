@@ -18,6 +18,5 @@ public class RegisterController {
     @PostMapping("/register")
     public RegisterDTO register(@RequestBody RegisterDTO request) {
         return sesionService.registro(request);
-    }
-
+    }    
 }

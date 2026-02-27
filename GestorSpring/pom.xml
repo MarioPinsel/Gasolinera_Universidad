@@ -97,6 +97,12 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		<!-- Starter para enviar correos electrónicos.
+			 Permite usar JavaMailSender para enviar emails desde la aplicación (EST :). -->
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
 
 	</dependencies>
 

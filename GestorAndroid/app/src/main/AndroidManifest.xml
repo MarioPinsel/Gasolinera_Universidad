@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
@@ -12,6 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Gestor_gasolina">
+        <activity
+            android:name=".ui.recover.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recover.CodeVerifierActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recover.RecoverByEmailActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="false" />
