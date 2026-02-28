@@ -33,9 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#1976D2"
-        android:textDecorationLine="underline"
         android:clickable="true"
-        android:focusable="true"
-        android:cursor="hand" />
+        android:focusable="true" />
 
 </LinearLayout>

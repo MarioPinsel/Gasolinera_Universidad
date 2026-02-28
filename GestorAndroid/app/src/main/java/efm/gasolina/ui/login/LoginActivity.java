@@ -1,5 +1,6 @@
 package efm.gasolina.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                 etEmail.getText().toString().trim(),
                 etPassword.getText().toString().trim()
         ));
-      
+
               TextView texto = findViewById(R.id.tvEnlace);
         texto.setOnClickListener(v ->
                 startActivity(new Intent(this, RecoverByEmailActivity.class)));

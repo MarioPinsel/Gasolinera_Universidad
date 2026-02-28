@@ -1,7 +1,10 @@
 package efm.gasolina.network;
+import java.util.Map;
+
 import efm.gasolina.model.LoginRequest;
 import efm.gasolina.model.NewPassword;
 import efm.gasolina.model.LoginResponse;
+import efm.gasolina.model.TokenResponse;
 import efm.gasolina.model.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -13,8 +16,8 @@ public interface ApiService {
     Call<Void> registerUser(@Body User user);
 
 
-    @POST("api/session/forgotPassword")
-    Call<Void> forgotPassword(@Body String request);
+    @POST("/sesion/forgotPassword")
+    Call<TokenResponse> forgotPassword(@Body Map<String,String> request);
 
     @POST("api/session/codeVerifier")
     Call<Void> codeVerifier(@Body String request);

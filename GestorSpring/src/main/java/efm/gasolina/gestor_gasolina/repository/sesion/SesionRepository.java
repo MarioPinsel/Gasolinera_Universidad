@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface SesionRepository extends JpaRepository<RegisterModel, Long> {
   
     Optional<RegisterModel> findByEmail(String email);
+    
+    
 
 }
 
