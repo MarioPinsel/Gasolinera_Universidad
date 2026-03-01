@@ -1,24 +1,34 @@
 package efm.gasolina.ui.recover;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import efm.gasolina.model.NewPassword;
-import efm.gasolina.model.TokenResponse;
+import java.util.HashMap;
+import java.util.Map;
+
+import efm.gasolina.model.PasswordRequest;
 import efm.gasolina.network.ApiClient;
 import efm.gasolina.network.ApiService;
+import efm.gasolina.util.TokenManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChangePasswordViewModel extends ViewModel {
+public class ChangePasswordViewModel extends AndroidViewModel {
     private final ApiService apiService;
 
+    private final TokenManager tokenManager;
     private final MutableLiveData<String> requestRecoverResult = new MutableLiveData<>();
 
-    public ChangePasswordViewModel() {
+    public ChangePasswordViewModel(@NonNull Application app) {
+        super(app);
         apiService = ApiClient.getClient().create(ApiService.class);
+        tokenManager = new TokenManager(app.getApplicationContext());
     }
     public LiveData<String> getRequestRecoverResult() {
         return requestRecoverResult;
@@ -31,13 +41,23 @@ public class ChangePasswordViewModel extends ViewModel {
             return;
         }
 
-        NewPassword request = new NewPassword(password, passwordB);
+        if (!password.equals(passwordB)) {
+            requestRecoverResult.setValue("ERROR:las contraseñas deben coincidir");
+            return;
+        }
 
-        apiService.changePassword(request).enqueue(new Callback<NewPassword>() {
+
+        PasswordRequest request = new PasswordRequest(
+                tokenManager.getToken(),
+                password
+        );
+
+
+        apiService.changePassword(request).enqueue(new Callback<Void>() {
 
             @Override
-            public void onResponse(Call<NewPassword> call,
-                                   Response<NewPassword> response) {
+            public void onResponse(Call<Void> call,
+                                   Response<Void> response) {
                 if (response.isSuccessful()) {
                     requestRecoverResult.setValue("Su contraseña ha sido cambiada");
                 } else  {
@@ -45,7 +65,7 @@ public class ChangePasswordViewModel extends ViewModel {
                 }
             }
             @Override
-            public void onFailure(Call<NewPassword> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 requestRecoverResult.setValue("ERROR:Sin conexión");
             }
         });
