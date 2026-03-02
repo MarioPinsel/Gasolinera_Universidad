@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
-        btnDevPanel = findViewById(R.id.btnDevPanel);
 
         btnLogin.setOnClickListener(v ->
                 startActivity(new Intent(this, LoginActivity.class)));

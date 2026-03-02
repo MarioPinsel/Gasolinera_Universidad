@@ -5,19 +5,22 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import efm.gasolina.model.User;
-import efm.gasolina.repository.AuthRepository;
+import efm.gasolina.repository.UserRepository;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterViewModel extends ViewModel {
 
-    private final AuthRepository repository;
+    private final UserRepository repository;
     private final MutableLiveData<String> registerResult = new MutableLiveData<>();
 
     public RegisterViewModel() {
-        repository = new AuthRepository();
+        repository = new UserRepository();
     }
 
     public LiveData<String> getRegisterResult() {
