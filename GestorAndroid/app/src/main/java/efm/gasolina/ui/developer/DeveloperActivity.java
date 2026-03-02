@@ -23,9 +23,11 @@ public class DeveloperActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_developer);
 
+        // configura el RecyclerView
         RecyclerView recycler = findViewById(R.id.recyclerUsuarios);
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
+        // crea el adapter con las acciones
         adapter = new UserAdapter(new ArrayList<>(),
                 new UserAdapter.OnUserActionListener() {
                     @Override
@@ -43,16 +45,19 @@ public class DeveloperActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this)
                 .get(DeveloperViewModel.class);
 
+        // observa la lista y actualiza el adapter
         viewModel.getUsuarios().observe(this, usuarios -> {
             adapter.updateList(usuarios);
         });
 
+        // observa resultados de aprobar/rechazar
         viewModel.getActionResult().observe(this, result -> {
             Toast.makeText(this,
                     result.substring(result.indexOf(":") + 1),
                     Toast.LENGTH_SHORT).show();
         });
 
+        // inicia el polling cada 10 segundos
         viewModel.startPolling(10);
     }
 }

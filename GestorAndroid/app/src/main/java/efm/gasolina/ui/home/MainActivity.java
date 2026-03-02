@@ -17,7 +17,7 @@ import efm.gasolina.ui.register.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnLogin, btnRegister,btnDevPanel;
+    Button btnLogin, btnRegister, btnDevPanel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
+        btnDevPanel = findViewById(R.id.btnDevPanel);
 
         btnLogin.setOnClickListener(v ->
                 startActivity(new Intent(this, LoginActivity.class)));

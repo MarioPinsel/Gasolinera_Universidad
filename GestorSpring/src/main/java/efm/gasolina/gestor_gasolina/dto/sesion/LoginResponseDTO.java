@@ -4,7 +4,7 @@ public class LoginResponseDTO {
     
     private String role;
 
-    public LoginResponseDTO(String rol) {
+    public LoginResponseDTO(String role) {
         this.role = role;
     }
 

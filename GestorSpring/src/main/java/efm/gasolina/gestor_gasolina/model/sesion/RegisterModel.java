@@ -17,6 +17,8 @@ public class RegisterModel {
     @Enumerated(EnumType.STRING)
     private Rol role;
 
+    private String verified;
+
     public RegisterModel() {
     }
 
@@ -25,6 +27,7 @@ public class RegisterModel {
     email = registerModel.email();
     password = registerModel.password();
     role = registerModel.role();
+    verified = "PENDING";
     }
 
     public Long getId() {
@@ -65,5 +68,13 @@ public class RegisterModel {
 
     public void setRole(Rol role) {
         this.role = role;
+    }
+
+    public String getVerified() {
+        return verified;
+    }
+
+    public void setVerified(String verified) {
+        this.verified = verified;
     }
 }
