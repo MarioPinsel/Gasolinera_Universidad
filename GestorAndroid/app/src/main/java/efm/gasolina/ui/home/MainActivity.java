@@ -11,7 +11,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import efm.gasolina.R;
-import efm.gasolina.ui.admin.AdminActivity;
 import efm.gasolina.ui.login.LoginActivity;
 import efm.gasolina.ui.register.RegisterActivity;
 
@@ -38,15 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
-        btnDevPanel = findViewById(R.id.btnDevPanel);
 
         btnLogin.setOnClickListener(v ->
                 startActivity(new Intent(this, LoginActivity.class)));
 
         btnRegister.setOnClickListener(v ->
                 startActivity(new Intent(this, RegisterActivity.class)));
-
-        btnDevPanel.setOnClickListener(v ->
-                startActivity(new Intent(this, AdminActivity.class)));
     }
 }

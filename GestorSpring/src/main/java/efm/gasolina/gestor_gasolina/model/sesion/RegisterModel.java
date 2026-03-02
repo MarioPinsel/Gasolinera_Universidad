@@ -13,7 +13,6 @@ public class RegisterModel {
     private String name;
     private String email;
     private String password;
-    private String verified;
 
     @Enumerated(EnumType.STRING)
     private Rol role;
@@ -26,7 +25,6 @@ public class RegisterModel {
     email = registerModel.email();
     password = registerModel.password();
     role = registerModel.role();
-    verified = "PENDING";
     }
 
     public Long getId() {
@@ -67,13 +65,5 @@ public class RegisterModel {
 
     public void setRole(Rol role) {
         this.role = role;
-    }
-
-    public String getVerified() {
-        return verified;
-    }
-
-    public void setVerified(String verified) {
-        this.verified = verified;
     }
 }

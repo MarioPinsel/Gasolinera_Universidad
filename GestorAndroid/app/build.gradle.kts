@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "efm.gasolina"
-        minSdk = 25
+        minSdk = 24
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -47,5 +47,4 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel:2.7.0")
     implementation("androidx.lifecycle:lifecycle-livedata:2.7.0")
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
 }
