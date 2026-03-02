@@ -42,7 +42,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();
-            } else if (result.startsWith("ERROR:")) {
+            } else if (result.startsWith("ERROR")) {
                 Toast.makeText(this,
                         result.substring(6),
                         Toast.LENGTH_SHORT).show();

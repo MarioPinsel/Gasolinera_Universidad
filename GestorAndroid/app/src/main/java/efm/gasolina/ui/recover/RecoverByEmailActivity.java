@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import efm.gasolina.R;
-import efm.gasolina.ui.login.LoginViewModel;
 
 public class RecoverByEmailActivity extends AppCompatActivity {
     private EditText textFiel;
@@ -29,15 +28,12 @@ public class RecoverByEmailActivity extends AppCompatActivity {
                 .get(RecoverByEmailViewModel.class);
 
         recoverModel.getRequestRecoverResult().observe(this, result -> {
-            if (result.startsWith("OK:")) {
-                String rol = result.substring(3);
-                // Aquí navegas a la pantalla según el rol
-                Toast.makeText(this,
-                        "Bienvenido, rol: " + rol, Toast.LENGTH_SHORT).show();
-                // TODO: redirigir según rol
+            if (result.startsWith("OK")) {
+                startActivity(new Intent(this, CodeVerifierActivity.class));
+                finish();
             } else {
                 Toast.makeText(this,
-                        result.substring(7), Toast.LENGTH_SHORT).show();
+                        result.substring(6), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -45,9 +41,6 @@ public class RecoverByEmailActivity extends AppCompatActivity {
             recoverModel.sendMail(
                     textFiel.getText().toString().trim()
             );
-            TextView texto = findViewById(R.id.tvEnlace);
-            texto.setOnClickListener(view ->
-                    startActivity(new Intent(this, CodeVerifierActivity.class)));
         });
     }
 }
