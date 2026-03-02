@@ -59,8 +59,8 @@ public class ChangePasswordViewModel extends AndroidViewModel {
             public void onResponse(Call<Void> call,
                                    Response<Void> response) {
                 if (response.isSuccessful()) {
-                    requestRecoverResult.setValue("Su contraseña ha sido cambiada");
-                } else  {
+                    requestRecoverResult.setValue("OK");
+                } else if (response.code() == 404) {
                     requestRecoverResult.setValue("ERROR:No se puedo completar la operacion");
                 }
             }
