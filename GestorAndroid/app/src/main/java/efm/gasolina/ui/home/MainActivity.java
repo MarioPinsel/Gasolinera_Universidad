@@ -11,12 +11,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import efm.gasolina.R;
+import efm.gasolina.ui.developer.DeveloperActivity;
 import efm.gasolina.ui.login.LoginActivity;
 import efm.gasolina.ui.register.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnLogin, btnRegister;
+    Button btnLogin, btnRegister,btnDevPanel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,5 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         btnRegister.setOnClickListener(v ->
                 startActivity(new Intent(this, RegisterActivity.class)));
+
+        btnDevPanel.setOnClickListener(v ->
+                startActivity(new Intent(this, DeveloperActivity.class)));
     }
 }
