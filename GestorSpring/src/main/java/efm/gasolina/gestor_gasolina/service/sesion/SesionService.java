@@ -11,16 +11,14 @@ import efm.gasolina.gestor_gasolina.repository.sesion.SesionRepository;
 
 import java.util.Random;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.Map;
 
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.Map;
-
-
-import java.util.HashMap;
-import java.util.Optional;
-import java.util.Map;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +34,6 @@ public class SesionService {
     private final JavaMailSender mailSender;
     private final RedisRepository redisRepo;
 
-
     public SesionService(JavaMailSender mailSender, RedisRepository redisRepo) {
 
         this.mailSender = mailSender;
@@ -49,7 +46,6 @@ public class SesionService {
         return request;
     }
 
-
     public Map<String, Object> sendEmail(String email) {
 
         Optional<RegisterModel> opt = sesionRepository.findByEmail(email);
@@ -60,7 +56,6 @@ public class SesionService {
         Long id = opt.get().getId();
         String code = randomizer(6);
         String token = randomizer(10);
-
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
@@ -79,51 +74,75 @@ public class SesionService {
         return response;
     }
 
-    public ResponseEntity<Object> verifyCode(RecoverRequest request){
+    public ResponseEntity<Object> verifyCode(RecoverRequest request) {
         String token = request.getToken();
         String code = request.getValue();
 
-        Map<String, Object> redisValues = (Map)redisRepo.getValue(token);
+        Map<String, Object> redisValues = (Map) redisRepo.getValue(token);
 
         if (redisValues.get("code").equals(code)) {
             return ResponseEntity.ok().build();
-        }else
+        } else
             return ResponseEntity.badRequest().build();
     }
 
     public LoginResponseDTO login(LoginDTO request) {
 
-    Optional<RegisterModel> user = sesionRepository.findByEmail(request.getEmail());
+        Optional<RegisterModel> userOpt = sesionRepository.findByEmail(request.getEmail());
 
-    if (user.isEmpty()) {
-        return null;
+        if (userOpt.isEmpty())
+            return null;
+
+        RegisterModel user = userOpt.get();
+
+        if (!user.getPassword().equals(request.getPassword()))
+            return null;
+
+        if (!"APPROVED".equals(user.getVerified())) {
+            throw new RuntimeException("USER_NOT_APPROVED");
+        }
+
+        return new LoginResponseDTO(user.getRole().name());
     }
 
-    if (!user.get().getPassword().equals(request.getPassword())) {
-        return null;
+    public List<RegisterModel> getPendingUsers() {
+        return sesionRepository.findByVerified("PENDING");
     }
 
-    return new LoginResponseDTO(user.get().getRole().name());
+    public void approveUser(Long id) {
+        RegisterModel user = sesionRepository.findById(id).orElse(null);
+        if (user != null) {
+            user.setVerified("APPROVED");
+            sesionRepository.save(user);
+        }
     }
 
-    public ResponseEntity<Object> changePassword(RecoverRequest request){
+    public void rejectUser(Long id) {
+        RegisterModel user = sesionRepository.findById(id).orElse(null);
+        if (user != null) {
+            user.setVerified("REJECTED");
+            sesionRepository.save(user);
+        }
+    }
+
+    public ResponseEntity<Object> changePassword(RecoverRequest request) {
         String token = request.getToken();
         String password = request.getValue();
         String id;
-        
+
         try {
-            Map<String, Object> redisValues = (Map)redisRepo.getValue(token);    
+            Map<String, Object> redisValues = (Map) redisRepo.getValue(token);
             id = redisValues.get("id").toString();
         } catch (Exception e) {
             throw new NoSuchElement();
         }
 
         try {
-            sesionRepository.updatePassword(id, password);    
+            sesionRepository.updatePassword(id, password);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();    
+            return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok().build();        
+        return ResponseEntity.ok().build();
     }
 
     private String randomizer(int size) {
