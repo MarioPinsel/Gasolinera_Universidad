@@ -6,19 +6,19 @@ import androidx.lifecycle.ViewModel;
 
 import efm.gasolina.model.LoginRequest;
 import efm.gasolina.model.LoginResponse;
-import efm.gasolina.repository.AuthRepository;
+import efm.gasolina.repository.UserRepository;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
 
-    private final AuthRepository repository;
+    private final UserRepository repository;
     private final MutableLiveData<LoginResponse> loginSuccess = new MutableLiveData<>();
     private final MutableLiveData<String> loginError = new MutableLiveData<>();
 
     public LoginViewModel() {
-        repository = new AuthRepository();
+        repository = new UserRepository();
     }
 
     public LiveData<LoginResponse> getLoginSuccess() { return loginSuccess; }
