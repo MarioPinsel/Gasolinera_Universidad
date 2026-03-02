@@ -6,14 +6,17 @@
 
     <application
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Gestor_gasolina">
+        android:theme="@style/Theme.Gestor_gasolina"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.admin.AdminActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.recover.ChangePasswordActivity"
             android:exported="false" />

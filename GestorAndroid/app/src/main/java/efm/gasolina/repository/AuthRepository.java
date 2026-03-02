@@ -7,11 +7,11 @@ import efm.gasolina.network.ApiClient;
 import efm.gasolina.network.ApiService;
 import retrofit2.Call;
 
-public class UserRepository {
+public class AuthRepository {
 
     private final ApiService apiService;
 
-    public UserRepository() {
+    public AuthRepository() {
         apiService =
                 ApiClient.getClient()
                         .create(ApiService.class);
