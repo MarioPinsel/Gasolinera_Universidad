@@ -20,13 +20,23 @@ public class LoginController {
     SesionService sesionService;
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO request) {
-    LoginResponseDTO response = sesionService.login(request);
+    public ResponseEntity<LoginResponseDTO> login(
+            @RequestBody LoginDTO request) {
 
-    if (response == null) {
-        return ResponseEntity.status(401).build();
-    }
+        try {
+            LoginResponseDTO response = sesionService.login(request);
 
-    return ResponseEntity.ok(response);
+            if (response == null)
+                return ResponseEntity.status(401).build();
+
+            return ResponseEntity.ok(response);
+
+        } catch (RuntimeException e) {
+
+            if (e.getMessage().equals("USER_NOT_APPROVED"))
+                return ResponseEntity.status(403).build();
+
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
