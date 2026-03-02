@@ -1,22 +1,35 @@
 package efm.gasolina.ui.recover;
 
+import android.app.Application;
+import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import efm.gasolina.network.ApiClient;
 import efm.gasolina.network.ApiService;
+import efm.gasolina.util.TokenManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CodeVerifierViewModel extends ViewModel {
+public class CodeVerifierViewModel extends AndroidViewModel {
 
     private final ApiService apiService;
+
+    private final TokenManager tokenManager;
     private final MutableLiveData<String> requestRecoverResult = new MutableLiveData<>();
 
-    public CodeVerifierViewModel() {
+    public CodeVerifierViewModel(@NonNull Application app) {
+        super(app);
         apiService = ApiClient.getClient().create(ApiService.class);
+        tokenManager = new TokenManager(app.getApplicationContext());
     }
 
     public LiveData<String> getRequestRecoverResult() {
@@ -30,7 +43,9 @@ public class CodeVerifierViewModel extends ViewModel {
             return;
         }
 
-        String request = codigo;
+        Map request = new HashMap<String, String>();
+        request.put("value", codigo);
+        request.put("token", tokenManager.getToken());
         // primero creas el objeto LoginRequest
         // luego se lo mandas a la API
 
