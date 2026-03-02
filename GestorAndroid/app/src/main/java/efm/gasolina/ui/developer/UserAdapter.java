@@ -1,4 +1,4 @@
-package efm.gasolina.ui.admin;
+package efm.gasolina.ui.developer;
 
 import android.view.LayoutInflater;
 import android.view.View;

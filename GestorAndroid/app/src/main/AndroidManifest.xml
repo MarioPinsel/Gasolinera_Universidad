@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Gestor_gasolina"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.admin.AdminActivity"
+            android:name=".ui.developer.DeveloperActivity"
             android:exported="false" />
         <activity
             android:name=".ui.recover.ChangePasswordActivity"

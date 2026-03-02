@@ -1,4 +1,4 @@
-package efm.gasolina.ui.admin;
+package efm.gasolina.ui.developer;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -16,14 +16,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AdminViewModel extends ViewModel {
+public class DeveloperViewModel extends ViewModel {
 
     private final ApiService apiService;
     private final MutableLiveData<List<User>> usuarios = new MutableLiveData<>();
     private final MutableLiveData<String> actionResult = new MutableLiveData<>();
     private ScheduledExecutorService scheduler;
 
-    public AdminViewModel() {
+    public DeveloperViewModel() {
         apiService = ApiClient.getClient().create(ApiService.class);
     }
 

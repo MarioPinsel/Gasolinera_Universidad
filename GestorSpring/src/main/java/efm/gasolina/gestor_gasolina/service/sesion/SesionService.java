@@ -11,9 +11,16 @@ import efm.gasolina.gestor_gasolina.repository.sesion.SesionRepository;
 
 import java.util.Random;
 
+
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.Map;
+
+
+import java.util.HashMap;
+import java.util.Optional;
+import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +36,9 @@ public class SesionService {
     private final JavaMailSender mailSender;
     private final RedisRepository redisRepo;
 
+
     public SesionService(JavaMailSender mailSender, RedisRepository redisRepo) {
+
         this.mailSender = mailSender;
         this.redisRepo = redisRepo;
     }
@@ -39,6 +48,7 @@ public class SesionService {
         sesionRepository.save(model);
         return request;
     }
+
 
     public Map<String, Object> sendEmail(String email) {
 
@@ -50,6 +60,7 @@ public class SesionService {
         Long id = opt.get().getId();
         String code = randomizer(6);
         String token = randomizer(10);
+
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
@@ -82,15 +93,17 @@ public class SesionService {
 
     public LoginResponseDTO login(LoginDTO request) {
 
-        Optional<RegisterModel> user = sesionRepository.findByEmail(request.getEmail());
-        if (user.isEmpty()) {
-            return null;
-        }
-        if (!user.get().getPassword().equals(request.getPassword())) {
-            return null;
-        }
+    Optional<RegisterModel> user = sesionRepository.findByEmail(request.getEmail());
 
-        return new LoginResponseDTO(user.get().getRole().name());
+    if (user.isEmpty()) {
+        return null;
+    }
+
+    if (!user.get().getPassword().equals(request.getPassword())) {
+        return null;
+    }
+
+    return new LoginResponseDTO(user.get().getRole().name());
     }
 
     public ResponseEntity<Object> changePassword(RecoverRequest request){
@@ -121,5 +134,6 @@ public class SesionService {
                 .mapToObj(values::charAt)
                 .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
                 .toString();
+
     }
 }

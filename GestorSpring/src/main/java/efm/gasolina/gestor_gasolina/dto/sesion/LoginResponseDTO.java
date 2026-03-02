@@ -2,11 +2,11 @@ package efm.gasolina.gestor_gasolina.dto.sesion;
 
 public class LoginResponseDTO {
     
-    private String rol;
+    private String role;
 
     public LoginResponseDTO(String rol) {
-        this.rol = rol;
+        this.role = role;
     }
 
-    public String getRol() { return rol; }
+    public String getRol() { return role; }
 }
