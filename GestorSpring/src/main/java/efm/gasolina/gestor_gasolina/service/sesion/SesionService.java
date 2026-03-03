@@ -118,11 +118,7 @@ public class SesionService {
     }
 
     public void rejectUser(Long id) {
-        RegisterModel user = sesionRepository.findById(id).orElse(null);
-        if (user != null) {
-            user.setVerified("REJECTED");
-            sesionRepository.save(user);
-        }
+        sesionRepository.deleteById(id);
     }
 
     public ResponseEntity<Object> changePassword(RecoverRequest request) {
