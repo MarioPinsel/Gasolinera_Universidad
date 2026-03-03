@@ -91,16 +91,15 @@ public class SesionService {
         Optional<RegisterModel> userOpt = sesionRepository.findByEmail(request.getEmail());
 
         if (userOpt.isEmpty())
-            return null;
+            throw new RuntimeException("USER_NOT_FOUND"); 
 
         RegisterModel user = userOpt.get();
 
         if (!user.getPassword().equals(request.getPassword()))
-            return null;
+            throw new RuntimeException("WRONG_PASSWORD"); 
 
-        if (!"APPROVED".equals(user.getVerified())) {
-            throw new RuntimeException("USER_NOT_APPROVED");
-        }
+        if (!"APPROVED".equals(user.getVerified()))
+            throw new RuntimeException("USER_NOT_APPROVED"); 
 
         return new LoginResponseDTO(user.getRole().name());
     }
@@ -118,11 +117,7 @@ public class SesionService {
     }
 
     public void rejectUser(Long id) {
-        RegisterModel user = sesionRepository.findById(id).orElse(null);
-        if (user != null) {
-            user.setVerified("REJECTED");
-            sesionRepository.save(user);
-        }
+        sesionRepository.deleteById(id);
     }
 
     public ResponseEntity<Object> changePassword(RecoverRequest request) {
