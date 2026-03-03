@@ -51,12 +51,12 @@ public class LoginViewModel extends ViewModel {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     loginSuccess.setValue(response.body());
+                } else if (response.code() == 404) {
+                    loginError.setValue("User not found");
                 } else if (response.code() == 401) {
                     loginError.setValue("Incorrect credentials");
                 } else if (response.code() == 403) {
                     loginError.setValue("Account pending approval");
-                } else {
-                    loginError.setValue("Server error " + response.code());
                 }
             }
 

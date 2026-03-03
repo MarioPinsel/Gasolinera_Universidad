@@ -20,23 +20,17 @@ public class LoginController {
     SesionService sesionService;
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login(
-            @RequestBody LoginDTO request) {
-
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO request) {
         try {
-            LoginResponseDTO response = sesionService.login(request);
-
-            if (response == null)
-                return ResponseEntity.status(401).build();
-
-            return ResponseEntity.ok(response);
+            return ResponseEntity.ok(sesionService.login(request));
 
         } catch (RuntimeException e) {
-
-            if (e.getMessage().equals("USER_NOT_APPROVED"))
-                return ResponseEntity.status(403).build();
-
-            return ResponseEntity.badRequest().build();
+            return switch (e.getMessage()) {
+                case "USER_NOT_FOUND" -> ResponseEntity.status(404).build();
+                case "WRONG_PASSWORD" -> ResponseEntity.status(401).build();
+                case "USER_NOT_APPROVED" -> ResponseEntity.status(403).build();
+                default -> ResponseEntity.badRequest().build();
+            };
         }
     }
 }
