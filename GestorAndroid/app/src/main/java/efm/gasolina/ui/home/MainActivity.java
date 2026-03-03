@@ -14,10 +14,11 @@ import efm.gasolina.R;
 import efm.gasolina.ui.developer.DeveloperActivity;
 import efm.gasolina.ui.login.LoginActivity;
 import efm.gasolina.ui.register.RegisterActivity;
+import efm.gasolina.ui.decrees.DecretoPrecioActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnLogin, btnRegister, btnDevPanel;
+    Button btnLogin, btnRegister, btnDevPanel, btnDecreto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,5 +49,15 @@ public class MainActivity extends AppCompatActivity {
 
         btnDevPanel.setOnClickListener(v ->
                 startActivity(new Intent(this, DeveloperActivity.class)));
+        btnDecreto = findViewById(R.id.btnDecreto);
+
+// Guarda el rol ADMIN en sesión para pruebas
+        getSharedPreferences("sesion", MODE_PRIVATE)
+                .edit()
+                .putString("rol", "ADMIN")
+                .apply();
+
+        btnDecreto.setOnClickListener(v ->
+                startActivity(new Intent(this, DecretoPrecioActivity.class)));
     }
 }
