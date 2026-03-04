@@ -33,10 +33,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         btnVerificar = findViewById(R.id.btnVerificar);
 
-        viewModel = new ViewModelProvider(this)
-                .get(ChangePasswordViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ChangePasswordViewModel.class);
 
-        // Observer reacciona al resultado de la petición
+
         viewModel.getRequestRecoverResult().observe(this, result -> {
             if (result.equals("OK")) {
                 Intent intent = new Intent(this, LoginActivity.class);

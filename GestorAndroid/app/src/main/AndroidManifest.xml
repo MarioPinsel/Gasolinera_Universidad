@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Gestor_gasolina"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.prices.GasPricesActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.developer.DeveloperActivity"
             android:exported="false" />
         <activity

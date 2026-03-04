@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import efm.gasolina.R;
+import efm.gasolina.ui.prices.GasPricesActivity;
+import efm.gasolina.ui.recover.ChangePasswordActivity;
 import efm.gasolina.ui.recover.RecoverByEmailActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -32,7 +34,9 @@ public class LoginActivity extends AppCompatActivity {
 
         viewModel.getLoginSuccess().observe(this, user -> {
             Toast.makeText(this, "Welcome, role: " + user.getRol(), Toast.LENGTH_SHORT).show();
-            // TODO: redirigir según rol
+            Intent intent = new Intent(this, GasPricesActivity.class);
+            startActivity(intent);
+            finish();
         });
 
         viewModel.getLoginError().observe(this, error -> {
