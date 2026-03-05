@@ -1,0 +1,14 @@
+INSERT INTO station (type, zone, franchise, price_difference, quantity) VALUES ('Corriente', 'ZONA A', 'Terpel', 150, 100);
+INSERT INTO station (type, zone, franchise, price_difference, quantity) VALUES ('Diesel', 'ZONA A', 'Terpel', 100, 100);
+INSERT INTO station (type, zone, franchise, price_difference, quantity) VALUES ('Corriente', 'ZONA A', 'Shell', 200, 100);
+INSERT INTO station (type, zone, franchise, price_difference, quantity) VALUES ('Diesel', 'ZONA A', 'Shell', 150, 100);
+INSERT INTO station (type, zone, franchise, price_difference, quantity) VALUES ('Corriente', 'ZONA A', 'Mobil', 250, 100);
+INSERT INTO station (type, zone, franchise, price_difference, quantity) VALUES ('Diesel', 'ZONA A', 'Mobil', 200, 100);
+INSERT INTO station (type, zone, franchise, price_difference, quantity) VALUES ('Diesel', 'ZONA B', 'Terpel', 220, 100);
+INSERT INTO station (type, zone, franchise, price_difference, quantity) VALUES ('Corriente', 'ZONA B', 'Shell', 330, 100);
+INSERT INTO station (type, zone, franchise, price_difference, quantity) VALUES ('Corriente', 'ZONA B', 'Mobil', 380, 100);
+INSERT INTO station (type, zone, franchise, price_difference, quantity) VALUES ('Diesel', 'ZONA B', 'Mobil', 320, 100);
+INSERT INTO station (type, zone, franchise, price_difference, quantity) VALUES ('Corriente', 'ZONA C', 'Terpel', 380, 100);
+INSERT INTO station (type, zone, franchise, price_difference, quantity) VALUES ('Diesel', 'ZONA C', 'Terpel', 320, 100);
+INSERT INTO station (type, zone, franchise, price_difference, quantity) VALUES ('Corriente', 'ZONA C', 'Mobil', 480, 100);
+INSERT INTO station (type, zone, franchise, price_difference, quantity) VALUES ('Diesel', 'ZONA C', 'Mobil', 420, 100);

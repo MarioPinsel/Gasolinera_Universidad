@@ -4,6 +4,7 @@ import java.util.Map;
 
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +15,11 @@ import efm.gasolina.gestor_gasolina.service.sesion.SesionService;
 
 @RestController
 @RequestMapping("/sesion")
-public class RecoverSession {
+public class RecoverSessionController {
 
     private final SesionService sesionService;
 
-    public RecoverSession(SesionService sesionService){
+    public RecoverSessionController(SesionService sesionService){
         this.sesionService = sesionService;
     }
     
@@ -32,7 +33,7 @@ public class RecoverSession {
         return sesionService.verifyCode(request);
     }
 
-    @PostMapping("/changePassword")
+    @PatchMapping("/changePassword")
     public ResponseEntity<Object> postMethodName(@RequestBody RecoverRequest request) {            
         return sesionService.changePassword(request);
     }

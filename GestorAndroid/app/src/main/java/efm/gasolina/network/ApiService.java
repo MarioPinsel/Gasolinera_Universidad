@@ -7,9 +7,11 @@ import efm.gasolina.model.PasswordRequest;
 import efm.gasolina.model.LoginResponse;
 import efm.gasolina.model.TokenResponse;
 import efm.gasolina.model.User;
+import efm.gasolina.model.consults.PricesRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -24,7 +26,7 @@ public interface ApiService {
     @POST("/sesion/codeVerifier")
     Call<Void> codeVerifier(@Body Map<String,String> request);
 
-    @POST("/sesion/changePassword")
+    @PATCH("/sesion/changePassword")
     Call<Void> changePassword(@Body PasswordRequest request);
 
     @POST("/sesion/login")
@@ -38,4 +40,8 @@ public interface ApiService {
 
     @PUT("developer/reject/{id}")
     Call<Void> rejectUser(@Path("id") Long id);
+
+    @GET("/consult/prices/{zone}/{type}")
+    Call<List<PricesRequest>> getPrices(@Path("zone") String zone, @Path("type") String type);
+
 }

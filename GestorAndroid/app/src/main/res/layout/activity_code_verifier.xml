@@ -6,6 +6,13 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingrese su codigo"
+        android:textSize="24sp"
+        android:gravity="center"/>
+
     <EditText
         android:id="@+id/etCode"
         android:layout_width="match_parent"
@@ -23,4 +30,10 @@
         android:text="Enviar"
         android:padding="12dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Si su codigo es correcto, sera redirigido a una nueva pestaña para cambiar su contraseña"
+        android:textSize="14sp"
+        android:gravity="center"/>
 </LinearLayout>

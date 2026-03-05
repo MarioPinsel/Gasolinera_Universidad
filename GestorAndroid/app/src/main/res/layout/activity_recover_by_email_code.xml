@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ingresa tu correo"
+        android:text="Ingrese su correo"
         android:textSize="24sp"
         android:gravity="center"/>
 
@@ -29,5 +29,12 @@
         android:layout_height="wrap_content"
         android:text="Enviar"
         android:padding="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tras presionar el boton se le enviara un correo con un codigo de verificacion de 6 digitos."
+        android:textSize="14sp"
+        android:gravity="center"/>
 
 </LinearLayout>
