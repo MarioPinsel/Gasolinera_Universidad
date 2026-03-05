@@ -22,7 +22,6 @@ public class GasPriceViewModel extends ViewModel {
     public GasPriceViewModel() {
         apiService = ApiClient.getClient().create(ApiService.class);
     }
-
     public LiveData<String> getResult() {
         return result;
     }
@@ -52,12 +51,14 @@ public class GasPriceViewModel extends ViewModel {
         apiService.getPrices(zone, type).enqueue(new Callback<List<PricesRequest>>() {
             @Override
             public void onResponse(Call<List<PricesRequest>> call, Response<List<PricesRequest>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    String results = response.body().stream().map(body ->
-                            body.getFranchise() + " ---> " + body.getPrice() + "\n"
-                    ).collect(Collectors.joining());
-                    gasPricesResult.setValue("OK");
-                    result.setValue(results);
+                if (response.isSuccessful()) {
+                    if (response.body() != null && !response.body().isEmpty()) {
+                        String results = response.body().stream().map(body ->
+                                body.getFranchise() + " ---> " + body.getPrice() + "\n"
+                        ).collect(Collectors.joining());
+                        result.setValue(results);
+                        gasPricesResult.setValue("OK");
+                    }
                 } else {
                     gasPricesResult.setValue("ERROR:No se pudo buscar la informacion");
                 }

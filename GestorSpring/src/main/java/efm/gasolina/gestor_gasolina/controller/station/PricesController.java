@@ -23,7 +23,7 @@ public class PricesController {
         this.priceService = priceService; 
     }
     
-    @GetMapping("/prices")
+    @GetMapping("/prices/{zone}/{type}") 
     public ResponseEntity<List<StationRequestDTO>> getPrices(@PathVariable String zone, @PathVariable String type) {
         return priceService.getPricesAndFranchise(zone, type);
     }

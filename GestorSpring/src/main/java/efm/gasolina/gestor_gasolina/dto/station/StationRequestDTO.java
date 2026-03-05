@@ -8,9 +8,9 @@ public class StationRequestDTO {
     public StationRequestDTO() {
     }
 
-    public StationRequestDTO(String franchise, String price) {
+    public StationRequestDTO(String franchise, Integer price) {
         this.franchise = franchise;
-        this.price = "$"+ price + gasValueBase;
+        this.price = "$"+ (price + gasValueBase);
     }
 
     public String getFranchise() {

@@ -42,7 +42,7 @@ public class GasPricesActivity extends AppCompatActivity {
 
         viewModel.getGasPricesResult().observe(this, result -> {
             if (result.equals("OK")) {
-                results.setText(viewModel.getResult().getValue());
+                results.setText(viewModel.getResult().getValue().toString());
             } else if (result.startsWith("ERROR")) {
                 Toast.makeText(this,
                         result.substring(6),

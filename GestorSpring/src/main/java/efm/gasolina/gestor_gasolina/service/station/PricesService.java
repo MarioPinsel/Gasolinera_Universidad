@@ -1,6 +1,7 @@
 package efm.gasolina.gestor_gasolina.service.station;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,18 @@ public class PricesService {
         this.stationRepository = stationRepository;
     }
 
-    public ResponseEntity<List<StationRequestDTO>> getPricesAndFranchise(String zone, String type) {
-        List<StationRequestDTO> response = stationRepository.findByZoneAndType(zone, type);
+    public ResponseEntity<List<StationRequestDTO>> getPricesAndFranchise(String zone, String type) {        
+        List<Object[]> response = stationRepository.findByZoneAndType(zone, type);
+
         if (!response.isEmpty()) {
-            return ResponseEntity.ok(response);
+            List<StationRequestDTO> dtos = response.stream()
+                    .map(row -> new StationRequestDTO(
+                            (String) row[0], (Integer) row[1]))
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(dtos);
         } else {
             return ResponseEntity.notFound().build();
         }
-        
     }
 }
