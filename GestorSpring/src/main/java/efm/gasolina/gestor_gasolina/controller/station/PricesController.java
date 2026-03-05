@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
-@RequestMapping("/prices")
+@RequestMapping("/consult")
 public class PricesController {
 
     private final PricesService priceService;
@@ -23,7 +23,7 @@ public class PricesController {
         this.priceService = priceService; 
     }
     
-    @GetMapping("/consult")
+    @GetMapping("/prices")
     public ResponseEntity<List<StationRequestDTO>> getPrices(@PathVariable String zone, @PathVariable String type) {
         return priceService.getPricesAndFranchise(zone, type);
     }

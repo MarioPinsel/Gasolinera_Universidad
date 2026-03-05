@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Stations {
+public class Station {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class Stations {
     private Integer price_difference;
     private Integer quantity;
 
-    public Stations(String type, String zone, String franchise, Integer price, Integer quantity) {
+    public Station(String type, String zone, String franchise, Integer price, Integer quantity) {
         this.type = type;
         this.zone = zone;
         this.franchise = franchise;

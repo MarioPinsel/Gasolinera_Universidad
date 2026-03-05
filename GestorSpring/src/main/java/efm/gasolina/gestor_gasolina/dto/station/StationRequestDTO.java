@@ -3,13 +3,14 @@ package efm.gasolina.gestor_gasolina.dto.station;
 public class StationRequestDTO {
     private String franchise;
     private String price;
+    private final Integer gasValueBase = 15057;
 
     public StationRequestDTO() {
     }
 
     public StationRequestDTO(String franchise, String price) {
         this.franchise = franchise;
-        this.price = price;
+        this.price = "$"+ price + gasValueBase;
     }
 
     public String getFranchise() {
