@@ -32,13 +32,13 @@ public interface ApiService {
     @POST("/sesion/login")
     Call<LoginResponse> login(@Body LoginRequest request);
 
-    @GET("/admin/pending")
+    @GET("developer/pending")
     Call<List<User>> getPendingUsers();
 
-    @PUT("/admin/approve/{id}")
+    @PUT("developer/approve/{id}")
     Call<Void> approveUser(@Path("id") Long id);
 
-    @PUT("/admin/reject/{id}")
+    @PUT("developer/reject/{id}")
     Call<Void> rejectUser(@Path("id") Long id);
 
     @GET("/consult/prices/{zone}/{type}")

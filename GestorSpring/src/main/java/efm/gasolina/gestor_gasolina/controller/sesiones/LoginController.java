@@ -21,12 +21,16 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO request) {
-    LoginResponseDTO response = sesionService.login(request);
+        try {
+            return ResponseEntity.ok(sesionService.login(request));
 
-    if (response == null) {
-        return ResponseEntity.status(401).build();
-    }
-
-    return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            return switch (e.getMessage()) {
+                case "USER_NOT_FOUND" -> ResponseEntity.status(404).build();
+                case "WRONG_PASSWORD" -> ResponseEntity.status(401).build();
+                case "USER_NOT_APPROVED" -> ResponseEntity.status(403).build();
+                default -> ResponseEntity.badRequest().build();
+            };
+        }
     }
 }
