@@ -89,7 +89,7 @@ public class SesionService {
     public LoginResponseDTO login(LoginDTO request) {
 
         Optional<RegisterModel> userOpt = sesionRepository.findByEmail(request.getEmail());
-
+        
         if (userOpt.isEmpty())
             throw new RuntimeException("USER_NOT_FOUND"); 
 

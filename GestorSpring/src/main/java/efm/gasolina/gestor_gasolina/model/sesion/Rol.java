@@ -1,7 +1,8 @@
 package efm.gasolina.gestor_gasolina.model.sesion;
 
 public enum Rol {
-    ADMINISTRADOR,
+    ADMINISTRADORLEGAL,
     DISTRIBUIDOR,
-    CLIENTE
+    CLIENTE,
+    ADMINISTRADOR
 }

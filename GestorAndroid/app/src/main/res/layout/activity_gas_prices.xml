@@ -19,7 +19,7 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <!-- Primera fila: TextView2 y Spinner1 -->
+    <!-- Primera fila: Zona y Spinner -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
             android:entries="@array/zone_array"/>
     </LinearLayout>
 
-    <!-- Segunda fila: TextView3 y Spinner2 -->
+    <!-- Segunda fila: Tipo y Spinner -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,22 +65,131 @@
             android:entries="@array/type_array"/>
     </LinearLayout>
 
-    <!-- Tercera fila: TextView y EditText -->
-
-    <!-- Botón centrado -->
+    <!-- Botón de búsqueda -->
     <Button
         android:id="@+id/button"
-        android:layout_width="191dp"
+        android:layout_width="match_parent"
         android:layout_height="51dp"
-        android:text="Button"
+        android:text="BUSCAR PRECIOS"
         android:layout_marginBottom="40dp" />
 
-    <!-- Espaciador que crece para empujar el último TextView abajo -->
-
-    <!-- TextView final -->
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+    <!-- ═════════════════════════════════════════════════════════
+         SECCIÓN DE RESULTADOS (INICIALMENTE OCULTA)
+         ═════════════════════════════════════════════════════════ -->
+    <ScrollView
+        android:id="@+id/resultsContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp" />
+        android:visibility="gone"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- MEJOR OPCIÓN -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MEJOR OPCIÓN"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:background="#f0f0f0"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Combustible:"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/bestOptionType"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:gravity="end"
+                        android:text="—" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Precio:"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/bestOptionPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:gravity="end"
+                        android:text="—"
+                        android:textColor="#4CAF50"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="Zona:"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/bestOptionZone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:gravity="end"
+                        android:text="—" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- OTRAS OPCIONES -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OTRAS OPCIONES"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Contenedor para celdas dinámicas -->
+            <LinearLayout
+                android:id="@+id/othersContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
