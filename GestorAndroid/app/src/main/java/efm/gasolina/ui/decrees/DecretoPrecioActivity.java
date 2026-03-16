@@ -17,20 +17,21 @@ import efm.gasolina.R;
 
 public class DecretoPrecioActivity extends AppCompatActivity {
 
-    // --- UI ---
     private TextInputEditText etNumDecreto, etFechaExpedicion, etFechaVigencia, etPrecio;
     private TextInputLayout tilNumDecreto, tilFechaVigencia, tilPrecio;
     private Spinner spinnerZona;
-    private TextView tvAudit, tvErrorVigencia, tvPrecioActual, tvAvisoReemplazo;
+    private TextView tvErrorVigencia, tvPrecioActual, tvAvisoReemplazo;
     private Button btnGuardar, btnCancelar;
 
-    // --- Estado ---
     private Calendar fechaExpedicionCal;
     private Calendar fechaVigenciaCal;
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", new Locale("es", "CO"));
 
-    // Zonas y precios actuales (simulados — reemplazar con BD real)
-    private final String[] zonas = {"Seleccione una zona", "Zona Centro", "Zona Norte", "Zona Sur", "Zona Oriente", "Zona Occidente"};
+    private final String[] zonas = {
+            "Seleccione una zona", "Zona Centro", "Zona Norte",
+            "Zona Sur", "Zona Oriente", "Zona Occidente"
+    };
+
     private final Map<String, String> preciosActuales = new HashMap<String, String>() {{
         put("Zona Centro",    "15.800");
         put("Zona Norte",     "16.200");
@@ -39,7 +40,6 @@ public class DecretoPrecioActivity extends AppCompatActivity {
         put("Zona Occidente", "15.700");
     }};
 
-    // Auditoría (simulada — en producción obtener de sesión real)
     private String usuarioActual = "admin@gasolinera.co";
     private String ipActual      = "192.168.1.10";
 
@@ -47,55 +47,39 @@ public class DecretoPrecioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // ── Guard: solo administradores ──────────────────────────────
-        // Reemplaza esta lógica con tu sistema de sesión real
         String rolUsuario = obtenerRolSesion();
         if (!"ADMIN".equals(rolUsuario)) {
             Toast.makeText(this, "Acceso denegado: solo administradores", Toast.LENGTH_LONG).show();
             finish();
             return;
         }
-        // ─────────────────────────────────────────────────────────────
 
         setContentView(R.layout.activity_decreto_precio);
         bindViews();
-        configurarAuditBanner();
         configurarSpinnerZona();
         configurarDatePickers();
         configurarBotones();
     }
-
-    // ── Binding ──────────────────────────────────────────────────────
 
     private void bindViews() {
         etNumDecreto      = findViewById(R.id.et_num_decreto);
         etFechaExpedicion = findViewById(R.id.et_fecha_expedicion);
         etFechaVigencia   = findViewById(R.id.et_fecha_vigencia);
         etPrecio          = findViewById(R.id.et_precio);
+
         tilNumDecreto     = findViewById(R.id.til_num_decreto);
         tilFechaVigencia  = findViewById(R.id.til_fecha_vigencia);
         tilPrecio         = findViewById(R.id.til_precio);
+
         spinnerZona       = findViewById(R.id.spinner_zona);
-        tvAudit           = findViewById(R.id.tv_audit);
+
         tvErrorVigencia   = findViewById(R.id.tv_error_vigencia);
         tvPrecioActual    = findViewById(R.id.tv_precio_actual);
         tvAvisoReemplazo  = findViewById(R.id.tv_aviso_reemplazo);
+
         btnGuardar        = findViewById(R.id.btn_guardar);
         btnCancelar       = findViewById(R.id.btn_cancelar);
     }
-
-    // ── Auditoría ────────────────────────────────────────────────────
-
-    private void configurarAuditBanner() {
-        String ahora = sdf.format(new Date());
-        tvAudit.setText(
-                "👤 Usuario: " + usuarioActual + "\n" +
-                        "🕐 Fecha carga: " + ahora + "\n" +
-                        "🌐 IP: " + ipActual
-        );
-    }
-
-    // ── Spinner de zonas ─────────────────────────────────────────────
 
     private void configurarSpinnerZona() {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -106,13 +90,12 @@ public class DecretoPrecioActivity extends AppCompatActivity {
         spinnerZona.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                String zona = zonas[pos];
                 if (pos == 0) {
                     tvPrecioActual.setVisibility(View.GONE);
                     tvAvisoReemplazo.setVisibility(View.GONE);
                 } else {
-                    mostrarPrecioActual(zona);
-                    actualizarAvisoReemplazo(zona);
+                    mostrarPrecioActual(zonas[pos]);
+                    actualizarAvisoReemplazo(zonas[pos]);
                 }
             }
             @Override public void onNothingSelected(AdapterView<?> parent) {}
@@ -126,16 +109,17 @@ public class DecretoPrecioActivity extends AppCompatActivity {
     }
 
     private void actualizarAvisoReemplazo(String zona) {
-        String precio = preciosActuales.get(zona);
-        String vigencia = etFechaVigencia.getText() != null ? etFechaVigencia.getText().toString() : "—";
+        String precio   = preciosActuales.get(zona);
+        String vigencia = (etFechaVigencia.getText() != null &&
+                !etFechaVigencia.getText().toString().isEmpty())
+                ? etFechaVigencia.getText().toString() : "—";
+
         tvAvisoReemplazo.setText(
                 "⚠ Al guardar, el precio actual ($" + precio + " COP/galón) de " + zona +
                         " será reemplazado a partir del " + vigencia + "."
         );
         tvAvisoReemplazo.setVisibility(View.VISIBLE);
     }
-
-    // ── DatePickers ──────────────────────────────────────────────────
 
     private void configurarDatePickers() {
         etFechaExpedicion.setOnClickListener(v -> mostrarDatePicker(false));
@@ -153,7 +137,6 @@ public class DecretoPrecioActivity extends AppCompatActivity {
                         fechaVigenciaCal = seleccionado;
                         etFechaVigencia.setText(sdf.format(seleccionado.getTime()));
                         validarFechaVigencia();
-                        // Actualizar aviso con nueva fecha
                         int pos = spinnerZona.getSelectedItemPosition();
                         if (pos > 0) actualizarAvisoReemplazo(zonas[pos]);
                     } else {
@@ -166,16 +149,13 @@ public class DecretoPrecioActivity extends AppCompatActivity {
                 hoy.get(Calendar.DAY_OF_MONTH)
         );
 
-        // Para vigencia: mínimo hoy
         if (esVigencia) {
             dialog.getDatePicker().setMinDate(hoy.getTimeInMillis());
         }
         dialog.show();
     }
 
-    // ── Validaciones ─────────────────────────────────────────────────
 
-    /** Retorna true si la fecha de vigencia es válida (hoy o futura). */
     private boolean validarFechaVigencia() {
         if (fechaVigenciaCal == null) return false;
 
@@ -229,8 +209,6 @@ public class DecretoPrecioActivity extends AppCompatActivity {
         return valido;
     }
 
-    // ── Botones ──────────────────────────────────────────────────────
-
     private void configurarBotones() {
         btnCancelar.setOnClickListener(v -> finish());
         btnGuardar.setOnClickListener(v -> {
@@ -241,9 +219,9 @@ public class DecretoPrecioActivity extends AppCompatActivity {
     }
 
     private void mostrarConfirmacion() {
-        String zona   = zonas[spinnerZona.getSelectedItemPosition()];
-        String precio = etPrecio.getText().toString();
-        String decreto = etNumDecreto.getText().toString();
+        String zona     = zonas[spinnerZona.getSelectedItemPosition()];
+        String precio   = etPrecio.getText().toString();
+        String decreto  = etNumDecreto.getText().toString();
         String vigencia = etFechaVigencia.getText().toString();
 
         new AlertDialog.Builder(this)
@@ -259,9 +237,7 @@ public class DecretoPrecioActivity extends AppCompatActivity {
                 .setNegativeButton("Revisar", null)
                 .show();
     }
-
     private void guardarDecreto() {
-        // ── Modelo del decreto ────────────────────────────────────────
         DecretoModel decreto = new DecretoModel(
                 etNumDecreto.getText().toString(),
                 sdf.format(fechaExpedicionCal.getTime()),
@@ -269,23 +245,18 @@ public class DecretoPrecioActivity extends AppCompatActivity {
                 zonas[spinnerZona.getSelectedItemPosition()],
                 etPrecio.getText().toString(),
                 usuarioActual,
-                sdf.format(new Date()),   // fecha/hora de carga
+                sdf.format(new Date()),
                 ipActual
         );
 
-        // TODO: enviar `decreto` a tu repositorio / API REST / BD local
-        // Ej: viewModel.guardarDecreto(decreto);
+        // TODO: viewModel.guardarDecreto(decreto);
 
         Toast.makeText(this,
                 "✅ Decreto " + decreto.getNumDecreto() + " guardado correctamente",
                 Toast.LENGTH_LONG).show();
         finish();
     }
-
-    // ── Sesión (reemplazar con tu lógica real) ───────────────────────
-
     private String obtenerRolSesion() {
-        // Ejemplo con SharedPreferences o token JWT decodificado
         return getSharedPreferences("sesion", MODE_PRIVATE)
                 .getString("rol", "");
     }

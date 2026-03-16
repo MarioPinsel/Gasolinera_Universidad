@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnDevPanel.setOnClickListener(v ->
                 startActivity(new Intent(this, DeveloperActivity.class)));
-        btnDecreto = findViewById(R.id.btnDecreto);
+
 
 // Guarda el rol ADMIN en sesión para pruebas
         getSharedPreferences("sesion", MODE_PRIVATE)
@@ -57,7 +57,5 @@ public class MainActivity extends AppCompatActivity {
                 .putString("rol", "ADMIN")
                 .apply();
 
-        btnDecreto.setOnClickListener(v ->
-                startActivity(new Intent(this, DecretoPrecioActivity.class)));
     }
 }
