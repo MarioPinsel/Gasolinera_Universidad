@@ -18,6 +18,8 @@ public class Station {
     private Integer price_difference;
     private Integer quantity;
 
+    public Station() {}
+
     public Station(String type, String zone, String franchise, Integer price, Integer quantity) {
         this.type = type;
         this.zone = zone;
