@@ -16,10 +16,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Map;
 
-import java.util.HashMap;
-import java.util.Optional;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
