@@ -4,5 +4,5 @@ public enum Rol {
     ADMINISTRADORLEGAL,
     DISTRIBUIDOR,
     CLIENTE,
-    ADMINISTRADOR
+    OPERADOR
 }

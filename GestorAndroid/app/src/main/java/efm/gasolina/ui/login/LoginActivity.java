@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import efm.gasolina.R;
+import efm.gasolina.ui.decrees.DecretoPrecioActivity;
 import efm.gasolina.ui.prices.GasPricesActivity;
 import efm.gasolina.ui.recover.ChangePasswordActivity;
 import efm.gasolina.ui.recover.RecoverByEmailActivity;
@@ -34,8 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
         viewModel.getLoginSuccess().observe(this, user -> {
             Toast.makeText(this, "Welcome, role: " + user.getRol(), Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, GasPricesActivity.class);
-            startActivity(intent);
+            startActivity(getIntentForRole(user.getRol()));
             finish();
         });
 
@@ -52,5 +52,13 @@ public class LoginActivity extends AppCompatActivity {
         texto.setOnClickListener(v ->
                 startActivity(new Intent(this, RecoverByEmailActivity.class)));
 
+    }
+    private Intent getIntentForRole(String role) {
+        switch (role) {
+            case "CLIENTE":   return new Intent(this, GasPricesActivity.class);
+            case "ADMINISTRADORLEGAL":  return new Intent(this, DecretoPrecioActivity.class);
+            //case "manager": return new Intent(this, ManagerActivity.class);
+            default: throw new IllegalArgumentException("Rol desconocido: " + role);
+        }
     }
 }
