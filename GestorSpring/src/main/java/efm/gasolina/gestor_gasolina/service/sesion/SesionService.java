@@ -97,7 +97,7 @@ public class SesionService {
         if (!"APPROVED".equals(user.getVerified()))
             throw new RuntimeException("USER_NOT_APPROVED"); 
 
-        return new LoginResponseDTO(user.getRole().name());
+        return new LoginResponseDTO(user.getRole().name(), user.getEmail());
     }
 
     public List<RegisterModel> getPendingUsers() {

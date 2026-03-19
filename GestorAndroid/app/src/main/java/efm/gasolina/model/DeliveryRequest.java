@@ -1,0 +1,27 @@
+package efm.gasolina.model;
+
+public class DeliveryRequest {
+    private String vehicle;
+    private String conductor;
+    private Integer volume;
+    private String fuelType;
+    private Long stationId;
+    private String distributorEmail;
+
+    public DeliveryRequest(String vehicle, String conductor, Integer volume,
+                           String fuelType, Long stationId, String distributorEmail) {
+        this.vehicle = vehicle;
+        this.conductor = conductor;
+        this.volume = volume;
+        this.fuelType = fuelType;
+        this.stationId = stationId;
+        this.distributorEmail = distributorEmail;
+    }
+
+    public String getVehicle() { return vehicle; }
+    public String getConductor() { return conductor; }
+    public Integer getVolume() { return volume; }
+    public String getFuelType() { return fuelType; }
+    public Long getStationId() { return stationId; }
+    public String getDistributorEmail() { return distributorEmail; }
+}

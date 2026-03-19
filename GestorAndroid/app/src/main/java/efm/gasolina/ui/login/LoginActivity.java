@@ -15,6 +15,7 @@ import efm.gasolina.ui.decrees.DecretoPrecioActivity;
 import efm.gasolina.ui.prices.GasPricesActivity;
 import efm.gasolina.ui.recover.ChangePasswordActivity;
 import efm.gasolina.ui.recover.RecoverByEmailActivity;
+import efm.gasolina.ui.wholesaler.WholesalerActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -34,8 +35,9 @@ public class LoginActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         viewModel.getLoginSuccess().observe(this, user -> {
-            Toast.makeText(this, "Welcome, role: " + user.getRol(), Toast.LENGTH_SHORT).show();
-            startActivity(getIntentForRole(user.getRol()));
+            Toast.makeText(this, "Welcome, role: " + user.getRol(),
+                    Toast.LENGTH_SHORT).show();
+            startActivity(getIntentForRole(user.getRol(), user.getEmail()));
             finish();
         });
 
@@ -53,12 +55,22 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(this, RecoverByEmailActivity.class)));
 
     }
-    private Intent getIntentForRole(String role) {
+    private Intent getIntentForRole(String role, String email) {
+        Intent intent;
         switch (role) {
-            case "CLIENTE":   return new Intent(this, GasPricesActivity.class);
-            case "ADMINISTRADORLEGAL":  return new Intent(this, DecretoPrecioActivity.class);
-            //case "manager": return new Intent(this, ManagerActivity.class);
-            default: throw new IllegalArgumentException("Rol desconocido: " + role);
+            case "CLIENTE":
+                intent = new Intent(this, GasPricesActivity.class);
+                break;
+            case "ADMINISTRADORLEGAL":
+                intent = new Intent(this, DecretoPrecioActivity.class);
+                break;
+            case "DISTRIBUIDOR":
+                intent = new Intent(this, WholesalerActivity.class);
+                break;
+            default:
+                throw new IllegalArgumentException("Rol desconocido: " + role);
         }
+        intent.putExtra("email", email);
+        return intent;
     }
 }

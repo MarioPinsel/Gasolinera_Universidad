@@ -2,9 +2,12 @@ package efm.gasolina.network;
 import java.util.List;
 import java.util.Map;
 
+import efm.gasolina.model.Delivery;
+import efm.gasolina.model.DeliveryRequest;
 import efm.gasolina.model.LoginRequest;
 import efm.gasolina.model.PasswordRequest;
 import efm.gasolina.model.LoginResponse;
+import efm.gasolina.model.Station;
 import efm.gasolina.model.TokenResponse;
 import efm.gasolina.model.User;
 import efm.gasolina.model.consults.PricesRequest;
@@ -43,5 +46,14 @@ public interface ApiService {
 
     @GET("/consult/prices/{zone}/{type}")
     Call<List<PricesRequest>> getPrices(@Path("zone") String zone, @Path("type") String type);
+
+    @GET("station/all")
+    Call<List<Station>> getAllStations();
+
+    @POST("delivery/register")
+    Call<Delivery> registerDelivery(@Body DeliveryRequest request);
+
+    @GET("delivery/history/{email}")
+    Call<List<Delivery>> getDeliveryHistory(@Path("email") String email);
 
 }

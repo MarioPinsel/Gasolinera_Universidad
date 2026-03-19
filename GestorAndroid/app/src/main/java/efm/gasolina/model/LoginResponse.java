@@ -2,7 +2,9 @@ package efm.gasolina.model;
 
 public class LoginResponse {
 
-    private String rol;
+    private String role;
+    private String email;
 
-    public String getRol() { return rol; }
+    public String getRol() { return role; }
+    public String getEmail() { return email; }
 }
