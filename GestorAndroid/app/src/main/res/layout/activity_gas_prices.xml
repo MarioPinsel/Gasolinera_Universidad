@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MEJOR OPCIÓN"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="10dp" />
 
@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="12dp"
+                android:padding="14dp"
                 android:background="#f0f0f0"
                 android:layout_marginBottom="20dp">
 
@@ -109,13 +109,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="12dp">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
                         android:text="Combustible:"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -124,7 +125,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.6"
                         android:gravity="end"
-                        android:text="—" />
+                        android:text="—"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -138,6 +141,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.4"
                         android:text="Precio:"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -147,38 +151,19 @@
                         android:layout_weight="0.6"
                         android:gravity="end"
                         android:text="—"
+                        android:textSize="16sp"
                         android:textColor="#4CAF50"
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        android:text="Zona:"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/bestOptionZone"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
-                        android:gravity="end"
-                        android:text="—" />
-                </LinearLayout>
             </LinearLayout>
 
-            <!-- OTRAS OPCIONES -->
+            <!-- OTROS -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="OTRAS OPCIONES"
-                android:textSize="16sp"
+                android:text="OTROS"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="10dp" />
 

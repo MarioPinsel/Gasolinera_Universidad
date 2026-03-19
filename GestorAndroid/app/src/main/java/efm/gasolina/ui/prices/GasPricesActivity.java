@@ -52,7 +52,6 @@ public class GasPricesActivity extends AppCompatActivity {
 
         bestOptionType = findViewById(R.id.bestOptionType);
         bestOptionPrice = findViewById(R.id.bestOptionPrice);
-        bestOptionZone = findViewById(R.id.bestOptionZone);
 
         // Inicializar ViewModel
         viewModel = new ViewModelProvider(this).get(GasPriceViewModel.class);
@@ -131,7 +130,7 @@ public class GasPricesActivity extends AppCompatActivity {
      */
     private void rellenarBestOption(PricesRequest pricesRequest) {
         bestOptionType.setText(pricesRequest.getFranchise());
-        bestOptionPrice.setText("$" + pricesRequest.getPrice());
+        bestOptionPrice.setText(pricesRequest.getPrice());
         // Si tu modelo no tiene getZone(), comenta esta línea
         // bestOptionZone.setText(pricesRequest.getZone());
     }
@@ -170,7 +169,7 @@ public class GasPricesActivity extends AppCompatActivity {
         // Label "Combustible"
         TextView label1 = new TextView(this);
         label1.setText("Combustible:");
-        label1.setTextSize(14);
+        label1.setTextSize(16);
         label1.setTypeface(null, android.graphics.Typeface.BOLD);
         LinearLayout.LayoutParams label1Params = new LinearLayout.LayoutParams(
                 0,
@@ -182,7 +181,7 @@ public class GasPricesActivity extends AppCompatActivity {
         // Valor del combustible
         TextView value1 = new TextView(this);
         value1.setText(pricesRequest.getFranchise());  // ← DEL API
-        value1.setTextSize(14);
+        value1.setTextSize(16);
         value1.setGravity(Gravity.END);
         LinearLayout.LayoutParams value1Params = new LinearLayout.LayoutParams(
                 0,
@@ -210,7 +209,7 @@ public class GasPricesActivity extends AppCompatActivity {
         // Label "Precio"
         TextView label2 = new TextView(this);
         label2.setText("Precio:");
-        label2.setTextSize(14);
+        label2.setTextSize(16);
         label2.setTypeface(null, android.graphics.Typeface.BOLD);
         LinearLayout.LayoutParams label2Params = new LinearLayout.LayoutParams(
                 0,
@@ -221,10 +220,10 @@ public class GasPricesActivity extends AppCompatActivity {
 
         // Valor del precio
         TextView value2 = new TextView(this);
-        value2.setText("$" + pricesRequest.getPrice());  // ← DEL API
+        value2.setText(pricesRequest.getPrice());  // ← DEL API
         value2.setTextSize(14);
         value2.setTypeface(null, android.graphics.Typeface.BOLD);
-        value2.setTextColor(Color.parseColor("#FF9800"));  // Naranja
+        value2.setTextColor(Color.parseColor("#FF9800"));
         value2.setGravity(Gravity.END);
         LinearLayout.LayoutParams value2Params = new LinearLayout.LayoutParams(
                 0,

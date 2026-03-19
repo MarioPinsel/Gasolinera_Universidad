@@ -10,14 +10,15 @@
 
     <string-array name="roles_usuario">
         <item>CLIENTE</item>
-        <item>ADMINISTRADOR</item>
+        <item>ADMINISTRADOR LEGAL</item>
         <item>DISTRIBUIDOR</item>
+        <item>OPERADOR DE ESTACION</item>
     </string-array>
 
     <string-array name="zone_array">
-        <item>ZONA A</item>
-        <item>ZONA B</item>
-        <item>ZONA C</item>
+        <item>Ciudad Bolivar</item>
+        <item>Kennedy</item>
+        <item>Suba</item>
     </string-array>
 
     <string-array name="type_array">
