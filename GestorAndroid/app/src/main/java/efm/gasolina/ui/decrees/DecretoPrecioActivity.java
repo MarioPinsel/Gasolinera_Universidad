@@ -28,8 +28,8 @@ public class DecretoPrecioActivity extends AppCompatActivity {
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", new Locale("es", "CO"));
 
     private final String[] zonas = {
-            "Seleccione una zona", "Zona Centro", "Zona Norte",
-            "Zona Sur", "Zona Oriente", "Zona Occidente"
+            "Seleccione una zona", "Ciudad Bolivar", "Kennedy",
+            "Suba"
     };
 
     private final Map<String, String> preciosActuales = new HashMap<String, String>() {{

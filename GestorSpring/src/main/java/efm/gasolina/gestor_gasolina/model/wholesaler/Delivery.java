@@ -5,10 +5,7 @@ import java.time.LocalDateTime;
 
 import efm.gasolina.gestor_gasolina.model.sesion.RegisterModel;
 import efm.gasolina.gestor_gasolina.model.station.Station;
-import lombok.Getter;
-import lombok.Setter;
-@Getter
-@Setter
+
 @Entity
 public class Delivery {
     @Id
@@ -20,6 +17,70 @@ public class Delivery {
     private Integer volume;
     private String fuelType;
     private LocalDateTime date;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getVehicle() {
+            return vehicle;
+        }
+
+        public void setVehicle(String vehicle) {
+            this.vehicle = vehicle;
+        }
+
+        public String getConductor() {
+            return conductor;
+        }
+
+        public void setConductor(String conductor) {
+            this.conductor = conductor;
+        }
+
+        public Integer getVolume() {
+            return volume;
+        }
+
+        public void setVolume(Integer volume) {
+            this.volume = volume;
+        }
+
+        public String getFuelType() {
+            return fuelType;
+        }
+
+        public void setFuelType(String fuelType) {
+            this.fuelType = fuelType;
+        }
+
+        public LocalDateTime getDate() {
+            return date;
+        }
+
+        public void setDate(LocalDateTime date) {
+            this.date = date;
+        }
+
+        public RegisterModel getDistributor() {
+            return distributor;
+        }
+
+        public void setDistributor(RegisterModel distributor) {
+            this.distributor = distributor;
+        }
+
+        public Station getStation() {
+            return station;
+        }
+
+        public void setStation(Station station) {
+            this.station = station;
+        }
 
     @ManyToOne
     @JoinColumn(name = "distributor_id")

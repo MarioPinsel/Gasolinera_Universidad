@@ -42,7 +42,7 @@ public class WholesalerViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<List<Station>> call, Throwable t) {
-                actionResult.setValue("ERROR:No internet connection");
+                actionResult.setValue("ERROR: No internet connection");
             }
         });
     }
@@ -59,7 +59,7 @@ public class WholesalerViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<List<Delivery>> call, Throwable t) {
-                actionResult.setValue("ERROR:No internet connection");
+                actionResult.setValue("ERROR: No internet connection");
             }
         });
     }
@@ -69,7 +69,7 @@ public class WholesalerViewModel extends ViewModel {
                                  Long stationId, String email) {
 
         if (vehicle.isEmpty() || conductor.isEmpty() || volume == null) {
-            actionResult.setValue("ERROR:Completa todos los campos");
+            actionResult.setValue("ERROR: Completa todos los campos");
             return;
         }
 
@@ -84,15 +84,15 @@ public class WholesalerViewModel extends ViewModel {
                 if (response.isSuccessful()) {
                     actionResult.setValue("Entrega realizada correctamente");
                 } else if (response.code() == 409) {
-                    actionResult.setValue("ERROR:Volume exceeds station capacity");
+                    actionResult.setValue("ERROR: Capacidad de volumen excedida");
                 } else {
-                    actionResult.setValue("ERROR:Server error " + response.code());
+                    actionResult.setValue("ERROR: Server error " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<Delivery> call, Throwable t) {
-                actionResult.setValue("ERROR:No internet connection");
+                actionResult.setValue("ERROR: No internet connection");
             }
         });
     }

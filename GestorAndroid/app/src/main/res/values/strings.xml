@@ -10,7 +10,7 @@
 
     <string-array name="roles_usuario">
         <item>CLIENTE</item>
-        <item>ADMINISTRADOR LEGAL</item>
+        <item>ADMINISTRADORLEGAL</item>
         <item>DISTRIBUIDOR</item>
         <item>OPERADOR DE ESTACION</item>
     </string-array>

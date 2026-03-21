@@ -35,7 +35,7 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.Delive
 
         holder.tvVehicle.setText("Vehiculo: " + delivery.getVehicle());
         holder.tvConductor.setText("Conductor: " + delivery.getConductor());
-        holder.tvVolume.setText("Cantidad: " + delivery.getVolume() + "L");
+        holder.tvVolume.setText("Cantidad: " + delivery.getVolume() + " Galon(s)");
         holder.tvFuelType.setText("Combustible: " + delivery.getFuelType());
         holder.tvStation.setText("Estación: " + delivery.getStation().getFranchise()
                 + " - " + delivery.getStation().getZone());
