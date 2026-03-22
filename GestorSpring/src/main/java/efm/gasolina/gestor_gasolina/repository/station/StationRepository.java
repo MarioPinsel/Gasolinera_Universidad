@@ -9,6 +9,9 @@ import java.util.List;
 
 public interface StationRepository extends JpaRepository<Station, Long>{
         
-    @Query("SELECT s.franchise, s.price_difference FROM Station s WHERE s.zone = ?1 AND s.type = ?2")
-    List<Object[]> findByZoneAndType(String zone, String type);
+    @Query("SELECT s.brand, s.regular_price_difference FROM Station s WHERE s.zone = ?1 ORDER BY s.regular_price_difference ASC")
+    List<Object[]> findBrandAndRegularDiff(String zone);
+
+    @Query("SELECT s.brand, s.diesel_price_difference FROM Station s WHERE s.zone = ?1  ORDER BY s.diesel_price_difference ASC")
+    List<Object[]> findBrandAndDieselDiff(String zone);
 }

@@ -17,30 +17,24 @@ public class GasPriceViewModel extends ViewModel {
 
     private final ApiService apiService;
 
-    // Lista completa de precios
     private final MutableLiveData<List<PricesRequest>> pricesList = new MutableLiveData<>();
 
-    // Para mensajes de estado y errores
     private final MutableLiveData<String> statusMessage = new MutableLiveData<>();
 
-    // Para indicar si está cargando
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
 
     public GasPriceViewModel() {
         apiService = ApiClient.getClient().create(ApiService.class);
     }
 
-    // Getter para la lista de precios
     public LiveData<List<PricesRequest>> getPricesList() {
         return pricesList;
     }
 
-    // Getter para mensajes de estado
     public LiveData<String> getStatusMessage() {
         return statusMessage;
     }
 
-    // Getter para indicador de loading
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }
@@ -48,36 +42,36 @@ public class GasPriceViewModel extends ViewModel {
     /**
      * Obtener precios por zona y tipo de combustible
      */
-    public void getPricesByZoneAndType(String zone, String type) {
+    public void getPricesByZoneAndType(String zone, String type, String vehicle) {
 
-        // VALIDACIONES
-        if (zone.isEmpty() && type.isEmpty()) {
+        if (zone == null && type == null) {
             statusMessage.setValue("ERROR: Todos los campos son necesarios");
             return;
         }
 
-        if (zone.isEmpty()) {
+        if (zone == null) {
             statusMessage.setValue("ERROR: La zona es requerida");
             return;
         }
 
-        if (type.isEmpty()) {
+        if (type == null) {
             statusMessage.setValue("ERROR: El tipo de combustible es requerido");
             return;
         }
 
-        // Mostrar que está cargando
-        isLoading.setValue(true);
+        if(vehicle == null){
+            statusMessage.setValue("ERROR: El vehiculo es requerido");
+            return;
+        }
 
-        // LLAMADA AL API
-        apiService.getPrices(zone, type).enqueue(new Callback<List<PricesRequest>>() {
+        isLoading.setValue(true);
+        apiService.getPrices(zone, type, vehicle).enqueue(new Callback<List<PricesRequest>>() {
             @Override
             public void onResponse(Call<List<PricesRequest>> call, Response<List<PricesRequest>> response) {
                 isLoading.setValue(false);
 
                 if (response.isSuccessful()) {
                     if (response.body() != null && !response.body().isEmpty()) {
-                        // ✅ Retornar la lista completa (no procesar aquí)
                         pricesList.setValue(response.body());
                         statusMessage.setValue("OK");
                     } else {

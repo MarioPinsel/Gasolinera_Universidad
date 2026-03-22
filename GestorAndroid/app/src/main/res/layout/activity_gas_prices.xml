@@ -65,6 +65,29 @@
             android:entries="@array/type_array"/>
     </LinearLayout>
 
+    <!--- Tipo de Vehiculo y Spinner -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="60dp">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Vehiculo" />
+
+        <Spinner
+            android:id="@+id/vehicleSpinner"
+            android:layout_width="0dp"
+            android:layout_height="41dp"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:entries="@array/vehicle_array"/>
+    </LinearLayout>
+
     <!-- Botón de búsqueda -->
     <Button
         android:id="@+id/button"

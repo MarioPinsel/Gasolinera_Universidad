@@ -34,7 +34,7 @@ public class DeliveryService {
         RegisterModel distributor = sesionRepository.findByEmail(request.distributorEmail())
                 .orElseThrow(() -> new RuntimeException("DISTRIBUTOR_NOT_FOUND"));
 
-        if (request.volume() > station.getQuantity())
+        if (request.volume() > station.getRegular_quantity())
             throw new ExceedsCapacityException();
 
         Delivery delivery = new Delivery(
