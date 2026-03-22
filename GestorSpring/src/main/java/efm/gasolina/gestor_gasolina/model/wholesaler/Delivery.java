@@ -17,6 +17,7 @@ public class Delivery {
     private Integer volume;
     private String fuelType;
     private LocalDateTime date;
+    private String status;
 
         public Long getId() {
             return id;
@@ -82,6 +83,10 @@ public class Delivery {
             this.station = station;
         }
 
+        public String getStatus() { return status; }
+
+        public void setStatus(String status) { this.status = status; }
+
     @ManyToOne
     @JoinColumn(name = "distributor_id")
     private RegisterModel distributor;  
@@ -102,5 +107,6 @@ public class Delivery {
         this.station = station;
         this.distributor = distributor;
         this.date = LocalDateTime.now();
+        this.status = "PENDING";
     }
 }

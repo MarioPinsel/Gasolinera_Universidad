@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ public class DeliveryHistoryFragment extends Fragment {
     private DeliveryAdapter adapter;
     private WholesalerViewModel viewModel;
     private String distributorEmail;
+
 
     public static DeliveryHistoryFragment newInstance(String email) {
         DeliveryHistoryFragment fragment = new DeliveryHistoryFragment();
@@ -61,6 +63,9 @@ public class DeliveryHistoryFragment extends Fragment {
         });
 
         viewModel.loadHistory(distributorEmail);
+
+        Button btnRefresh = view.findViewById(R.id.btnRefresh);
+        btnRefresh.setOnClickListener(v -> viewModel.loadHistory(distributorEmail));
     }
     @Override
     public void onResume() {

@@ -8,7 +8,9 @@
 
     <EditText
         android:id="@+id/etVehicle"
-        android:hint="Placa del vehiculo"
+        android:hint="Placa del vehículo"
+        android:inputType="textCapCharacters"
+        android:maxLength="6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"/>
@@ -55,7 +57,7 @@
 
     <Button
         android:id="@+id/btnRegister"
-        android:text="Registrar entrega"
+        android:text="Solicitar aprobación de entrega"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#7FFFD4"
