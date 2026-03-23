@@ -44,8 +44,11 @@ public interface ApiService {
     @PUT("developer/reject/{id}")
     Call<Void> rejectUser(@Path("id") Long id);
 
-    @GET("/consult/prices/{zone}/{type}")
-    Call<List<PricesRequest>> getPrices(@Path("zone") String zone, @Path("type") String type);
+    @GET("/consult/prices/{zone}/{type}/{vehicle}")
+    Call<List<PricesRequest>> getPrices(
+            @Path("zone") String zone,
+            @Path("type") String type,
+            @Path("vehicle") String vehicle);
 
     @GET("station/all")
     Call<List<Station>> getAllStations();

@@ -23,6 +23,8 @@ public class GasPricesActivity extends AppCompatActivity {
 
     private Spinner zoneSpinner;
     private Spinner typeSpinner;
+
+    private Spinner vehicleSpinner;
     private Button launchBtn;
 
     // Componentes para mostrar resultados
@@ -45,6 +47,7 @@ public class GasPricesActivity extends AppCompatActivity {
         // Referencias a elementos del layout
         zoneSpinner = findViewById(R.id.zoneSpinner);
         typeSpinner = findViewById(R.id.typeSpinner);
+        vehicleSpinner = findViewById(R.id.vehicleSpinner);
         launchBtn = findViewById(R.id.button);
 
         resultsContainer = findViewById(R.id.resultsContainer);
@@ -99,7 +102,9 @@ public class GasPricesActivity extends AppCompatActivity {
         launchBtn.setOnClickListener(v -> {
             String zone = zoneSpinner.getSelectedItem().toString().trim();
             String type = typeSpinner.getSelectedItem().toString().trim();
-            viewModel.getPricesByZoneAndType(zone, type);
+            String vehicle = vehicleSpinner.getSelectedItem().toString().trim();
+
+            viewModel.getPricesByZoneAndType(zone, type, vehicle);
         });
     }
 

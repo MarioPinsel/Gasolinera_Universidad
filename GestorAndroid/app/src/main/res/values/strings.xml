@@ -19,11 +19,23 @@
         <item>Ciudad Bolivar</item>
         <item>Kennedy</item>
         <item>Suba</item>
+        <item>Tunjuelito</item>
+        <item>Bosa</item>
+        <item>Chapinero</item>
+        <item>Teusaquillo</item>
     </string-array>
 
     <string-array name="type_array">
         <item>Corriente</item>
         <item>Diesel</item>
+    </string-array>
+
+    <string-array name="vehicle_array">
+        <item>Carro Particular</item>
+        <item>Moto Particular</item>
+        <item>Camion de Carga</item>
+        <item>Taxi</item>
+        <item>Bus Urbano</item>
     </string-array>
 
 </resources>
