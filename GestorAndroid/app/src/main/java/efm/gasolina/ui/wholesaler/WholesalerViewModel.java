@@ -82,7 +82,7 @@ public class WholesalerViewModel extends ViewModel {
             public void onResponse(Call<Delivery> call,
                                    Response<Delivery> response) {
                 if (response.isSuccessful()) {
-                    actionResult.setValue("Entrega realizada correctamente");
+                    actionResult.setValue("Entrega solicitada correctamente");
                 } else if (response.code() == 409) {
                     actionResult.setValue("ERROR: Capacidad de volumen excedida");
                 } else {

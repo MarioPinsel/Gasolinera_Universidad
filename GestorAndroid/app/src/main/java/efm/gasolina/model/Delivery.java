@@ -10,6 +10,8 @@ public class Delivery {
     private Station station;
     private User distributor;
 
+    private String status;
+
     public Long getId() { return id; }
     public String getVehicle() { return vehicle; }
     public String getConductor() { return conductor; }
@@ -20,6 +22,8 @@ public class Delivery {
     public User getDistributor() { return distributor; }
 
     public void setId(Long id) { this.id = id; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
     public void setVehicle(String vehicle) { this.vehicle = vehicle; }
     public void setConductor(String conductor) { this.conductor = conductor; }
     public void setVolume(Integer volume) { this.volume = volume; }

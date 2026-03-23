@@ -39,4 +39,6 @@ public class DeliveryController {
     public ResponseEntity<List<Delivery>> getHistory(@PathVariable String email) {
         return ResponseEntity.ok(deliveryService.getDeliveriesByDistributor(email));
     }
+
+    
 }

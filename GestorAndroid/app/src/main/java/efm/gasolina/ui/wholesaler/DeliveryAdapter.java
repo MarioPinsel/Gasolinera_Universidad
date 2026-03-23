@@ -33,14 +33,25 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.Delive
     public void onBindViewHolder(@NonNull DeliveryViewHolder holder, int position) {
         Delivery delivery = deliveries.get(position);
 
-        holder.tvVehicle.setText("Vehiculo: " + delivery.getVehicle());
-        holder.tvConductor.setText("Conductor: " + delivery.getConductor());
+        holder.tvVehicle.setText("Placa del vehiculo: " + delivery.getVehicle());
+        holder.tvConductor.setText("Nombre del conductor: " + delivery.getConductor());
         holder.tvVolume.setText("Cantidad: " + delivery.getVolume() + " Galon(s)");
-        holder.tvFuelType.setText("Combustible: " + delivery.getFuelType());
+        holder.tvFuelType.setText("Tipo de combustible: " + delivery.getFuelType());
         holder.tvStation.setText("Estación: " + delivery.getStation().getFranchise()
                 + " - " + delivery.getStation().getZone());
-        holder.tvDate.setText("Fecha: " + delivery.getDate());
-        holder.tvDistributor.setText("Distributor: " + delivery.getDistributor().getName());
+        holder.tvDistributor.setText("Nombre del distributor: " + delivery.getDistributor().getName());
+        holder.tvStatus.setText("Estado: " + delivery.getStatus());
+        String rawDate = delivery.getDate();
+        try {
+            java.text.SimpleDateFormat inputFormat =
+                    new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS");
+            java.text.SimpleDateFormat outputFormat =
+                    new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
+            java.util.Date date = inputFormat.parse(rawDate);
+            holder.tvDate.setText("Fecha de solicitud: " + outputFormat.format(date));
+        } catch (Exception e) {
+            holder.tvDate.setText("Fecha de solicitud: " + rawDate);
+        }
     }
 
     @Override
@@ -52,7 +63,7 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.Delive
     }
 
     static class DeliveryViewHolder extends RecyclerView.ViewHolder {
-        TextView tvVehicle, tvConductor, tvVolume, tvFuelType, tvStation, tvDate,tvDistributor;
+        TextView tvVehicle, tvConductor, tvVolume, tvFuelType, tvStation, tvDate,tvDistributor,tvStatus;
 
         DeliveryViewHolder(View itemView) {
             super(itemView);
@@ -63,6 +74,7 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.Delive
             tvStation   = itemView.findViewById(R.id.tvStation);
             tvDate      = itemView.findViewById(R.id.tvDate);
             tvDistributor = itemView.findViewById(R.id.tvDistributor);
+            tvStatus = itemView.findViewById(R.id.tvStatus);
         }
     }
 }
