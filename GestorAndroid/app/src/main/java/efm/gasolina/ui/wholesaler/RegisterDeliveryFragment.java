@@ -70,7 +70,7 @@ public class RegisterDeliveryFragment extends Fragment {
             List<Station> uniqueStations = new ArrayList<>();
 
             for (Station s : stations) {
-                String name = s.getFranchise() + " - " + s.getZone();
+                String name = s.getBrand() + " - " + s.getZone();
                 if (!stationNames.contains(name)) {
                     stationNames.add(name);
                     uniqueStations.add(s);

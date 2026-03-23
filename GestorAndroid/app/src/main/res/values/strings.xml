@@ -12,7 +12,7 @@
         <item>CLIENTE</item>
         <item>ADMINISTRADORLEGAL</item>
         <item>DISTRIBUIDOR</item>
-        <item>OPERADOR DE ESTACION</item>
+        <item>OPERADOR</item>
     </string-array>
 
     <string-array name="zone_array">
