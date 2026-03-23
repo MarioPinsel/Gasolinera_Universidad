@@ -93,7 +93,7 @@ public class Delivery {
 
     @ManyToOne
     @JoinColumn(name = "station_id")
-    private Station station;  
+    private Station station;
 
     public Delivery() {}
 
