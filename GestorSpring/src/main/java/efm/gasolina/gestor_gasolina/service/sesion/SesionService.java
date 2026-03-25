@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Map;
 
+import efm.gasolina.gestor_gasolina.repository.station.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
@@ -26,6 +27,8 @@ import org.springframework.stereotype.Service;
 public class SesionService {
     @Autowired
     private SesionRepository sesionRepository;
+    @Autowired
+    private StationRepository stationRepository;
 
     private final JavaMailSender mailSender;
     private final RedisRepository redisRepo;
@@ -38,6 +41,7 @@ public class SesionService {
 
     public RegisterDTO registro(RegisterDTO request) {
         RegisterModel model = new RegisterModel(request);
+        model.setIdStation(stationRepository.findIdByBrandAndZone(model.getBrand(), model.getZone()));
         sesionRepository.save(model);
         return request;
     }

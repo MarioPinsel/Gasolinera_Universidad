@@ -14,7 +14,7 @@ import efm.gasolina.R;
 import efm.gasolina.ui.developer.DeveloperActivity;
 import efm.gasolina.ui.login.LoginActivity;
 import efm.gasolina.ui.register.RegisterActivity;
-import efm.gasolina.ui.decrees.DecretoPrecioActivity;
+//import efm.gasolina.ui.decrees.DecretoPrecioActivity;
 
 public class MainActivity extends AppCompatActivity {
 
