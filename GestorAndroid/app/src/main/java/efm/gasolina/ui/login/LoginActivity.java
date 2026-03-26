@@ -15,6 +15,7 @@ import efm.gasolina.R;
 import efm.gasolina.ui.prices.GasPricesActivity;
 import efm.gasolina.ui.recover.ChangePasswordActivity;
 import efm.gasolina.ui.recover.RecoverByEmailActivity;
+import efm.gasolina.ui.station.StationActivity;
 import efm.gasolina.ui.wholesaler.WholesalerActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -66,6 +67,9 @@ public class LoginActivity extends AppCompatActivity {
                 break;
             case "DISTRIBUIDOR":
                 intent = new Intent(this, WholesalerActivity.class);
+                break;
+            case "OPERADOR":
+                intent = new Intent(this, StationActivity.class);
                 break;
             default:
                 throw new IllegalArgumentException("Rol desconocido: " + role);
