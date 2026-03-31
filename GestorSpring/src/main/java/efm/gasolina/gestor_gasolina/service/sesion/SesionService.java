@@ -1,7 +1,7 @@
 package efm.gasolina.gestor_gasolina.service.sesion;
 
-import efm.gasolina.gestor_gasolina.dto.sesion.RecoverRequest;
 import efm.gasolina.gestor_gasolina.dto.sesion.LoginDTO;
+import efm.gasolina.gestor_gasolina.dto.sesion.RecoverRequest;
 import efm.gasolina.gestor_gasolina.dto.sesion.LoginResponseDTO;
 import efm.gasolina.gestor_gasolina.dto.sesion.RegisterDTO;
 import efm.gasolina.gestor_gasolina.handler.runtime.NoSuchElement;
@@ -88,20 +88,20 @@ public class SesionService {
 
     public LoginResponseDTO login(LoginDTO request) {
 
-        Optional<RegisterModel> userOpt = sesionRepository.findByEmail(request.getEmail());
+        Optional<RegisterModel> userOpt = sesionRepository.findByEmail(request.email());
         
         if (userOpt.isEmpty())
             throw new RuntimeException("USER_NOT_FOUND"); 
 
         RegisterModel user = userOpt.get();
 
-        if (!user.getPassword().equals(request.getPassword()))
+        if (!user.getPassword().equals(request.password()))
             throw new RuntimeException("WRONG_PASSWORD"); 
 
         if (!"APPROVED".equals(user.getVerified()))
             throw new RuntimeException("USER_NOT_APPROVED"); 
 
-        return new LoginResponseDTO(user.getRole().name(), user.getEmail());
+        return new LoginResponseDTO(user.getRole().name(), user.getEmail(), user.getIdStation());
     }
 
     public List<RegisterModel> getPendingUsers() {

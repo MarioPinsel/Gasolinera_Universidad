@@ -1,14 +1,13 @@
 package efm.gasolina.gestor_gasolina.dto.sesion;
 
-public class LoginResponseDTO {
-    private String role;
-    private String email; 
-
-    public LoginResponseDTO(String role, String email) {
+public record LoginResponseDTO(
+        String role,
+        String email,
+        Long idStation
+) {
+    public LoginResponseDTO(String role, String email, Long idStation) {
         this.role = role;
-        this.email = email; 
+        this.email = email;
+        this.idStation = idStation;
     }
-
-    public String getRole() { return role; }
-    public String getEmail() { return email; }
 }

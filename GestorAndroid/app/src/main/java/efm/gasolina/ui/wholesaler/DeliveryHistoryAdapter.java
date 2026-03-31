@@ -15,19 +15,12 @@ import java.util.List;
 import efm.gasolina.R;
 import efm.gasolina.model.Delivery;
 
-public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.ViewHolder> {
-
-    public interface OnDeliveryAction {
-        void onAccept(Delivery delivery);
-        void onReject(Delivery delivery);
-    }
+public class DeliveryHistoryAdapter extends RecyclerView.Adapter<DeliveryHistoryAdapter.ViewHolder> {
 
     private final List<Delivery> deliveries;
-    private final OnDeliveryAction listener;
 
-    public DeliveryAdapter(List<Delivery> deliveries, OnDeliveryAction listener) {
+    public DeliveryHistoryAdapter(List<Delivery> deliveries) {
         this.deliveries = deliveries;
-        this.listener   = listener;
     }
 
     @NonNull
@@ -50,19 +43,20 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.ViewHo
         holder.tvDistributor.setText("📦 " + (d.getDistributor() != null
                 ? d.getDistributor().getName() : "—"));
 
-        holder.btnAccept.setOnClickListener(v -> listener.onAccept(d));
-        holder.btnReject.setOnClickListener(v -> listener.onReject(d));
+        // 🔥 ocultamos botones porque es historial
+        holder.btnAccept.setVisibility(View.GONE);
+        holder.btnReject.setVisibility(View.GONE);
     }
 
     @Override
-    public int getItemCount() { return deliveries.size(); }
+    public int getItemCount() {
+        return deliveries.size();
+    }
 
-    public void removeItem(Delivery delivery) {
-        int index = deliveries.indexOf(delivery);
-        if (index != -1) {
-            deliveries.remove(index);
-            notifyItemRemoved(index);
-        }
+    public void updateList(List<Delivery> newList) {
+        deliveries.clear();
+        deliveries.addAll(newList);
+        notifyDataSetChanged();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
