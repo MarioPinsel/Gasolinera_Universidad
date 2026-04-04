@@ -15,22 +15,36 @@
         android:textColor="#1A1A2E"
         android:padding="16dp"/>
 
-    <TextView
-        android:id="@+id/tv_empty"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="No hay entregas pendientes"
-        android:textSize="14sp"
-        android:textColor="#888888"
-        android:gravity="center"
-        android:padding="32dp"
-        android:visibility="gone"/>
+        android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_deliveries"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingVertical="8dp"
-        android:clipToPadding="false"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_deliveries"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="8dp"
+                android:clipToPadding="false"/>
+
+            <TextView
+                android:id="@+id/tv_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No hay entregas pendientes"
+                android:textSize="14sp"
+                android:textColor="#888888"
+                android:gravity="center"
+                android:padding="32dp"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>
