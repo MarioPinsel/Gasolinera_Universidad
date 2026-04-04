@@ -17,6 +17,7 @@ public class RegisterModel {
     private String brand;
     private String zone;
     private Long idStation;
+
     public RegisterModel() {
     }
 

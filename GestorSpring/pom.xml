@@ -106,8 +106,8 @@
 		<!-- Starter para guardar pares con TTL.
 			 Permite guarda en una NoSQL DB pares clave valor con tiempo de expiracion (EST :). -->
 		<dependency>
-    		<groupId>org.springframework.boot</groupId>
-    		<artifactId>spring-boot-starter-data-redis</artifactId>		    
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 	</dependencies>
 
