@@ -34,9 +34,16 @@ public class DeliveryService {
         RegisterModel distributor = sesionRepository.findByEmail(request.distributorEmail())
                 .orElseThrow(() -> new RuntimeException("DISTRIBUTOR_NOT_FOUND"));
 
-        if (request.volume() > station.getRegular_quantity())
-            throw new ExceedsCapacityException();
-
+        if (request.fuelType().equals("Corriente")) {
+            if (request.volume() > station.getRegular_capacity() 
+            || request.volume() + station.getRegular_quantity() > station.getRegular_capacity())
+                throw new ExceedsCapacityException();
+        } else {
+            if (request.volume() > station.getDiesel_capacity() 
+            || request.volume() + station.getDiesel_quantity() > station.getDiesel_capacity())
+                throw new ExceedsCapacityException();
+        }
+        
         Delivery delivery = new Delivery(
                 request.vehicle(),
                 request.conductor(),

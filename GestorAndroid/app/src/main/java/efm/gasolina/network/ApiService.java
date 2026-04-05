@@ -7,6 +7,8 @@ import efm.gasolina.model.DeliveryRequest;
 import efm.gasolina.model.LoginRequest;
 import efm.gasolina.model.PasswordRequest;
 import efm.gasolina.model.LoginResponse;
+import efm.gasolina.model.Sale;
+import efm.gasolina.model.SaleRequest;
 import efm.gasolina.model.Station;
 import efm.gasolina.model.TokenResponse;
 import efm.gasolina.model.User;
@@ -59,6 +61,11 @@ public interface ApiService {
     @GET("delivery/history/{email}")
     Call<List<Delivery>> getDeliveryHistory(@Path("email") String email);
 
+    @POST("sale/register")
+    Call<Sale> registerSale(@Body SaleRequest request);
+
+    @GET("sale/vehicles")
+    Call<List<String>> getVehicleTypes();
     @GET("delivery/station/{stationId}/pending")
     Call<List<Delivery>> getPendingDeliveries(@Path("stationId") Long stationId);
 
