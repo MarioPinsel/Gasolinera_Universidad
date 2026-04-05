@@ -1,7 +1,6 @@
 package efm.gasolina.ui.station;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +18,6 @@ import efm.gasolina.R;
 import efm.gasolina.model.Delivery;
 import efm.gasolina.network.ApiClient;
 import efm.gasolina.network.ApiService;
-import efm.gasolina.ui.wholesaler.DeliveryAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,7 +27,7 @@ public class RevisionEntregasActivity extends AppCompatActivity {
     private RecyclerView rvDeliveries;
     private TextView tvEmpty;
     private SwipeRefreshLayout swipeRefresh;
-    private DeliveryAdapter adapter;
+    private StationDeliveryAdapter adapter;
     private final List<Delivery> deliveries = new ArrayList<>();
     private ApiService apiService;
     private Long stationId;
@@ -53,7 +51,7 @@ public class RevisionEntregasActivity extends AppCompatActivity {
             return;
         }
 
-        adapter = new DeliveryAdapter(deliveries, new DeliveryAdapter.OnDeliveryAction() {
+        adapter = new StationDeliveryAdapter(deliveries, new StationDeliveryAdapter.OnAction() {
             @Override
             public void onAccept(Delivery delivery) {
                 confirmarAccion(delivery, true);

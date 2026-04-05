@@ -89,17 +89,17 @@ public class SesionService {
     public LoginResponseDTO login(LoginDTO request) {
 
         Optional<RegisterModel> userOpt = sesionRepository.findByEmail(request.email());
-        
+
         if (userOpt.isEmpty())
-            throw new RuntimeException("USER_NOT_FOUND"); 
+            throw new RuntimeException("USER_NOT_FOUND");
 
         RegisterModel user = userOpt.get();
 
         if (!user.getPassword().equals(request.password()))
-            throw new RuntimeException("WRONG_PASSWORD"); 
+            throw new RuntimeException("WRONG_PASSWORD");
 
         if (!"APPROVED".equals(user.getVerified()))
-            throw new RuntimeException("USER_NOT_APPROVED"); 
+            throw new RuntimeException("USER_NOT_APPROVED");
 
         return new LoginResponseDTO(user.getRole().name(), user.getEmail(), user.getIdStation());
     }

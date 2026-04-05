@@ -52,13 +52,13 @@ public class LoginActivity extends AppCompatActivity {
         viewModel.getLoginError().observe(this, error -> {
             Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
         });
-      
+
         btnLogin.setOnClickListener(v -> viewModel.login(
                 etEmail.getText().toString().trim(),
                 etPassword.getText().toString().trim()
         ));
 
-              TextView texto = findViewById(R.id.tvEnlace);
+        TextView texto = findViewById(R.id.tvEnlace);
         texto.setOnClickListener(v ->
                 startActivity(new Intent(this, RecoverByEmailActivity.class)));
 

@@ -12,8 +12,7 @@ import efm.gasolina.R;
 
 public class StationActivity extends AppCompatActivity {
 
-    private MaterialButton btnRevisionEntregas, btnRealizarVenta,
-            btnDisponibilidad, btnHistorialMovimientos;
+    private MaterialButton btnRevisionEntregas, btnRealizarVenta, btnDisponibilidad, btnHistorialMovimientos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

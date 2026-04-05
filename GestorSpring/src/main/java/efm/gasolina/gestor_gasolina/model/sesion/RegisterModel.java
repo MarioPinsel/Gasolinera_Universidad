@@ -22,13 +22,13 @@ public class RegisterModel {
     }
 
     public RegisterModel(RegisterDTO registerModel) {
-    name = registerModel.name();
-    email = registerModel.email();
-    password = registerModel.password();
-    role = registerModel.role();
-    verified = "PENDING";
-    brand = registerModel.brand();
-    zone = registerModel.zone();
+        name = registerModel.name();
+        email = registerModel.email();
+        password = registerModel.password();
+        role = registerModel.role();
+        verified = "PENDING";
+        brand = registerModel.brand();
+        zone = registerModel.zone();
 
     }
 

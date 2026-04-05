@@ -20,7 +20,7 @@ import efm.gasolina.R;
 public class DeliveryHistoryFragment extends Fragment {
 
     private RecyclerView recyclerDeliveries;
-    private DeliveryHistoryAdapter adapter;
+    private DeliveryAdapter adapter;
     private WholesalerViewModel viewModel;
     private String distributorEmail;
 
@@ -52,7 +52,7 @@ public class DeliveryHistoryFragment extends Fragment {
         recyclerDeliveries = view.findViewById(R.id.recyclerDeliveries);
         recyclerDeliveries.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        adapter = new DeliveryHistoryAdapter(new ArrayList<>());
+        adapter = new DeliveryAdapter(new ArrayList<>());
         recyclerDeliveries.setAdapter(adapter);
 
         viewModel = new ViewModelProvider(requireActivity())
