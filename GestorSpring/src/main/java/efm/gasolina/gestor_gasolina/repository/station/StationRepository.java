@@ -3,14 +3,14 @@ package efm.gasolina.gestor_gasolina.repository.station;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-
 import efm.gasolina.gestor_gasolina.model.station.Station;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface StationRepository extends JpaRepository<Station, Long>{
-        
+public interface StationRepository extends JpaRepository<Station, Long> {
+
     @Query("SELECT s.brand, s.regular_price_difference FROM Station s WHERE s.zone = ?1 ORDER BY s.regular_price_difference ASC")
     List<Object[]> findBrandAndRegularDiff(String zone);
 
@@ -19,4 +19,10 @@ public interface StationRepository extends JpaRepository<Station, Long>{
 
     @Query("SELECT s.id FROM Station s WHERE s.brand = :brand AND s.zone = :zone")
     Long findIdByBrandAndZone(@Param("brand") String brand, @Param("zone") String zone);
+
+    @Query("SELECT s.regular_price_difference FROM Station s WHERE s.id = ?1")
+    Optional<Integer> findRegularDiffByStation(Long id);
+
+    @Query("SELECT s.diesel_price_difference FROM Station s WHERE s.id = ?1")
+    Optional<Integer> findDieselDiffByStation(Long id);
 }

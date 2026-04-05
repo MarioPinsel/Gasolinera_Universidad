@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Gestor_gasolina"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.operator.OperatorActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.wholesaler.WholesalerActivity"
             android:exported="false" />
         <activity
@@ -50,7 +53,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
