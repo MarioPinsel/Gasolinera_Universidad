@@ -16,6 +16,7 @@ public class OpDeliveryService {
     public void acceptDelivery(Long id) {
         Delivery delivery = deliveryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Entrega no encontrada"));
+
         delivery.setStatus("ACCEPTED");
         deliveryRepository.save(delivery);
     }

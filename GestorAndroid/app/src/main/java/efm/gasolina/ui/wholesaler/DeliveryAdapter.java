@@ -8,77 +8,73 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.button.MaterialButton;
-
 import java.util.List;
 
 import efm.gasolina.R;
 import efm.gasolina.model.Delivery;
 
-public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.ViewHolder> {
+public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.DeliveryViewHolder> {
 
-    public interface OnDeliveryAction {
-        void onAccept(Delivery delivery);
-        void onReject(Delivery delivery);
-    }
+    private List<Delivery> deliveries;
 
-    private final List<Delivery> deliveries;
-    private final OnDeliveryAction listener;
-
-    public DeliveryAdapter(List<Delivery> deliveries, OnDeliveryAction listener) {
+    public DeliveryAdapter(List<Delivery> deliveries) {
         this.deliveries = deliveries;
-        this.listener   = listener;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DeliveryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_delivery, parent, false);
-        return new ViewHolder(view);
+        return new DeliveryViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Delivery d = deliveries.get(position);
+    public void onBindViewHolder(@NonNull DeliveryViewHolder holder, int position) {
+        Delivery delivery = deliveries.get(position);
 
-        holder.tvVehicle.setText("🚛 " + d.getVehicle());
-        holder.tvConductor.setText("Conductor: " + d.getConductor());
-        holder.tvVolume.setText(d.getVolume() + " gal");
-        holder.tvFuelType.setText(d.getFuelType());
-        holder.tvDate.setText(d.getDate());
-        holder.tvDistributor.setText("📦 " + (d.getDistributor() != null
-                ? d.getDistributor().getName() : "—"));
-
-        holder.btnAccept.setOnClickListener(v -> listener.onAccept(d));
-        holder.btnReject.setOnClickListener(v -> listener.onReject(d));
+        holder.tvVehicle.setText("Placa del vehiculo: " + delivery.getVehicle());
+        holder.tvConductor.setText("Nombre del conductor: " + delivery.getConductor());
+        holder.tvVolume.setText("Cantidad: " + delivery.getVolume() + " Galon(s)");
+        holder.tvFuelType.setText("Tipo de combustible: " + delivery.getFuelType());
+        holder.tvStation.setText("Estación: " + delivery.getStation().getBrand()
+                + " - " + delivery.getStation().getZone());
+        holder.tvDistributor.setText("Nombre del distributor: " + delivery.getDistributor().getName());
+        holder.tvStatus.setText("Estado: " + delivery.getStatus());
+        String rawDate = delivery.getDate();
+        try {
+            java.text.SimpleDateFormat inputFormat =
+                    new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS");
+            java.text.SimpleDateFormat outputFormat =
+                    new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
+            java.util.Date date = inputFormat.parse(rawDate);
+            holder.tvDate.setText("Fecha de solicitud: " + outputFormat.format(date));
+        } catch (Exception e) {
+            holder.tvDate.setText("Fecha de solicitud: " + rawDate);
+        }
     }
 
     @Override
     public int getItemCount() { return deliveries.size(); }
 
-    public void removeItem(Delivery delivery) {
-        int index = deliveries.indexOf(delivery);
-        if (index != -1) {
-            deliveries.remove(index);
-            notifyItemRemoved(index);
-        }
+    public void updateList(List<Delivery> newList) {
+        this.deliveries = newList;
+        notifyDataSetChanged();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvVehicle, tvConductor, tvVolume, tvFuelType, tvDistributor, tvDate;
-        MaterialButton btnAccept, btnReject;
+    static class DeliveryViewHolder extends RecyclerView.ViewHolder {
+        TextView tvVehicle, tvConductor, tvVolume, tvFuelType, tvStation, tvDate,tvDistributor,tvStatus;
 
-        ViewHolder(@NonNull View itemView) {
+        DeliveryViewHolder(View itemView) {
             super(itemView);
-            tvVehicle     = itemView.findViewById(R.id.tv_vehicle);
-            tvConductor   = itemView.findViewById(R.id.tv_conductor);
-            tvVolume      = itemView.findViewById(R.id.tv_volume);
-            tvFuelType    = itemView.findViewById(R.id.tv_fuel_type);
-            tvDistributor = itemView.findViewById(R.id.tv_distributor);
-            tvDate        = itemView.findViewById(R.id.tv_date);
-            btnAccept     = itemView.findViewById(R.id.btn_accept);
-            btnReject     = itemView.findViewById(R.id.btn_reject);
+            tvVehicle   = itemView.findViewById(R.id.tvVehicle);
+            tvConductor = itemView.findViewById(R.id.tvConductor);
+            tvVolume    = itemView.findViewById(R.id.tvVolume);
+            tvFuelType  = itemView.findViewById(R.id.tvFuelType);
+            tvStation   = itemView.findViewById(R.id.tvStation);
+            tvDate      = itemView.findViewById(R.id.tvDate);
+            tvDistributor = itemView.findViewById(R.id.tvDistributor);
+            tvStatus = itemView.findViewById(R.id.tvStatus);
         }
     }
 }

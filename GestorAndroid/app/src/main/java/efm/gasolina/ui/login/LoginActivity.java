@@ -15,8 +15,6 @@ import efm.gasolina.R;
 import efm.gasolina.ui.prices.GasPricesActivity;
 import efm.gasolina.ui.recover.ChangePasswordActivity;
 import efm.gasolina.ui.recover.RecoverByEmailActivity;
-import efm.gasolina.ui.station.RevisionEntregasActivity;
-import efm.gasolina.ui.station.StationActivity;
 import efm.gasolina.ui.wholesaler.WholesalerActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -37,18 +35,12 @@ public class LoginActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         viewModel.getLoginSuccess().observe(this, user -> {
-            Toast.makeText(this, "Welcome, role: " + user.getRol(), Toast.LENGTH_SHORT).show();
-
-            getSharedPreferences("sesion", MODE_PRIVATE)
-                    .edit()
-                    .putString("rol", user.getRol())
-                    .putString("email", user.getEmail())
-                    .putLong("stationId", user.getIdStation() != null ? user.getIdStation() : -1L)
-                    .apply();
-
+            Toast.makeText(this, "Welcome, role: " + user.getRol(),
+                    Toast.LENGTH_SHORT).show();
             startActivity(getIntentForRole(user.getRol(), user.getEmail()));
             finish();
         });
+
         viewModel.getLoginError().observe(this, error -> {
             Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
         });
@@ -74,9 +66,6 @@ public class LoginActivity extends AppCompatActivity {
                 break;
             case "DISTRIBUIDOR":
                 intent = new Intent(this, WholesalerActivity.class);
-                break;
-            case "OPERADOR":
-                intent = new Intent(this, StationActivity.class);
                 break;
             default:
                 throw new IllegalArgumentException("Rol desconocido: " + role);
