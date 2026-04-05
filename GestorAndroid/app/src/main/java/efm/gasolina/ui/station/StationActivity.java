@@ -9,15 +9,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 
 import efm.gasolina.R;
+import efm.gasolina.ui.operator.OperatorActivity;
 
 public class StationActivity extends AppCompatActivity {
 
     private MaterialButton btnRevisionEntregas, btnRealizarVenta, btnDisponibilidad, btnHistorialMovimientos;
+    private String operatorEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station);
+        operatorEmail = getIntent().getStringExtra("email");
 
         btnRevisionEntregas     = findViewById(R.id.btn_revision_entregas);
         btnRealizarVenta        = findViewById(R.id.btn_realizar_venta);
@@ -26,6 +29,12 @@ public class StationActivity extends AppCompatActivity {
 
         btnRevisionEntregas.setOnClickListener(v ->
                 startActivity(new Intent(this, RevisionEntregasActivity.class)));
+
+        btnRealizarVenta.setOnClickListener(v -> {
+            Intent intent = new Intent(this, OperatorActivity.class);
+            intent.putExtra("email", operatorEmail);
+            startActivity(intent);
+        });
 
         // Los demás se activan cuando tengas esas Activities
         // btnRealizarVenta.setOnClickListener(...)

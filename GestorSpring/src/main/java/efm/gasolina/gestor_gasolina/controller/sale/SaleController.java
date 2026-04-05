@@ -23,9 +23,9 @@ public class SaleController {
         } catch (RuntimeException e) {
             return switch (e.getMessage()) {
                 case "OPERATOR_NOT_FOUND" -> ResponseEntity.status(404).body("Operator not found");
-                case "STATION_NOT_FOUND"  -> ResponseEntity.status(404).body("Station not found");
-                case "INSUFFICIENT_FUEL"  -> ResponseEntity.status(409).body("Insufficient fuel");
-                case "INVALID_FUEL_TYPE"  -> ResponseEntity.status(400).body("Invalid fuel type");
+                case "STATION_NOT_FOUND" -> ResponseEntity.status(404).body("Station not found");
+                case "INSUFFICIENT_FUEL" -> ResponseEntity.status(409).body("Insufficient fuel");
+                case "INVALID_FUEL_TYPE" -> ResponseEntity.status(400).body("Invalid fuel type");
                 default -> ResponseEntity.status(500).body("Server error");
             };
         }
@@ -34,5 +34,17 @@ public class SaleController {
     @GetMapping("/vehicles")
     public ResponseEntity<List<String>> getVehicleTypes() {
         return ResponseEntity.ok(saleService.getVehicleTypes());
+    }
+
+    @GetMapping("/price/{email}/{fuelType}/{vehicleType}")
+    public ResponseEntity<Integer> getPrice(
+            @PathVariable String email,
+            @PathVariable String fuelType,
+            @PathVariable String vehicleType) {
+        try {
+            return ResponseEntity.ok(saleService.calculatePrice(email, fuelType, vehicleType));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).build();
+        }
     }
 }
