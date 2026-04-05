@@ -15,9 +15,7 @@ public class Station {
     private String zone;
     private String brand;
     private Integer diesel_quantity;
-    private Integer diesel_capacity;    
     private Integer regular_quantity;
-    private Integer regular_capacity;
     private Integer diesel_price_difference;
     private Integer regular_price_difference;
 
@@ -75,22 +73,6 @@ public class Station {
 
     public void setRegular_price_difference(Integer regular_price_difference) {
         this.regular_price_difference = regular_price_difference;
-    }
-
-    public Integer getDiesel_capacity() {
-        return diesel_capacity;
-    }
-
-    public void setDiesel_capacity(Integer diesel_capacity) {
-        this.diesel_capacity = diesel_capacity;
-    }
-
-    public Integer getRegular_capacity() {
-        return regular_capacity;
-    }
-
-    public void setRegular_capacity(Integer regular_capacity) {
-        this.regular_capacity = regular_capacity;
     }
 
 }
