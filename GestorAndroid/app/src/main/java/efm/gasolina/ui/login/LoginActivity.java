@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import efm.gasolina.R;
-//import efm.gasolina.ui.decrees.DecretoPrecioActivity;
+import efm.gasolina.ui.decrees.DecretoPrecioActivity;
 import efm.gasolina.ui.prices.GasPricesActivity;
 import efm.gasolina.ui.recover.ChangePasswordActivity;
 import efm.gasolina.ui.recover.RecoverByEmailActivity;
@@ -56,13 +56,13 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     private Intent getIntentForRole(String role, String email) {
-        Intent intent = null;
+        Intent intent;
         switch (role) {
             case "CLIENTE":
                 intent = new Intent(this, GasPricesActivity.class);
                 break;
             case "ADMINISTRADORLEGAL":
-//                intent = new Intent(this, DecretoPrecioActivity.class);
+                intent = new Intent(this, DecretoPrecioActivity.class);
                 break;
             case "DISTRIBUIDOR":
                 intent = new Intent(this, WholesalerActivity.class);

@@ -1,7 +1,5 @@
 package efm.gasolina.model;
 
-import com.google.gson.annotations.SerializedName;
-
 public class User {
 
     private Long id;
@@ -11,29 +9,18 @@ public class User {
     private String role;
     private String verified;
 
-    @SerializedName("zone")
-    private String zona;
-
-    @SerializedName("brand")
-    private String brand;
-
     public User(String name, String email,
-                String password, String role,
-                String zona, String brand) {
-        this.name     = name;
-        this.email    = email;
+                String password, String role) {
+        this.name = name;
+        this.email = email;
         this.password = password;
-        this.role     = role;
-        this.zona     = zona;
-        this.brand    = brand;
+        this.role = role;
     }
 
-    public Long getId()         { return id; }
-    public String getName()     { return name; }
-    public String getEmail()    { return email; }
+    public Long getId() { return id; }
+    public String getName() { return name; }
+    public String getEmail() { return email; }
     public String getPassword() { return password; }
-    public String getRole()     { return role; }
+    public String getRole() { return role; }
     public String getVerified() { return verified; }
-    public String getZona()     { return zona; }
-    public String getBrand()    { return brand; }
 }

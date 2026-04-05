@@ -24,7 +24,7 @@ public class RegisterViewModel extends ViewModel {
         return registerResult;
     }
 
-    public void register(String nombre, String correo, String password, String rol, String zona, String brand) {
+    public void register(String nombre, String correo, String password, String rol) {
         if (nombre.trim().isEmpty() || correo.trim().isEmpty() || password.trim().isEmpty()) {
             registerResult.setValue("ERROR:Completa todos los campos");
             return;
@@ -40,7 +40,7 @@ public class RegisterViewModel extends ViewModel {
             return;
         }
 
-        User user = new User(nombre, correo, password, rol, zona, brand);
+        User user = new User(nombre, correo, password, rol);
 
         repository.register(user).enqueue(new Callback<Void>() {
             @Override
@@ -60,4 +60,5 @@ public class RegisterViewModel extends ViewModel {
             }
         });
     }
+
 }

@@ -2,7 +2,7 @@ package efm.gasolina.gestor_gasolina.controller.opStation;
 
 import efm.gasolina.gestor_gasolina.model.wholesaler.Delivery;
 
-import efm.gasolina.gestor_gasolina.service.opStation.OpDeliveryService;
+import efm.gasolina.gestor_gasolina.service.opStation.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +16,13 @@ import java.util.List;
 public class DeliveryStatusController {
 
     @Autowired
-    private OpDeliveryService opDeliveryService;
+    private DeliveryService deliveryService;
 
     @Transactional
     @PutMapping("/{id}/accept")
     public ResponseEntity<String> acceptDelivery(@PathVariable Long id) {
         try {
-            opDeliveryService.acceptDelivery(id);
+            deliveryService.acceptDelivery(id);
             return ResponseEntity.ok("Entrega aceptada correctamente");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -33,7 +33,7 @@ public class DeliveryStatusController {
     @PutMapping("/{id}/reject")
     public ResponseEntity<String> rejectDelivery(@PathVariable Long id) {
         try {
-            opDeliveryService.rejectDelivery(id);
+            deliveryService.rejectDelivery(id);
             return ResponseEntity.ok("Entrega rechazada correctamente");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -43,7 +43,7 @@ public class DeliveryStatusController {
     @GetMapping("/station/{stationId}/pending")
     public ResponseEntity<List<Delivery>> getPendingDeliveries(@PathVariable Long stationId) {
         try {
-            List<Delivery> deliveries = opDeliveryService.getPendingDeliveries(stationId);
+            List<Delivery> deliveries = deliveryService.getPendingDeliveries(stationId);
             if (deliveries.isEmpty()) {
                 return ResponseEntity.noContent().build();
             }
