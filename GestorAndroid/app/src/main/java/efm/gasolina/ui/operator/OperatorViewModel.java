@@ -20,6 +20,7 @@ public class OperatorViewModel extends ViewModel {
     private final MutableLiveData<List<String>> vehicleTypes = new MutableLiveData<>();
     private final MutableLiveData<String> actionResult = new MutableLiveData<>();
     private final MutableLiveData<Sale> lastSale = new MutableLiveData<>();
+    private final MutableLiveData<Integer> currentPrice = new MutableLiveData<>();
 
     public OperatorViewModel() {
         apiService = ApiClient.getClient().create(ApiService.class);
@@ -28,6 +29,7 @@ public class OperatorViewModel extends ViewModel {
     public LiveData<List<String>> getVehicleTypes() { return vehicleTypes; }
     public LiveData<String> getActionResult() { return actionResult; }
     public LiveData<Sale> getLastSale() { return lastSale; }
+    public LiveData<Integer> getCurrentPrice() { return currentPrice; }
 
     public void loadVehicleTypes() {
         apiService.getVehicleTypes().enqueue(new Callback<List<String>>() {
@@ -38,12 +40,28 @@ public class OperatorViewModel extends ViewModel {
                     vehicleTypes.setValue(response.body());
                 }
             }
-
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
-                actionResult.setValue("ERROR:No internet connection");
+                actionResult.setValue("ERROR:Sin conexión");
             }
         });
+    }
+
+    public void consultarPrecio(String email, String fuelType, String vehicleType) {
+        apiService.getPrice(email, fuelType, vehicleType)
+                .enqueue(new Callback<Integer>() {
+                    @Override
+                    public void onResponse(Call<Integer> call,
+                                           Response<Integer> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            currentPrice.setValue(response.body());
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<Integer> call, Throwable t) {
+                        actionResult.setValue("ERROR:Sin conexión");
+                    }
+                });
     }
 
     public void registerSale(String fuelType, String vehicleType,
@@ -51,7 +69,7 @@ public class OperatorViewModel extends ViewModel {
                              String operatorEmail) {
 
         if (volume == null || volume <= 0) {
-            actionResult.setValue("ERROR:Enter a valid volume");
+            actionResult.setValue("ERROR:Ingresa un volumen válido");
             return;
         }
 
@@ -73,7 +91,6 @@ public class OperatorViewModel extends ViewModel {
                     actionResult.setValue("ERROR:Error del servidor " + response.code());
                 }
             }
-
             @Override
             public void onFailure(Call<Sale> call, Throwable t) {
                 actionResult.setValue("ERROR:Sin conexión");

@@ -66,6 +66,12 @@ public interface ApiService {
 
     @GET("sale/vehicles")
     Call<List<String>> getVehicleTypes();
+    @GET("sale/price/{email}/{fuelType}/{vehicleType}")
+    Call<Integer> getPrice(
+            @Path("email") String email,
+            @Path("fuelType") String fuelType,
+            @Path("vehicleType") String vehicleType
+    );
     @GET("delivery/station/{stationId}/pending")
     Call<List<Delivery>> getPendingDeliveries(@Path("stationId") Long stationId);
 

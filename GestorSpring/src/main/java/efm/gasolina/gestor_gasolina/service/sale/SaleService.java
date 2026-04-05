@@ -75,7 +75,7 @@ public class SaleService {
                 request.vehicleType(),
                 request.volume(),
                 pricePerGallon,
-                request.plate(), 
+                request.plate(),
                 station,
                 operator);
 
@@ -84,5 +84,32 @@ public class SaleService {
 
     public List<String> getVehicleTypes() {
         return vehicleRepository.findAllVehicleTypes();
+    }
+
+    public Integer calculatePrice(String operatorEmail, String fuelType, String vehicleType) {
+
+        RegisterModel operator = sesionRepository.findByEmail(operatorEmail)
+                .orElseThrow(() -> new RuntimeException("OPERATOR_NOT_FOUND"));
+
+        Station station = stationRepository.findById(operator.getIdStation())
+                .orElseThrow(() -> new RuntimeException("STATION_NOT_FOUND"));
+
+        if (fuelType.equals("Corriente")) {
+            Integer subsidy = vehicleRepository
+                    .findRegularSubsidyByVehicle(vehicleType).orElse(0);
+            Integer diff = stationRepository
+                    .findRegularDiffByStation(station.getId()).orElse(0);
+            return regularBase - subsidy + diff;
+
+        } else if (fuelType.equals("Diesel")) {
+            Integer subsidy = vehicleRepository
+                    .findDieselSubsidyByVehicle(vehicleType).orElse(0);
+            Integer diff = stationRepository
+                    .findDieselDiffByStation(station.getId()).orElse(0);
+            return dieselBase - subsidy + diff;
+
+        } else {
+            throw new RuntimeException("INVALID_FUEL_TYPE");
+        }
     }
 }

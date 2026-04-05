@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,7 @@ public class RegisterSaleFragment extends Fragment {
     private TextView tvPrice, tvTotal;
     private OperatorViewModel viewModel;
     private String operatorEmail;
+    private boolean vehicleTypesLoaded = false;
 
     public static RegisterSaleFragment newInstance(String email) {
         RegisterSaleFragment fragment = new RegisterSaleFragment();
@@ -72,11 +74,40 @@ public class RegisterSaleFragment extends Fragment {
             );
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerVehicleType.setAdapter(adapter);
+            vehicleTypesLoaded = true;
+            consultarPrecio();
         });
 
-        viewModel.getLastSale().observe(getViewLifecycleOwner(), sale -> {
-            tvPrice.setText("Precio por galón: $" + sale.getPricePerGallon());
-            tvTotal.setText("Total: $" + sale.getTotalPrice());
+        AdapterView.OnItemSelectedListener spinnerListener =
+                new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View v,
+                                               int position, long id) {
+                        if (vehicleTypesLoaded) consultarPrecio();
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {}
+                };
+
+        spinnerFuelType.setOnItemSelectedListener(spinnerListener);
+        spinnerVehicleType.setOnItemSelectedListener(spinnerListener);
+
+        etVolume.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {}
+            @Override
+            public void afterTextChanged(android.text.Editable s) {
+                calcularTotal();
+            }
+        });
+
+        viewModel.getCurrentPrice().observe(getViewLifecycleOwner(), precio -> {
+            tvPrice.setText("Precio por galón: $" + precio);
+            calcularTotal();
         });
 
         viewModel.getActionResult().observe(getViewLifecycleOwner(), result -> {
@@ -85,7 +116,6 @@ public class RegisterSaleFragment extends Fragment {
                         result.substring(3), Toast.LENGTH_SHORT).show();
                 etVolume.setText("");
                 etPlate.setText("");
-                tvPrice.setText("Precio por galón: -");
                 tvTotal.setText("Total: -");
             } else {
                 Toast.makeText(requireContext(),
@@ -94,9 +124,9 @@ public class RegisterSaleFragment extends Fragment {
         });
 
         btnRegisterSale.setOnClickListener(v -> {
-            String volumeStr = etVolume.getText().toString().trim();
-            String plate     = etPlate.getText().toString().trim().toUpperCase();
-            String fuelType  = spinnerFuelType.getSelectedItem().toString();
+            String volumeStr   = etVolume.getText().toString().trim();
+            String plate       = etPlate.getText().toString().trim().toUpperCase();
+            String fuelType    = spinnerFuelType.getSelectedItem().toString();
             String vehicleType = spinnerVehicleType.getSelectedItem().toString();
 
             if (plate.isEmpty()) {
@@ -128,5 +158,27 @@ public class RegisterSaleFragment extends Fragment {
 
             viewModel.registerSale(fuelType, vehicleType, volume, plate, operatorEmail);
         });
+    }
+
+    private void consultarPrecio() {
+        if (spinnerFuelType.getSelectedItem() == null ||
+                spinnerVehicleType.getSelectedItem() == null) return;
+
+        String fuelType    = spinnerFuelType.getSelectedItem().toString();
+        String vehicleType = spinnerVehicleType.getSelectedItem().toString();
+
+        viewModel.consultarPrecio(operatorEmail, fuelType, vehicleType);
+    }
+
+    private void calcularTotal() {
+        String volStr = etVolume.getText().toString().trim();
+        Integer precio = viewModel.getCurrentPrice().getValue();
+
+        if (!volStr.isEmpty() && precio != null) {
+            int vol = Integer.parseInt(volStr);
+            tvTotal.setText("Total: $" + (vol * precio));
+        } else {
+            tvTotal.setText("Total: -");
+        }
     }
 }
