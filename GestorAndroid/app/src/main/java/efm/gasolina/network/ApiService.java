@@ -66,5 +66,13 @@ public interface ApiService {
 
     @GET("sale/vehicles")
     Call<List<String>> getVehicleTypes();
+    @GET("delivery/station/{stationId}/pending")
+    Call<List<Delivery>> getPendingDeliveries(@Path("stationId") Long stationId);
+
+    @PUT("delivery/{id}/accept")
+    Call<Void> acceptDelivery(@Path("id") Long id);
+
+    @PUT("delivery/{id}/reject")
+    Call<Void> rejectDelivery(@Path("id") Long id);
 
 }

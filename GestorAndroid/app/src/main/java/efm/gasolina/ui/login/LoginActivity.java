@@ -15,6 +15,7 @@ import efm.gasolina.R;
 import efm.gasolina.ui.prices.GasPricesActivity;
 import efm.gasolina.ui.recover.ChangePasswordActivity;
 import efm.gasolina.ui.recover.RecoverByEmailActivity;
+import efm.gasolina.ui.station.RevisionEntregasActivity;
 import efm.gasolina.ui.station.StationActivity;
 import efm.gasolina.ui.wholesaler.WholesalerActivity;
 
@@ -36,22 +37,28 @@ public class LoginActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         viewModel.getLoginSuccess().observe(this, user -> {
-            Toast.makeText(this, "Welcome, role: " + user.getRol(),
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Welcome, role: " + user.getRol(), Toast.LENGTH_SHORT).show();
+
+            getSharedPreferences("sesion", MODE_PRIVATE)
+                    .edit()
+                    .putString("rol", user.getRol())
+                    .putString("email", user.getEmail())
+                    .putLong("stationId", user.getIdStation() != null ? user.getIdStation() : -1L)
+                    .apply();
+
             startActivity(getIntentForRole(user.getRol(), user.getEmail()));
             finish();
         });
-
         viewModel.getLoginError().observe(this, error -> {
             Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
         });
-      
+
         btnLogin.setOnClickListener(v -> viewModel.login(
                 etEmail.getText().toString().trim(),
                 etPassword.getText().toString().trim()
         ));
 
-              TextView texto = findViewById(R.id.tvEnlace);
+        TextView texto = findViewById(R.id.tvEnlace);
         texto.setOnClickListener(v ->
                 startActivity(new Intent(this, RecoverByEmailActivity.class)));
 

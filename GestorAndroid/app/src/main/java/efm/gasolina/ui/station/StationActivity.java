@@ -12,8 +12,7 @@ import efm.gasolina.R;
 
 public class StationActivity extends AppCompatActivity {
 
-    private MaterialButton btnRevisionEntregas, btnRealizarVenta,
-            btnDisponibilidad, btnHistorialMovimientos;
+    private MaterialButton btnRevisionEntregas, btnRealizarVenta, btnDisponibilidad, btnHistorialMovimientos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,16 +24,12 @@ public class StationActivity extends AppCompatActivity {
         btnDisponibilidad       = findViewById(R.id.btn_disponibilidad);
         btnHistorialMovimientos = findViewById(R.id.btn_historial_movimientos);
 
-//        btnRevisionEntregas.setOnClickListener(v ->
-//                startActivity(new Intent(this, RevisionEntregasActivity.class)));
-//
-//        btnRealizarVenta.setOnClickListener(v ->
-//                startActivity(new Intent(this, RealizarVentaActivity.class)));
-//
-//        btnDisponibilidad.setOnClickListener(v ->
-//                startActivity(new Intent(this, DisponibilidadActivity.class)));
-//
-//        btnHistorialMovimientos.setOnClickListener(v ->
-//                startActivity(new Intent(this, HistorialMovimientosActivity.class)));
+        btnRevisionEntregas.setOnClickListener(v ->
+                startActivity(new Intent(this, RevisionEntregasActivity.class)));
+
+        // Los demás se activan cuando tengas esas Activities
+        // btnRealizarVenta.setOnClickListener(...)
+        // btnDisponibilidad.setOnClickListener(...)
+        // btnHistorialMovimientos.setOnClickListener(...)
     }
 }

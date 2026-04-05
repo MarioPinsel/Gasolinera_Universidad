@@ -14,6 +14,7 @@ import efm.gasolina.gestor_gasolina.repository.station.StationRepository;
 import efm.gasolina.gestor_gasolina.repository.wholesaler.DeliveryRepository;
 
 @Service
+
 public class DeliveryService {
 
     @Autowired

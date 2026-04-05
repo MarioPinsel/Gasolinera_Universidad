@@ -9,5 +9,5 @@ public record RegisterDTO(
         @JsonAlias("role") Rol role,
         @JsonAlias("brand") String brand,
         @JsonAlias("zone") String zone
-        )
+)
 {}

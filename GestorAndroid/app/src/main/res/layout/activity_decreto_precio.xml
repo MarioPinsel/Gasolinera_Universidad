@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F2F5">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="32dp">
+
+        <!-- Header -->
+        <TextView
+            android:id="@+id/tv_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Cargar Decreto de Precio"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:padding="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Card datos decreto -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_decreto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DATOS DEL DECRETO"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="#888888"
+                    android:letterSpacing="0.08"
+                    android:layout_marginBottom="14dp"/>
+
+                <!-- Número decreto -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Número de Decreto *"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="#444444"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_num_decreto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_num_decreto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ej: 2024-001"
+                        android:inputType="text"
+                        android:textSize="15sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Fecha expedición -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha de Expedición *"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="#444444"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_fecha_expedicion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_fecha_expedicion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="DD/MM/AAAA"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:textSize="15sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Fecha vigencia -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha de Vigencia *"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="#444444"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_fecha_vigencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_fecha_vigencia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="DD/MM/AAAA"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:textSize="15sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tv_error_vigencia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⚠ La fecha de vigencia no puede ser anterior a hoy"
+                    android:textColor="#C62828"
+                    android:textSize="12sp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="12dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card zona y precio -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_zona"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/card_decreto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ZONA Y PRECIO"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="#888888"
+                    android:letterSpacing="0.08"
+                    android:layout_marginBottom="14dp"/>
+
+                <!-- Zona -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Zona *"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="#444444"/>
+                <Spinner
+                    android:id="@+id/spinner_zona"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="8dp"
+                    android:padding="8dp"/>
+
+                <!-- Info precio actual zona -->
+                <TextView
+                    android:id="@+id/tv_precio_actual"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F3F8FF"
+                    android:padding="10dp"
+                    android:textSize="12sp"
+                    android:textColor="#1565C0"
+                    android:visibility="gone"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Precio -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Precio COP/galón *"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="#444444"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_precio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    app:prefixText="$ ">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_precio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:textSize="15sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Aviso reemplazo -->
+        <TextView
+            android:id="@+id/tv_aviso_reemplazo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="10dp"
+            android:background="#FFF8E1"
+            android:padding="12dp"
+            android:textSize="12.5sp"
+            android:textColor="#795548"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/card_zona"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Botones -->
+        <Button
+            android:id="@+id/btn_cancelar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#EEEEEE"
+            android:textColor="#555555"
+            app:layout_constraintTop_toBottomOf="@id/tv_aviso_reemplazo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_guardar"/>
+
+        <Button
+            android:id="@+id/btn_guardar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Guardar Decreto"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_aviso_reemplazo"
+            app:layout_constraintStart_toEndOf="@id/btn_cancelar"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
