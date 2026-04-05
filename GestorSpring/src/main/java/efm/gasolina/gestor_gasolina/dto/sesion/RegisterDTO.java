@@ -6,6 +6,8 @@ public record RegisterDTO(
         @JsonAlias("name") String name,
         @JsonAlias("email") String email,
         @JsonAlias("password") String password,
-        @JsonAlias("role") Rol role
-        )
+        @JsonAlias("role") Rol role,
+        @JsonAlias("brand") String brand,
+        @JsonAlias("zone") String zone
+)
 {}

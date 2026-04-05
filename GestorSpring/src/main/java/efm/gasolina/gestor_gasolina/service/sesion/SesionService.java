@@ -1,7 +1,7 @@
 package efm.gasolina.gestor_gasolina.service.sesion;
 
-import efm.gasolina.gestor_gasolina.dto.sesion.RecoverRequest;
 import efm.gasolina.gestor_gasolina.dto.sesion.LoginDTO;
+import efm.gasolina.gestor_gasolina.dto.sesion.RecoverRequest;
 import efm.gasolina.gestor_gasolina.dto.sesion.LoginResponseDTO;
 import efm.gasolina.gestor_gasolina.dto.sesion.RegisterDTO;
 import efm.gasolina.gestor_gasolina.handler.runtime.NoSuchElement;
@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Map;
 
+import efm.gasolina.gestor_gasolina.repository.station.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
@@ -26,6 +27,8 @@ import org.springframework.stereotype.Service;
 public class SesionService {
     @Autowired
     private SesionRepository sesionRepository;
+    @Autowired
+    private StationRepository stationRepository;
 
     private final JavaMailSender mailSender;
     private final RedisRepository redisRepo;
@@ -38,6 +41,7 @@ public class SesionService {
 
     public RegisterDTO registro(RegisterDTO request) {
         RegisterModel model = new RegisterModel(request);
+        model.setIdStation(stationRepository.findIdByBrandAndZone(model.getBrand(), model.getZone()));
         sesionRepository.save(model);
         return request;
     }
@@ -84,20 +88,20 @@ public class SesionService {
 
     public LoginResponseDTO login(LoginDTO request) {
 
-        Optional<RegisterModel> userOpt = sesionRepository.findByEmail(request.getEmail());
-        
+        Optional<RegisterModel> userOpt = sesionRepository.findByEmail(request.email());
+
         if (userOpt.isEmpty())
-            throw new RuntimeException("USER_NOT_FOUND"); 
+            throw new RuntimeException("USER_NOT_FOUND");
 
         RegisterModel user = userOpt.get();
 
-        if (!user.getPassword().equals(request.getPassword()))
-            throw new RuntimeException("WRONG_PASSWORD"); 
+        if (!user.getPassword().equals(request.password()))
+            throw new RuntimeException("WRONG_PASSWORD");
 
         if (!"APPROVED".equals(user.getVerified()))
-            throw new RuntimeException("USER_NOT_APPROVED"); 
+            throw new RuntimeException("USER_NOT_APPROVED");
 
-        return new LoginResponseDTO(user.getRole().name(), user.getEmail());
+        return new LoginResponseDTO(user.getRole().name(), user.getEmail(), user.getIdStation());
     }
 
     public List<RegisterModel> getPendingUsers() {
