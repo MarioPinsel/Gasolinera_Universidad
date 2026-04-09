@@ -13,6 +13,7 @@ import efm.gasolina.model.Station;
 import efm.gasolina.model.TokenResponse;
 import efm.gasolina.model.User;
 import efm.gasolina.model.consults.PricesRequest;
+import efm.gasolina.model.sale.Movimiento;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -80,5 +81,8 @@ public interface ApiService {
 
     @PUT("delivery/{id}/reject")
     Call<Void> rejectDelivery(@Path("id") Long id);
+
+    @GET("movimientos/{email}")
+    Call<List<Movimiento>> getHistorialMovimientos(@Path("email") String email);
 
 }

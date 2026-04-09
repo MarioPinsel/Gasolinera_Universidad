@@ -47,6 +47,7 @@
         <activity
             android:name=".ui.station.RevisionEntregasActivity"
             android:exported="false" />
+        <activity android:name=".ui.sales.HistorialMovimientosActivity" />
 
         <activity
             android:name=".ui.home.MainActivity"

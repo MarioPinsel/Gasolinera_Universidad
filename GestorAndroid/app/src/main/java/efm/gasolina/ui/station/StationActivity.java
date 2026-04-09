@@ -10,6 +10,9 @@ import com.google.android.material.button.MaterialButton;
 
 import efm.gasolina.R;
 import efm.gasolina.ui.operator.OperatorActivity;
+import efm.gasolina.ui.sales.HistorialMovimientos;
+import efm.gasolina.ui.sales.HistorialMovimientosActivity;
+import efm.gasolina.ui.sales.HistorialMovimientosFragment;
 
 public class StationActivity extends AppCompatActivity {
 
@@ -36,9 +39,10 @@ public class StationActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Los demás se activan cuando tengas esas Activities
-        // btnRealizarVenta.setOnClickListener(...)
-        // btnDisponibilidad.setOnClickListener(...)
-        // btnHistorialMovimientos.setOnClickListener(...)
+        btnHistorialMovimientos.setOnClickListener(v -> {
+            Intent intent = new Intent(this, HistorialMovimientosActivity.class);
+            intent.putExtra("email", operatorEmail);
+            startActivity(intent);
+        });
     }
 }
