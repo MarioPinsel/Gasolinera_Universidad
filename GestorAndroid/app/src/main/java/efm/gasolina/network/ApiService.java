@@ -10,6 +10,7 @@ import efm.gasolina.model.LoginResponse;
 import efm.gasolina.model.Sale;
 import efm.gasolina.model.SaleRequest;
 import efm.gasolina.model.Station;
+import efm.gasolina.model.StationAvailability;
 import efm.gasolina.model.TokenResponse;
 import efm.gasolina.model.User;
 import efm.gasolina.model.consults.PricesRequest;
@@ -67,6 +68,8 @@ public interface ApiService {
 
     @GET("sale/vehicles")
     Call<List<String>> getVehicleTypes();
+    @GET("station/availability/{email}")
+    Call<StationAvailability> getAvailability(@Path("email") String email);
     @GET("sale/price/{email}/{fuelType}/{vehicleType}")
     Call<Integer> getPrice(
             @Path("email") String email,

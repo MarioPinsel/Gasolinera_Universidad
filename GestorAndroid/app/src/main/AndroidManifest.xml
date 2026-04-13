@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Gestor_gasolina"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.operator.AvailabilityActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.operator.OperatorActivity"
             android:exported="false" />
         <activity
@@ -48,7 +51,6 @@
             android:name=".ui.station.RevisionEntregasActivity"
             android:exported="false" />
         <activity android:name=".ui.sales.HistorialMovimientosActivity" />
-
         <activity
             android:name=".ui.home.MainActivity"
             android:exported="true">
