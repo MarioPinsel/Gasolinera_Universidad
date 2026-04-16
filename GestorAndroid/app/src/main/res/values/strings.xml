@@ -15,6 +15,12 @@
         <item>OPERADOR</item>
     </string-array>
 
+    <string-array name="spinner_combustible">
+        <item>Seleccione el tipo de combustible</item>
+        <item>Corriente</item>
+        <item>Diesel</item>
+    </string-array>
+
     <string-array name="zone_array">
         <item>Ciudad Bolivar</item>
         <item>Kennedy</item>

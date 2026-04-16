@@ -146,7 +146,7 @@ public class GasPricesActivity extends AppCompatActivity {
     private void crearCeldaDinamica(LinearLayout container, PricesRequest pricesRequest) {
 
         // ═════════════════════════════════════════════════════════
-        // 1. CREAR LA CELDA PRINCIPAL (LinearLayout)
+        // 1. CREAR LA CELD+A PRINCIPAL (LinearLayout)
         // ═════════════════════════════════════════════════════════
         LinearLayout cell = new LinearLayout(this);
         LinearLayout.LayoutParams cellParams = new LinearLayout.LayoutParams(

@@ -35,3 +35,6 @@ INSERT INTO vehicle (vehicle_type, regular_subsidy, diesel_subsidy) VALUES ('Mot
 INSERT INTO vehicle (vehicle_type, regular_subsidy, diesel_subsidy) VALUES ('Camion de Carga', 0, 6000);
 INSERT INTO vehicle (vehicle_type, regular_subsidy, diesel_subsidy) VALUES ('Taxi', 750, 0);
 INSERT INTO vehicle (vehicle_type, regular_subsidy, diesel_subsidy) VALUES ('Bus Urbano', 700, 7000);
+
+INSERT INTO decrees (name, type_of_gas, value, date_of_change) VALUES ('Decreto 0159', 'Corriente', 16500, '19-02-2026');
+INSERT INTO decrees (name, type_of_gas, value, date_of_change) VALUES ('Decreto 0159', 'Diesel', 11300, '19-02-2026');
