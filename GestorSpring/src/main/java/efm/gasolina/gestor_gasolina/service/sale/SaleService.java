@@ -4,11 +4,14 @@ import efm.gasolina.gestor_gasolina.dto.sale.SaleDTO;
 import efm.gasolina.gestor_gasolina.model.sale.Sale;
 import efm.gasolina.gestor_gasolina.model.sesion.RegisterModel;
 import efm.gasolina.gestor_gasolina.model.station.Station;
+import efm.gasolina.gestor_gasolina.repository.legal.LegalRepository;
 import efm.gasolina.gestor_gasolina.repository.sale.SaleRepository;
 import efm.gasolina.gestor_gasolina.repository.sesion.SesionRepository;
 import efm.gasolina.gestor_gasolina.repository.station.StationRepository;
 import efm.gasolina.gestor_gasolina.repository.station.VehicleRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -23,11 +26,15 @@ public class SaleService {
     private StationRepository stationRepository;
     @Autowired
     private VehicleRepository vehicleRepository;
+    @Autowired
+    private LegalRepository legalRepository;
 
-    private final Integer dieselBase = 11300;
-    private final Integer regularBase = 16500;
+    private Integer dieselBase;
+    private Integer regularBase;
 
     public Sale registerSale(SaleDTO request) {
+
+        loadCurrentPrices();
 
         RegisterModel operator = sesionRepository.findByEmail(request.operatorEmail())
                 .orElseThrow(() -> new RuntimeException("OPERATOR_NOT_FOUND"));
@@ -88,6 +95,8 @@ public class SaleService {
 
     public Integer calculatePrice(String operatorEmail, String fuelType, String vehicleType) {
 
+        loadCurrentPrices();
+
         RegisterModel operator = sesionRepository.findByEmail(operatorEmail)
                 .orElseThrow(() -> new RuntimeException("OPERATOR_NOT_FOUND"));
 
@@ -111,5 +120,15 @@ public class SaleService {
         } else {
             throw new RuntimeException("INVALID_FUEL_TYPE");
         }
+    }
+
+    private void loadCurrentPrices() {
+        this.dieselBase = legalRepository.findValueOfGas("Diesel")
+                .orElseThrow(
+                        () -> new IllegalStateException("No new price for Diesel"));
+
+        this.regularBase = legalRepository.findValueOfGas("Corriente")
+                .orElseThrow(
+                        () -> new IllegalStateException("No new price for Corriente"));
     }
 }
