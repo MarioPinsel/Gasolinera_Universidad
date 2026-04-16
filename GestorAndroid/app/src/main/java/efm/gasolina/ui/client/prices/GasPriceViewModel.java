@@ -1,4 +1,4 @@
-package efm.gasolina.ui.prices;
+package efm.gasolina.ui.client.prices;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -1,4 +1,4 @@
-package efm.gasolina.ui.sales;
+package efm.gasolina.ui.movimientos;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -50,7 +50,6 @@ public class HistorialMovimientosFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity())
                 .get(HistorialMovimientos.class);
 
-        // 👀 Observar datos
         viewModel.getMovimientos().observe(getViewLifecycleOwner(), lista -> {
             StringBuilder texto = new StringBuilder();
 
@@ -71,7 +70,6 @@ public class HistorialMovimientosFragment extends Fragment {
                     result.substring(7), Toast.LENGTH_SHORT).show();
         });
 
-        // 🚀 Cargar historial
         viewModel.cargarHistorial(operatorEmail);
     }
 }
