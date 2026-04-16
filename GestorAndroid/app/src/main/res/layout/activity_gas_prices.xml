@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:padding="16dp"
-    tools:context=".ui.prices.GasPricesActivity">
+    tools:context=".ui.client.prices.GasPricesActivity">
 
     <!-- Título principal -->
     <TextView

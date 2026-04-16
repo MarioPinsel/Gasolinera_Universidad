@@ -1,4 +1,4 @@
-package efm.gasolina.ui.sales;
+package efm.gasolina.ui.movimientos;
 
 import android.os.Bundle;
 

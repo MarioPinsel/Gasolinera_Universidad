@@ -2,7 +2,6 @@ package efm.gasolina.ui.station;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,9 +9,7 @@ import com.google.android.material.button.MaterialButton;
 
 import efm.gasolina.R;
 import efm.gasolina.ui.operator.OperatorActivity;
-import efm.gasolina.ui.sales.HistorialMovimientos;
-import efm.gasolina.ui.sales.HistorialMovimientosActivity;
-import efm.gasolina.ui.sales.HistorialMovimientosFragment;
+import efm.gasolina.ui.movimientos.HistorialMovimientosActivity;
 
 public class StationActivity extends AppCompatActivity {
 

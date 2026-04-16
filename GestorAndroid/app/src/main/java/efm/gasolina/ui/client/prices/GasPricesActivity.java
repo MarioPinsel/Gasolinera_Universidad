@@ -1,4 +1,4 @@
-package efm.gasolina.ui.prices;
+package efm.gasolina.ui.client.prices;
 
 import android.graphics.Color;
 import android.os.Bundle;

@@ -21,7 +21,7 @@
             android:name=".ui.wholesaler.WholesalerActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.prices.GasPricesActivity"
+            android:name=".ui.client.prices.GasPricesActivity"
             android:exported="false" />
         <activity
             android:name=".ui.developer.DeveloperActivity"
@@ -47,7 +47,12 @@
         <activity
             android:name=".ui.station.RevisionEntregasActivity"
             android:exported="false" />
-        <activity android:name=".ui.sales.HistorialMovimientosActivity" />
+        <activity android:name=".ui.movimientos.HistorialMovimientosActivity"
+            android:exported="false"/>
+        <activity android:name=".ui.client.ClientActivity"
+            android:exported="false"/>
+<!--        <activity android:name=".ui.client.history.HistorialMovimientosActivity"-->
+<!--            android:exported="false"/>-->
 
         <activity
             android:name=".ui.home.MainActivity"
