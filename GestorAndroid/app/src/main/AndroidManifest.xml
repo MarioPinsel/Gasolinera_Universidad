@@ -18,6 +18,9 @@
             android:name=".ui.operator.OperatorActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.decrees.DecretoPrecioActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.wholesaler.WholesalerActivity"
             android:exported="false" />
         <activity

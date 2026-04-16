@@ -1,4 +1,5 @@
 package efm.gasolina.network;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -84,5 +85,8 @@ public interface ApiService {
 
     @GET("movimientos/{email}")
     Call<List<Movimiento>> getHistorialMovimientos(@Path("email") String email);
+
+    @POST("/legal/newDecree")
+    Call<Void>guardarDecreto(@Body Map<String, Object> body);
 
 }
