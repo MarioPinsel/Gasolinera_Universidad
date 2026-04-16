@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 
 import efm.gasolina.R;
+import efm.gasolina.ui.operator.AvailabilityActivity;
 import efm.gasolina.ui.operator.OperatorActivity;
 import efm.gasolina.ui.movimientos.HistorialMovimientosActivity;
 
@@ -38,6 +39,12 @@ public class StationActivity extends AppCompatActivity {
 
         btnHistorialMovimientos.setOnClickListener(v -> {
             Intent intent = new Intent(this, HistorialMovimientosActivity.class);
+            intent.putExtra("email", operatorEmail);
+            startActivity(intent);
+        });
+
+        btnDisponibilidad.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AvailabilityActivity.class);
             intent.putExtra("email", operatorEmail);
             startActivity(intent);
         });

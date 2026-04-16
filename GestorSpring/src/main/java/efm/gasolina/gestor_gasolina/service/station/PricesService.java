@@ -1,12 +1,14 @@
 package efm.gasolina.gestor_gasolina.service.station;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import efm.gasolina.gestor_gasolina.dto.station.StationRequestDTO;
+import efm.gasolina.gestor_gasolina.repository.legal.LegalRepository;
 import efm.gasolina.gestor_gasolina.repository.station.StationRepository;
 import efm.gasolina.gestor_gasolina.repository.station.VehicleRepository;
 
@@ -14,17 +16,29 @@ import efm.gasolina.gestor_gasolina.repository.station.VehicleRepository;
 public class PricesService {
     private final StationRepository stationRepository;
     private final VehicleRepository vehicleRepository;
+    private final LegalRepository legalRepository;
     private Integer dieselBase;
     private Integer regularBase;
 
-    public PricesService(StationRepository stationRepository, VehicleRepository vehicleRepository) {
+    public PricesService(
+        StationRepository stationRepository, VehicleRepository vehicleRepository, LegalRepository legalRepository) {
         this.stationRepository = stationRepository;
         this.vehicleRepository = vehicleRepository;
-        this.dieselBase = 11300;
-        this.regularBase = 16500;
+        this.legalRepository = legalRepository;
     }
 
     public ResponseEntity<List<StationRequestDTO>> getPricesAndFranchise(String zone, String type, String vehicleType) {
+        Optional<Integer> info = legalRepository.findValueOfGas("Diesel");
+        Optional<Integer> info2 = legalRepository.findValueOfGas("Corriente");
+
+        if (info.isEmpty() || info2.isEmpty() ) {
+            return ResponseEntity.internalServerError().build();
+        }
+        this.dieselBase = info.get();
+        this.regularBase = info2.get();
+        
+
+            
         List<Object[]> stationInfo = null;
         final Integer finalPriceDiff;
 

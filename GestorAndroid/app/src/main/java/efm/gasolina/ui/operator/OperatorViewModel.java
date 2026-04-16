@@ -8,6 +8,7 @@ import java.util.List;
 
 import efm.gasolina.model.Sale;
 import efm.gasolina.model.SaleRequest;
+import efm.gasolina.model.StationAvailability;
 import efm.gasolina.network.ApiClient;
 import efm.gasolina.network.ApiService;
 import retrofit2.Call;
@@ -21,6 +22,7 @@ public class OperatorViewModel extends ViewModel {
     private final MutableLiveData<String> actionResult = new MutableLiveData<>();
     private final MutableLiveData<Sale> lastSale = new MutableLiveData<>();
     private final MutableLiveData<Integer> currentPrice = new MutableLiveData<>();
+    private final MutableLiveData<StationAvailability> availability = new MutableLiveData<>();
 
     public OperatorViewModel() {
         apiService = ApiClient.getClient().create(ApiService.class);
@@ -30,6 +32,7 @@ public class OperatorViewModel extends ViewModel {
     public LiveData<String> getActionResult() { return actionResult; }
     public LiveData<Sale> getLastSale() { return lastSale; }
     public LiveData<Integer> getCurrentPrice() { return currentPrice; }
+    public LiveData<StationAvailability> getAvailability() { return availability; }
 
     public void loadVehicleTypes() {
         apiService.getVehicleTypes().enqueue(new Callback<List<String>>() {
@@ -62,6 +65,22 @@ public class OperatorViewModel extends ViewModel {
                         actionResult.setValue("ERROR:Sin conexión");
                     }
                 });
+    }
+
+    public void loadAvailability(String email) {
+        apiService.getAvailability(email).enqueue(new Callback<StationAvailability>() {
+            @Override
+            public void onResponse(Call<StationAvailability> call,
+                                   Response<StationAvailability> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    availability.setValue(response.body());
+                }
+            }
+            @Override
+            public void onFailure(Call<StationAvailability> call, Throwable t) {
+                actionResult.setValue("ERROR:Sin conexión");
+            }
+        });
     }
 
     public void registerSale(String fuelType, String vehicleType,
