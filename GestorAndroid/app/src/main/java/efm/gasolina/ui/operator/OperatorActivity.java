@@ -33,7 +33,6 @@ public class OperatorActivity extends AppCompatActivity {
             public Fragment createFragment(int position) {
                 return RegisterSaleFragment.newInstance(operatorEmail);
             }
-
             @Override
             public int getItemCount() { return 1; }
         });
