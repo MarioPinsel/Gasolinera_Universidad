@@ -9,6 +9,7 @@ public class Delivery {
     private String conductor;
     private Integer volume;
     private String fuelType;
+    private Integer price;
     private String date;
     private Station station;
     private User distributor;
@@ -31,6 +32,8 @@ public class Delivery {
     public void setConductor(String conductor) { this.conductor = conductor; }
     public void setVolume(Integer volume) { this.volume = volume; }
     public void setFuelType(String fuelType) { this.fuelType = fuelType; }
+    public Integer getPrice() { return price; }
+    public void setPrice(Integer price) { this.price = price; }
     public void setDate(String date) { this.date = date; }
     public void setStation(Station station) { this.station = station; }
     public void setDistributor(User distributor) { this.distributor = distributor; }
