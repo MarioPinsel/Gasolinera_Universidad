@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,14 +13,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DecretoPrecioViewModel extends ViewModel {
+public class PriceDecreesViewModel extends ViewModel {
 
     private final ApiService apiService;
 
     private final MutableLiveData<String> statusMessage = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
 
-    public DecretoPrecioViewModel() {
+    public PriceDecreesViewModel() {
         apiService = ApiClient.getClient().create(ApiService.class);
     }
 

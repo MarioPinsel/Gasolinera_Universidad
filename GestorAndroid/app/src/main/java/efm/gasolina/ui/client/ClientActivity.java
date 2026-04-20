@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 
 import efm.gasolina.R;
-import efm.gasolina.ui.client.history.HistorialMovimientosActivity;
+import efm.gasolina.ui.client.history.MovementsHistoryActivity;
 import efm.gasolina.ui.client.prices.GasPricesActivity;
 
 public class ClientActivity extends AppCompatActivity {
@@ -34,7 +34,7 @@ public class ClientActivity extends AppCompatActivity {
         });
 
         btnHistorialMovimientos.setOnClickListener(v -> {
-            Intent intent = new Intent(this, HistorialMovimientosActivity.class);
+            Intent intent = new Intent(this, MovementsHistoryActivity.class);
             intent.putExtra("email", operatorEmail);
             startActivity(intent);
         });

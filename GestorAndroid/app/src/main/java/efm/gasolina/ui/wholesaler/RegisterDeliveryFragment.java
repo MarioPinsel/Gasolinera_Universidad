@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import efm.gasolina.R;
-import efm.gasolina.model.Station;
+import efm.gasolina.model.sation.Station;
 
 public class RegisterDeliveryFragment extends Fragment {
 

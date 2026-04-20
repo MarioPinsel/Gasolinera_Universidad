@@ -13,16 +13,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import efm.gasolina.R;
-import efm.gasolina.model.sale.Movimiento;
+import efm.gasolina.model.sale.Movement;
 
-public class HistorialMovimientosFragment extends Fragment {
+public class MovementHistoryFragment extends Fragment {
 
-    private HistorialMovimientos viewModel;
+    private MovementHistory viewModel;
     private TextView tvHistorial;
     private String operatorEmail;
 
-    public static HistorialMovimientosFragment newInstance(String email) {
-        HistorialMovimientosFragment fragment = new HistorialMovimientosFragment();
+    public static MovementHistoryFragment newInstance(String email) {
+        MovementHistoryFragment fragment = new MovementHistoryFragment();
         Bundle args = new Bundle();
         args.putString("email", email);
         fragment.setArguments(args);
@@ -34,7 +34,7 @@ public class HistorialMovimientosFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_historial_movimientos, container, false);
+        return inflater.inflate(R.layout.fragment_movements_history, container, false);
     }
 
     @Override
@@ -48,12 +48,12 @@ public class HistorialMovimientosFragment extends Fragment {
         tvHistorial = view.findViewById(R.id.tvHistorial);
 
         viewModel = new ViewModelProvider(requireActivity())
-                .get(HistorialMovimientos.class);
+                .get(MovementHistory.class);
 
         viewModel.getMovimientos().observe(getViewLifecycleOwner(), lista -> {
             StringBuilder texto = new StringBuilder();
 
-            for (Movimiento m : lista) {
+            for (Movement m : lista) {
                 texto.append("Tipo: ").append(m.getTipo()).append("\n")
                         .append("Placa: ").append(m.getPlaca()).append("\n")
                         .append("Volumen: ").append(m.getVolumen()).append("\n")

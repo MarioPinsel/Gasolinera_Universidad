@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import efm.gasolina.R;
 
-public class HistorialMovimientosActivity extends AppCompatActivity {
+public class MovementHistoryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class HistorialMovimientosActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainer,
-                        HistorialMovimientosFragment.newInstance(email))
+                        MovementHistoryFragment.newInstance(email))
                 .commit();
     }
 }

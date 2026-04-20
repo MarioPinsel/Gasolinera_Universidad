@@ -1,4 +1,4 @@
-package efm.gasolina.model;
+package efm.gasolina.model.sation;
 
 public class StationAvailability {
     private String zone;

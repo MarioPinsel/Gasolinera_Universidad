@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import efm.gasolina.R;
-import efm.gasolina.model.Delivery;
+import efm.gasolina.model.delivery.Delivery;
 
 public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.DeliveryViewHolder> {
 

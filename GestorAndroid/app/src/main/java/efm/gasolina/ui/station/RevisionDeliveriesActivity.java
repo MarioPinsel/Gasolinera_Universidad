@@ -15,14 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import efm.gasolina.R;
-import efm.gasolina.model.Delivery;
+import efm.gasolina.model.delivery.Delivery;
 import efm.gasolina.network.ApiClient;
 import efm.gasolina.network.ApiService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RevisionEntregasActivity extends AppCompatActivity {
+public class RevisionDeliveriesActivity extends AppCompatActivity {
 
     private RecyclerView rvDeliveries;
     private TextView tvEmpty;
@@ -35,7 +35,7 @@ public class RevisionEntregasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_revision_entregas);
+        setContentView(R.layout.activity_revision_deliveries);
 
         rvDeliveries = findViewById(R.id.rv_deliveries);
         tvEmpty      = findViewById(R.id.tv_empty);
@@ -89,7 +89,7 @@ public class RevisionEntregasActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Delivery>> call, Throwable t) {
                 swipeRefresh.setRefreshing(false);
-                Toast.makeText(RevisionEntregasActivity.this,
+                Toast.makeText(RevisionDeliveriesActivity.this,
                         "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -117,16 +117,16 @@ public class RevisionEntregasActivity extends AppCompatActivity {
                     adapter.removeItem(delivery);
                     tvEmpty.setVisibility(deliveries.isEmpty() ? View.VISIBLE : View.GONE);
                     String msg = aceptar ? "✅ Entrega aceptada" : "❌ Entrega rechazada";
-                    Toast.makeText(RevisionEntregasActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RevisionDeliveriesActivity.this, msg, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(RevisionEntregasActivity.this,
+                    Toast.makeText(RevisionDeliveriesActivity.this,
                             "Error: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(RevisionEntregasActivity.this,
+                Toast.makeText(RevisionDeliveriesActivity.this,
                         "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

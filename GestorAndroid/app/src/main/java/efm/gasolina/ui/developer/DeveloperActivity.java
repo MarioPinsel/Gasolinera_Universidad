@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import efm.gasolina.R;
-import efm.gasolina.model.User;
+import efm.gasolina.model.auth.User;
 
 public class DeveloperActivity extends AppCompatActivity {
 

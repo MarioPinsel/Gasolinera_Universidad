@@ -1,21 +1,20 @@
 package efm.gasolina.network;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import efm.gasolina.model.Delivery;
-import efm.gasolina.model.DeliveryRequest;
-import efm.gasolina.model.LoginRequest;
-import efm.gasolina.model.PasswordRequest;
-import efm.gasolina.model.LoginResponse;
-import efm.gasolina.model.Sale;
-import efm.gasolina.model.SaleRequest;
-import efm.gasolina.model.Station;
-import efm.gasolina.model.StationAvailability;
-import efm.gasolina.model.TokenResponse;
-import efm.gasolina.model.User;
+import efm.gasolina.model.delivery.Delivery;
+import efm.gasolina.model.delivery.DeliveryRequest;
+import efm.gasolina.model.auth.LoginRequest;
+import efm.gasolina.model.auth.PasswordRequest;
+import efm.gasolina.model.auth.LoginResponse;
+import efm.gasolina.model.sale.Sale;
+import efm.gasolina.model.sale.SaleRequest;
+import efm.gasolina.model.sation.Station;
+import efm.gasolina.model.sation.StationAvailability;
+import efm.gasolina.model.auth.TokenResponse;
+import efm.gasolina.model.auth.User;
 import efm.gasolina.model.consults.PricesRequest;
-import efm.gasolina.model.sale.Movimiento;
+import efm.gasolina.model.sale.Movement;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -87,7 +86,7 @@ public interface ApiService {
     Call<Void> rejectDelivery(@Path("id") Long id);
 
     @GET("movimientos/{email}")
-    Call<List<Movimiento>> getHistorialMovimientos(@Path("email") String email);
+    Call<List<Movement>> getHistorialMovimientos(@Path("email") String email);
 
     @POST("/legal/newDecree")
     Call<Void>guardarDecreto(@Body Map<String, Object> body);

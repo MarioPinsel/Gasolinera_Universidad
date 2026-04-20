@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import efm.gasolina.R;
-import efm.gasolina.model.User;
+import efm.gasolina.model.auth.User;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 

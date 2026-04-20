@@ -1,4 +1,4 @@
-package efm.gasolina.model;
+package efm.gasolina.model.auth;
 
 public class LoginResponse {
 

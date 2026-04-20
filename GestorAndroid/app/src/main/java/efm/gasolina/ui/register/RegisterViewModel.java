@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import efm.gasolina.model.User;
+import efm.gasolina.model.auth.User;
 import efm.gasolina.repository.AuthRepository;
 import retrofit2.Call;
 import retrofit2.Callback;
