@@ -6,25 +6,25 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import efm.gasolina.model.sale.Movimiento;
+import efm.gasolina.model.sale.Movement;
 import efm.gasolina.network.ApiClient;
 import efm.gasolina.network.ApiService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HistorialMovimientos extends ViewModel {
+public class MovementHistory extends ViewModel {
 
     private final ApiService apiService;
 
-    private final MutableLiveData<List<Movimiento>> movimientos = new MutableLiveData<>();
+    private final MutableLiveData<List<Movement>> movimientos = new MutableLiveData<>();
     private final MutableLiveData<String> actionResult = new MutableLiveData<>();
 
-    public HistorialMovimientos() {
+    public MovementHistory() {
         apiService = ApiClient.getClient().create(ApiService.class);
     }
 
-    public LiveData<List<Movimiento>> getMovimientos() {
+    public LiveData<List<Movement>> getMovimientos() {
         return movimientos;
     }
 
@@ -35,10 +35,10 @@ public class HistorialMovimientos extends ViewModel {
     // 🔍 CONSULTAR HISTORIAL
     public void cargarHistorial(String operatorEmail) {
         apiService.getHistorialMovimientos(operatorEmail)
-                .enqueue(new Callback<List<Movimiento>>() {
+                .enqueue(new Callback<List<Movement>>() {
                     @Override
-                    public void onResponse(Call<List<Movimiento>> call,
-                                           Response<List<Movimiento>> response) {
+                    public void onResponse(Call<List<Movement>> call,
+                                           Response<List<Movement>> response) {
 
                         if (response.isSuccessful() && response.body() != null) {
                             movimientos.setValue(response.body());
@@ -48,7 +48,7 @@ public class HistorialMovimientos extends ViewModel {
                     }
 
                     @Override
-                    public void onFailure(Call<List<Movimiento>> call, Throwable t) {
+                    public void onFailure(Call<List<Movement>> call, Throwable t) {
                         actionResult.setValue("ERROR:Sin conexión");
                     }
                 });

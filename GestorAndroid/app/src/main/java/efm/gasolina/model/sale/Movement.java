@@ -1,6 +1,6 @@
 package efm.gasolina.model.sale;
 
-public class Movimiento {
+public class Movement {
 
     private String tipo;
     private String fecha;

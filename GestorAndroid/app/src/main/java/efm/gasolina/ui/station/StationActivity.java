@@ -10,7 +10,7 @@ import com.google.android.material.button.MaterialButton;
 import efm.gasolina.R;
 import efm.gasolina.ui.operator.AvailabilityActivity;
 import efm.gasolina.ui.operator.OperatorActivity;
-import efm.gasolina.ui.movimientos.HistorialMovimientosActivity;
+import efm.gasolina.ui.movimientos.MovementHistoryActivity;
 
 public class StationActivity extends AppCompatActivity {
 
@@ -29,7 +29,7 @@ public class StationActivity extends AppCompatActivity {
         btnHistorialMovimientos = findViewById(R.id.btn_historial_movimientos);
 
         btnRevisionEntregas.setOnClickListener(v ->
-                startActivity(new Intent(this, RevisionEntregasActivity.class)));
+                startActivity(new Intent(this, RevisionDeliveriesActivity.class)));
 
         btnRealizarVenta.setOnClickListener(v -> {
             Intent intent = new Intent(this, OperatorActivity.class);
@@ -38,7 +38,7 @@ public class StationActivity extends AppCompatActivity {
         });
 
         btnHistorialMovimientos.setOnClickListener(v -> {
-            Intent intent = new Intent(this, HistorialMovimientosActivity.class);
+            Intent intent = new Intent(this, MovementHistoryActivity.class);
             intent.putExtra("email", operatorEmail);
             startActivity(intent);
         });

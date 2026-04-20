@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.HashMap;
 import java.util.Map;
 
-import efm.gasolina.model.TokenResponse;
+import efm.gasolina.model.auth.TokenResponse;
 import efm.gasolina.network.ApiClient;
 import efm.gasolina.network.ApiService;
 import efm.gasolina.util.TokenManager;

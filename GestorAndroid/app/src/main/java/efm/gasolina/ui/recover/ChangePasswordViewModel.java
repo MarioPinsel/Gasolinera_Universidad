@@ -6,12 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import efm.gasolina.model.PasswordRequest;
+import efm.gasolina.model.auth.PasswordRequest;
 import efm.gasolina.network.ApiClient;
 import efm.gasolina.network.ApiService;
 import efm.gasolina.util.TokenManager;

@@ -17,7 +17,7 @@ import java.util.*;
 
 import efm.gasolina.R;
 
-public class DecretoPrecioActivity extends AppCompatActivity {
+public class PriceDecreesActivity extends AppCompatActivity {
 
     private TextInputEditText etNumDecreto, etFechaExpedicion, etValor;
     private TextInputLayout tilNumDecreto, tilFechaExpedicion;
@@ -27,12 +27,12 @@ public class DecretoPrecioActivity extends AppCompatActivity {
     private Calendar fechaExpedicionCal;
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", new Locale("es", "CO"));
 
-    private DecretoPrecioViewModel viewModel;
+    private PriceDecreesViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_decreto_precio);
+        setContentView(R.layout.activity_price_decrees);
 
         bindViews();
         configurarSpinner();
@@ -84,7 +84,7 @@ public class DecretoPrecioActivity extends AppCompatActivity {
     }
 
     private void configurarViewModel() {
-        viewModel = new ViewModelProvider(this).get(DecretoPrecioViewModel.class);
+        viewModel = new ViewModelProvider(this).get(PriceDecreesViewModel.class);
 
         viewModel.getIsLoading().observe(this, isLoading -> {
             btnGuardar.setText(isLoading ? "GUARDANDO..." : "Guardar Decreto");

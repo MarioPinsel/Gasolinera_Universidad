@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import efm.gasolina.model.Delivery;
-import efm.gasolina.model.DeliveryRequest;
-import efm.gasolina.model.Station;
+import efm.gasolina.model.delivery.Delivery;
+import efm.gasolina.model.delivery.DeliveryRequest;
+import efm.gasolina.model.sation.Station;
 import efm.gasolina.network.ApiClient;
 import efm.gasolina.network.ApiService;
 import retrofit2.Call;

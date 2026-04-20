@@ -1,4 +1,4 @@
-package efm.gasolina.model;
+package efm.gasolina.model.delivery;
 
 public class DeliveryRequest {
     private String vehicle;

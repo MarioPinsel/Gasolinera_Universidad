@@ -1,4 +1,4 @@
-package efm.gasolina.model;
+package efm.gasolina.model.sale;
 
 public class SaleRequest {
     private String fuelType;

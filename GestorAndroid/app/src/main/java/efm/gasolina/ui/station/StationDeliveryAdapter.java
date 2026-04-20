@@ -13,7 +13,7 @@ import com.google.android.material.button.MaterialButton;
 import java.util.List;
 
 import efm.gasolina.R;
-import efm.gasolina.model.Delivery;
+import efm.gasolina.model.delivery.Delivery;
 
 public class StationDeliveryAdapter extends RecyclerView.Adapter<StationDeliveryAdapter.ViewHolder> {
 

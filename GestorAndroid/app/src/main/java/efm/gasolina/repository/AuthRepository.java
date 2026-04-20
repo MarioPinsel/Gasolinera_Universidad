@@ -1,8 +1,8 @@
 package efm.gasolina.repository;
 
-import efm.gasolina.model.LoginRequest;
-import efm.gasolina.model.LoginResponse;
-import efm.gasolina.model.User;
+import efm.gasolina.model.auth.LoginRequest;
+import efm.gasolina.model.auth.LoginResponse;
+import efm.gasolina.model.auth.User;
 import efm.gasolina.network.ApiClient;
 import efm.gasolina.network.ApiService;
 import retrofit2.Call;

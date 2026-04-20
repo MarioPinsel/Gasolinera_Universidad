@@ -1,4 +1,7 @@
-package efm.gasolina.model;
+package efm.gasolina.model.delivery;
+
+import efm.gasolina.model.sation.Station;
+import efm.gasolina.model.auth.User;
 
 public class Delivery {
     private Long id;
