@@ -49,6 +49,7 @@ public class DeliveryService {
                 request.conductor(),
                 request.volume(),
                 request.fuelType(),
+                request.price(), 
                 station,
                 distributor);
 

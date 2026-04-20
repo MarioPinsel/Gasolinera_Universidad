@@ -30,6 +30,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"/>
 
+    <EditText
+        android:id="@+id/etPrice"
+        android:hint="Precio total de la entrega"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"/>
+
     <TextView
         android:text="Tipo de combustible"
         android:textSize="14sp"

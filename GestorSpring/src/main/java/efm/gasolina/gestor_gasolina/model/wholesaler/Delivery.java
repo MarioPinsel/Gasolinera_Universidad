@@ -18,6 +18,15 @@ public class Delivery {
     private String fuelType;
     private LocalDateTime date;
     private String status;
+    private Integer price;
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
 
         public Long getId() {
             return id;
@@ -98,12 +107,13 @@ public class Delivery {
     public Delivery() {}
 
     public Delivery(String vehicle, String conductor, Integer volume,
-                    String fuelType, Station station,
+                    String fuelType, Integer price, Station station,
                     RegisterModel distributor) {
         this.vehicle = vehicle;
         this.conductor = conductor;
         this.volume = volume;
         this.fuelType = fuelType;
+        this.price = price;
         this.station = station;
         this.distributor = distributor;
         this.date = LocalDateTime.now();

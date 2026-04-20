@@ -65,7 +65,7 @@ public class WholesalerViewModel extends ViewModel {
     }
 
     public void registerDelivery(String vehicle, String conductor,
-                                 Integer volume, String fuelType,
+                                 Integer volume, String fuelType,Integer price,
                                  Long stationId, String email) {
 
         if (vehicle.isEmpty() || conductor.isEmpty() || volume == null) {
@@ -74,7 +74,7 @@ public class WholesalerViewModel extends ViewModel {
         }
 
         DeliveryRequest request = new DeliveryRequest(
-                vehicle, conductor, volume, fuelType, stationId, email
+                vehicle, conductor, volume, fuelType, price, stationId, email
         );
 
         apiService.registerDelivery(request).enqueue(new Callback<Delivery>() {

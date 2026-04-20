@@ -37,6 +37,7 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.Delive
         holder.tvConductor.setText("Nombre del conductor: " + delivery.getConductor());
         holder.tvVolume.setText("Cantidad: " + delivery.getVolume() + " Galon(s)");
         holder.tvFuelType.setText("Tipo de combustible: " + delivery.getFuelType());
+        holder.tvPrice.setText("Precio: $" + delivery.getPrice());
         holder.tvStation.setText("Estación: " + delivery.getStation().getBrand()
                 + " - " + delivery.getStation().getZone());
         holder.tvDistributor.setText("Nombre del distributor: " + delivery.getDistributor().getName());
@@ -63,7 +64,7 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.Delive
     }
 
     static class DeliveryViewHolder extends RecyclerView.ViewHolder {
-        TextView tvVehicle, tvConductor, tvVolume, tvFuelType, tvStation, tvDate,tvDistributor,tvStatus;
+        TextView tvVehicle, tvConductor, tvVolume, tvFuelType,tvPrice, tvStation, tvDate,tvDistributor,tvStatus;
 
         DeliveryViewHolder(View itemView) {
             super(itemView);
@@ -71,6 +72,7 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.Delive
             tvConductor = itemView.findViewById(R.id.tvConductor);
             tvVolume    = itemView.findViewById(R.id.tvVolume);
             tvFuelType  = itemView.findViewById(R.id.tvFuelType);
+            tvPrice = itemView.findViewById(R.id.tvPrice);
             tvStation   = itemView.findViewById(R.id.tvStation);
             tvDate      = itemView.findViewById(R.id.tvDate);
             tvDistributor = itemView.findViewById(R.id.tvDistributor);

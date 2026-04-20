@@ -23,7 +23,7 @@ import efm.gasolina.model.sation.Station;
 
 public class RegisterDeliveryFragment extends Fragment {
 
-    private EditText etVehicle, etConductor, etVolume;
+    private EditText etVehicle, etConductor, etVolume, etPrice;;
     private Spinner spinnerFuelType, spinnerStation;
     private Button btnRegister;
     private WholesalerViewModel viewModel;
@@ -60,6 +60,7 @@ public class RegisterDeliveryFragment extends Fragment {
         spinnerFuelType = view.findViewById(R.id.spinnerFuelType);
         spinnerStation  = view.findViewById(R.id.spinnerStation);
         btnRegister     = view.findViewById(R.id.btnRegister);
+        etPrice = view.findViewById(R.id.etPrice);
 
         viewModel = new ViewModelProvider(requireActivity())
                 .get(WholesalerViewModel.class);
@@ -111,6 +112,7 @@ public class RegisterDeliveryFragment extends Fragment {
             String conductor = etConductor.getText().toString().trim().toUpperCase();
             String volumeStr = etVolume.getText().toString().trim();
             String fuelType  = spinnerFuelType.getSelectedItem().toString();
+            String priceStr = etPrice.getText().toString().trim();
 
             if (!vehicle.toUpperCase().matches("[A-Z]{3}[0-9]{3}|[A-Z]{3}[0-9]{2}[A-Z]{1}")) {
                 Toast.makeText(requireContext(),
@@ -139,12 +141,25 @@ public class RegisterDeliveryFragment extends Fragment {
                 return;
             }
 
+            if (priceStr.isEmpty()) {
+                Toast.makeText(requireContext(),
+                        "Ingresa el precio", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Integer price = Integer.parseInt(priceStr);
+            if (price <= 0) {
+                Toast.makeText(requireContext(),
+                        "El precio debe ser mayor a 0", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+
             Long stationId = stationList.get(
                     spinnerStation.getSelectedItemPosition()).getId();
 
             viewModel.registerDelivery(
                     vehicle, conductor, volume,
-                    fuelType, stationId, distributorEmail
+                    fuelType,price, stationId, distributorEmail
             );
         });
     }

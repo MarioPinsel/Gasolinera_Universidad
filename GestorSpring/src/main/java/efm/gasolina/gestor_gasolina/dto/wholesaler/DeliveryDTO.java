@@ -5,6 +5,7 @@ public record DeliveryDTO(
     String conductor,
     Integer volume,
     String fuelType,
+    Integer price, 
     Long stationId,
     String distributorEmail
 ) {}
