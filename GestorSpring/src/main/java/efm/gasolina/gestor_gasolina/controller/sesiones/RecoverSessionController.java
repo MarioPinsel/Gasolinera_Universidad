@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import efm.gasolina.gestor_gasolina.dto.sesion.RecoverRequest;
+import efm.gasolina.gestor_gasolina.dto.sesion.RecoverRequestDTO;
 import efm.gasolina.gestor_gasolina.service.sesion.SessionRecoverService;
 
 @RestController
@@ -29,12 +29,12 @@ public class RecoverSessionController {
     }
 
     @PostMapping("/codeVerifier")
-    public ResponseEntity<Object> codeVerifier(@RequestBody RecoverRequest request) {                
+    public ResponseEntity<Object> codeVerifier(@RequestBody RecoverRequestDTO request) {                
         return sessionRecover.verifyCode(request);
     }
 
     @PatchMapping("/changePassword")
-    public ResponseEntity<Object> postMethodName(@RequestBody RecoverRequest request) {            
+    public ResponseEntity<Object> postMethodName(@RequestBody RecoverRequestDTO request) {            
         return sessionRecover.changePassword(request);
     }
     

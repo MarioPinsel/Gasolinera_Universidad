@@ -32,11 +32,11 @@ public class DeveloperActivity extends AppCompatActivity {
                 new UserAdapter.OnUserActionListener() {
                     @Override
                     public void onAceptar(User user) {
-                        viewModel.aprobar(user.getId());
+                        viewModel.aprobar(user.getId(), user.getRole());
                     }
                     @Override
                     public void onRechazar(User user) {
-                        viewModel.rechazar(user.getId());
+                        viewModel.rechazar(user.getId(), user.getRole());
                     }
                 });
 

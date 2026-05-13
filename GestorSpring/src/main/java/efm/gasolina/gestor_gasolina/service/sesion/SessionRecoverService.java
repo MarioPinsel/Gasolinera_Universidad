@@ -12,7 +12,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import efm.gasolina.gestor_gasolina.dto.sesion.RecoverRequest;
+import efm.gasolina.gestor_gasolina.dto.sesion.RecoverRequestDTO;
 import efm.gasolina.gestor_gasolina.handler.runtime.NoSuchElement;
 import efm.gasolina.gestor_gasolina.model.sesion.RegisterModel;
 import efm.gasolina.gestor_gasolina.repository.redis.RedisRepository;
@@ -61,7 +61,7 @@ public class SessionRecoverService {
         return response;
     }
 
-    public ResponseEntity<Object> verifyCode(RecoverRequest request) {
+    public ResponseEntity<Object> verifyCode(RecoverRequestDTO request) {
         String token = request.getToken();
         String code = request.getValue();
 
@@ -73,7 +73,7 @@ public class SessionRecoverService {
             return ResponseEntity.badRequest().build();
     }
 
-    public ResponseEntity<Object> changePassword(RecoverRequest request) {
+    public ResponseEntity<Object> changePassword(RecoverRequestDTO request) {
         String token = request.getToken();
         String password = request.getValue();
         String id;

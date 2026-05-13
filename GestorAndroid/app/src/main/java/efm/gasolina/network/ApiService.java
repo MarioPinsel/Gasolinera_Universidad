@@ -23,6 +23,7 @@ import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -44,10 +45,10 @@ public interface ApiService {
     Call<List<User>> getPendingUsers();
 
     @PUT("developer/approve/{id}")
-    Call<Void> approveUser(@Path("id") Long id);
+    Call<Void> approveUser(@Path("id") Long id,@Query("role") String role);
 
     @PUT("developer/reject/{id}")
-    Call<Void> rejectUser(@Path("id") Long id);
+    Call<Void> rejectUser(@Path("id") Long id, @Query("role") String role);
 
     @GET("/consult/prices/{zone}/{type}/{vehicle}")
     Call<List<PricesRequest>> getPrices(

@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Legal_Administrators")
-public class LegalAdmins {
+public class LegalAdmins implements ICredentials{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,6 +27,7 @@ public class LegalAdmins {
         this.verified = "PENDING";
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -35,6 +36,7 @@ public class LegalAdmins {
         this.id = id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -43,6 +45,7 @@ public class LegalAdmins {
         this.name = name;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }
@@ -51,6 +54,7 @@ public class LegalAdmins {
         this.email = email;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -59,6 +63,7 @@ public class LegalAdmins {
         this.password = password;
     }
 
+    @Override
     public String getVerified() {
         return verified;
     }

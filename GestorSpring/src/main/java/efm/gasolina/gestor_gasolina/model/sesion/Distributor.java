@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Clients implements ICredentials{
+public class Distributor implements ICredentials{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,9 +16,9 @@ public class Clients implements ICredentials{
     private String password;
     private String verified;
 
-    public Clients() {}
+    public Distributor() {}
 
-    public Clients(RegisterDTO request) {
+    public Distributor(RegisterDTO request) {
         this.name = request.name();
         this.email =request.email();
         this.password = request.password();
@@ -32,7 +32,6 @@ public class Clients implements ICredentials{
     public void setId(Long id) {
         this.id = id;
     }
-    
     @Override
     public String getName() {
         return name;
@@ -55,7 +54,7 @@ public class Clients implements ICredentials{
     public String getPassword() {
         return password;
     }
-    
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -70,4 +69,5 @@ public class Clients implements ICredentials{
     }
 
 }
+
 
