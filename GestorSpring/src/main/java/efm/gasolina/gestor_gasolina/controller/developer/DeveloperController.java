@@ -1,6 +1,7 @@
 package efm.gasolina.gestor_gasolina.controller.developer;
 
-import efm.gasolina.gestor_gasolina.model.sesion.RegisterModel;
+import efm.gasolina.gestor_gasolina.dto.sesion.LoginResponseDTO;
+import efm.gasolina.gestor_gasolina.model.sesion.ICredentials;
 import efm.gasolina.gestor_gasolina.service.sesion.SesionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +19,20 @@ public class DeveloperController {
     SesionService sesionService;
 
     @GetMapping("/pending")
-    public ResponseEntity<List<RegisterModel>> getPending() {
-        List<RegisterModel> pending = sesionService.getPendingUsers();
+    public ResponseEntity<List<LoginResponseDTO>> getPending() {
+        List<LoginResponseDTO> pending = sesionService.getPendingUsers();
         return ResponseEntity.ok(pending);
     }
 
     @PutMapping("/approve/{id}")
-    public ResponseEntity<?> approve(@PathVariable Long id) {
-        sesionService.approveUser(id);
+    public ResponseEntity<?> approve(@PathVariable Long id, @RequestParam String role) {
+        sesionService.approveUser(id, role);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/reject/{id}")
-    public ResponseEntity<?> reject(@PathVariable Long id) {
-        sesionService.rejectUser(id);
+    public ResponseEntity<?> reject(@PathVariable Long id, @RequestParam String role) {
+        sesionService.rejectUser(id, role);
         return ResponseEntity.ok().build();
     }
 }
