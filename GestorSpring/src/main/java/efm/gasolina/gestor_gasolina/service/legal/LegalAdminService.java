@@ -21,9 +21,9 @@ public class LegalAdminService {
     }
 
     public ResponseEntity changeGasValues(DecreesDTO decreesDto){
-        String name = decreesDto.getName();
-        Integer value = decreesDto.getValue();
-        String typeOfGas = decreesDto.getTypeOfGas();
+        String name = decreesDto.name();
+        Integer value = decreesDto.value();
+        String typeOfGas = decreesDto.typeOfGas();
         
         if (name.isBlank() || name.isEmpty() || name.equals(" ")) {
             return ResponseEntity.badRequest().body("Invalid Name");

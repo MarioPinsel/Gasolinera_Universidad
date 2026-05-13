@@ -1,13 +1,11 @@
 package efm.gasolina.gestor_gasolina.dto.sesion;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
 public record LoginResponseDTO(
-        String role,
-        String email,
-        Long idStation
-) {
-    public LoginResponseDTO(String role, String email, Long idStation) {
-        this.role = role;
-        this.email = email;
-        this.idStation = idStation;
-    }
-}
+        @NotBlank String role,
+        @Email String email,
+        @Positive Long idStation
+) {}

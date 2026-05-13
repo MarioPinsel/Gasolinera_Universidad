@@ -2,6 +2,7 @@ package efm.gasolina.gestor_gasolina.controller.sesiones;
 
 import efm.gasolina.gestor_gasolina.dto.sesion.RegisterDTO;
 import efm.gasolina.gestor_gasolina.service.sesion.SesionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +17,7 @@ public class RegisterController {
     SesionService sesionService;
 
     @PostMapping("/register")
-    public RegisterDTO register(@RequestBody RegisterDTO request) {
+    public RegisterDTO register(@Valid @RequestBody RegisterDTO request) {
         return sesionService.registro(request);
     }    
 }

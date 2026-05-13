@@ -13,14 +13,12 @@ import efm.gasolina.gestor_gasolina.dto.error.ErrorDTO;
 public class ExcpetionsHandler {
 
     @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<ErrorDTO> noSuchElement(Exception ex){
+    public ResponseEntity<ErrorDTO> noSuchElement(Exception ex) {
         ErrorDTO error = new ErrorDTO(
-            HttpStatus.NOT_FOUND.value(),
-            ex.getCause().getMessage().toString(),
-            ex.getMessage().toString()
+                HttpStatus.NOT_FOUND.value(),
+                ex.getCause() != null ? ex.getCause().getMessage() : "No additional cause",
+                ex.getMessage()
         );
-        return ResponseEntity.status(HttpStatus.NOT_FOUND.value()).body(error);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
-    
-    
 }
