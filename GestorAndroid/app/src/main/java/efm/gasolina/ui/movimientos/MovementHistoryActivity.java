@@ -13,11 +13,12 @@ public class MovementHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historial_movimientos);
 
-        String email = getIntent().getStringExtra("email");
+        String email    = getSharedPreferences("sesion", MODE_PRIVATE).getString("email", "");
+        Long stationId  = getSharedPreferences("sesion", MODE_PRIVATE).getLong("stationId", -1L);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainer,
-                        MovementHistoryFragment.newInstance(email))
+                        MovementHistoryFragment.newInstance(email, stationId))
                 .commit();
     }
 }

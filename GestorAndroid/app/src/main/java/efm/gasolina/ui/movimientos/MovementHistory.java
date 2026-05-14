@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
+import efm.gasolina.model.DTO.HistorialDTO;
 import efm.gasolina.model.sale.Movement;
 import efm.gasolina.network.ApiClient;
 import efm.gasolina.network.ApiService;
@@ -16,30 +17,22 @@ import retrofit2.Response;
 public class MovementHistory extends ViewModel {
 
     private final ApiService apiService;
-
-    private final MutableLiveData<List<Movement>> movimientos = new MutableLiveData<>();
+    private final MutableLiveData<List<HistorialDTO>> movimientos = new MutableLiveData<>();
     private final MutableLiveData<String> actionResult = new MutableLiveData<>();
 
     public MovementHistory() {
         apiService = ApiClient.getClient().create(ApiService.class);
     }
 
-    public LiveData<List<Movement>> getMovimientos() {
-        return movimientos;
-    }
+    public LiveData<List<HistorialDTO>> getMovimientos() { return movimientos; }
+    public LiveData<String> getActionResult()            { return actionResult; }
 
-    public LiveData<String> getActionResult() {
-        return actionResult;
-    }
-
-    // 🔍 CONSULTAR HISTORIAL
-    public void cargarHistorial(String operatorEmail) {
-        apiService.getHistorialMovimientos(operatorEmail)
-                .enqueue(new Callback<List<Movement>>() {
+    public void cargarHistorial(String email, Long stationId) {
+        apiService.getHistorialOperador(email, stationId)
+                .enqueue(new Callback<List<HistorialDTO>>() {
                     @Override
-                    public void onResponse(Call<List<Movement>> call,
-                                           Response<List<Movement>> response) {
-
+                    public void onResponse(Call<List<HistorialDTO>> call,
+                                           Response<List<HistorialDTO>> response) {
                         if (response.isSuccessful() && response.body() != null) {
                             movimientos.setValue(response.body());
                         } else {
@@ -48,7 +41,7 @@ public class MovementHistory extends ViewModel {
                     }
 
                     @Override
-                    public void onFailure(Call<List<Movement>> call, Throwable t) {
+                    public void onFailure(Call<List<HistorialDTO>> call, Throwable t) {
                         actionResult.setValue("ERROR:Sin conexión");
                     }
                 });

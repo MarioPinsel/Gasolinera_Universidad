@@ -2,6 +2,7 @@ package efm.gasolina.network;
 import java.util.List;
 import java.util.Map;
 
+import efm.gasolina.model.DTO.HistorialDTO;
 import efm.gasolina.model.delivery.Delivery;
 import efm.gasolina.model.delivery.DeliveryRequest;
 import efm.gasolina.model.auth.LoginRequest;
@@ -95,4 +96,9 @@ public interface ApiService {
 
     @POST("/pqrs/send")
     Call<Void> enviarPqrs(@Body PqrsRequest request);
+
+    @GET("historial/operador/{email}/{stationId}")
+    Call<List<HistorialDTO>> getHistorialOperador(
+            @Path("email") String email,
+            @Path("stationId") Long stationId);
 }

@@ -1,6 +1,6 @@
 package efm.gasolina.gestor_gasolina.service.Pqrs;
 
-import efm.gasolina.gestor_gasolina.dto.PqrsDTO;
+import efm.gasolina.gestor_gasolina.dto.pqrs.PqrsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

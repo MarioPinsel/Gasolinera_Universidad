@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import efm.gasolina.R;
 import efm.gasolina.model.sale.Movement;
@@ -18,13 +20,16 @@ import efm.gasolina.model.sale.Movement;
 public class MovementHistoryFragment extends Fragment {
 
     private MovementHistory viewModel;
-    private TextView tvHistorial;
+    private RecyclerView rvHistorial;
+    private TextView tvEmpty;
     private String operatorEmail;
+    private Long stationId;
 
-    public static MovementHistoryFragment newInstance(String email) {
+    public static MovementHistoryFragment newInstance(String email, Long stationId) {
         MovementHistoryFragment fragment = new MovementHistoryFragment();
         Bundle args = new Bundle();
         args.putString("email", email);
+        args.putLong("stationId", stationId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -43,33 +48,27 @@ public class MovementHistoryFragment extends Fragment {
 
         if (getArguments() != null) {
             operatorEmail = getArguments().getString("email");
+            stationId     = getArguments().getLong("stationId", -1L);
         }
 
-        tvHistorial = view.findViewById(R.id.tvHistorial);
+        rvHistorial = view.findViewById(R.id.rv_historial);
+        tvEmpty     = view.findViewById(R.id.tv_empty);
 
         viewModel = new ViewModelProvider(requireActivity())
                 .get(MovementHistory.class);
 
+        HistorialAdapter adapter = new HistorialAdapter();
+        rvHistorial.setLayoutManager(new LinearLayoutManager(requireContext()));
+        rvHistorial.setAdapter(adapter);
+
         viewModel.getMovimientos().observe(getViewLifecycleOwner(), lista -> {
-            StringBuilder texto = new StringBuilder();
-
-            for (Movement m : lista) {
-                texto.append("Tipo: ").append(m.getTipo()).append("\n")
-                        .append("Placa: ").append(m.getPlaca()).append("\n")
-                        .append("Volumen: ").append(m.getVolumen()).append("\n")
-                        .append("Total: $").append(m.getTotal()).append("\n")
-                        .append("Fecha: ").append(m.getFecha()).append("\n")
-                        .append("----------------------\n");
-            }
-
-            tvHistorial.setText(texto.toString());
+            adapter.setData(lista);
+            tvEmpty.setVisibility(lista.isEmpty() ? View.VISIBLE : View.GONE);
         });
 
-        viewModel.getActionResult().observe(getViewLifecycleOwner(), result -> {
-            Toast.makeText(requireContext(),
-                    result.substring(7), Toast.LENGTH_SHORT).show();
-        });
+        viewModel.getActionResult().observe(getViewLifecycleOwner(), result ->
+                Toast.makeText(requireContext(), result.substring(7), Toast.LENGTH_SHORT).show());
 
-        viewModel.cargarHistorial(operatorEmail);
+        viewModel.cargarHistorial(operatorEmail, stationId);
     }
 }
