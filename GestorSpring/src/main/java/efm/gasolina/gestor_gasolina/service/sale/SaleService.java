@@ -2,10 +2,12 @@ package efm.gasolina.gestor_gasolina.service.sale;
 
 import efm.gasolina.gestor_gasolina.dto.sale.SaleDTO;
 import efm.gasolina.gestor_gasolina.model.sale.Sale;
+import efm.gasolina.gestor_gasolina.model.sesion.Operator;
 import efm.gasolina.gestor_gasolina.model.sesion.RegisterModel;
 import efm.gasolina.gestor_gasolina.model.station.Station;
 import efm.gasolina.gestor_gasolina.repository.legal.LegalRepository;
 import efm.gasolina.gestor_gasolina.repository.sale.SaleRepository;
+import efm.gasolina.gestor_gasolina.repository.sesion.OperatorRepository;
 import efm.gasolina.gestor_gasolina.repository.sesion.SesionRepository;
 import efm.gasolina.gestor_gasolina.repository.station.StationRepository;
 import efm.gasolina.gestor_gasolina.repository.station.VehicleRepository;
@@ -23,6 +25,8 @@ public class SaleService {
     @Autowired
     private SesionRepository sesionRepository;
     @Autowired
+    private OperatorRepository operatorRepo;
+    @Autowired
     private StationRepository stationRepository;
     @Autowired
     private VehicleRepository vehicleRepository;
@@ -36,10 +40,10 @@ public class SaleService {
 
         loadCurrentPrices();
 
-        RegisterModel operator = sesionRepository.findByEmail(request.operatorEmail())
+        Operator operator = operatorRepo.findByEmail(request.operatorEmail())
                 .orElseThrow(() -> new RuntimeException("OPERATOR_NOT_FOUND"));
 
-        Station station = stationRepository.findById(operator.getIdStation())
+        Station station = stationRepository.findById(operator.getId_station())
                 .orElseThrow(() -> new RuntimeException("STATION_NOT_FOUND"));
 
         Integer pricePerGallon;
@@ -97,10 +101,10 @@ public class SaleService {
 
         loadCurrentPrices();
 
-        RegisterModel operator = sesionRepository.findByEmail(operatorEmail)
+        Operator operator = operatorRepo.findByEmail(operatorEmail)
                 .orElseThrow(() -> new RuntimeException("OPERATOR_NOT_FOUND"));
 
-        Station station = stationRepository.findById(operator.getIdStation())
+        Station station = stationRepository.findById(operator.getId_station())
                 .orElseThrow(() -> new RuntimeException("STATION_NOT_FOUND"));
 
         if (fuelType.equals("Corriente")) {

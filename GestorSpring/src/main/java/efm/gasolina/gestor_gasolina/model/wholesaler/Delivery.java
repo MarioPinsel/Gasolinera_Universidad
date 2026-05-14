@@ -3,6 +3,7 @@ package efm.gasolina.gestor_gasolina.model.wholesaler;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+import efm.gasolina.gestor_gasolina.model.sesion.Distributor;
 import efm.gasolina.gestor_gasolina.model.sesion.RegisterModel;
 import efm.gasolina.gestor_gasolina.model.station.Station;
 
@@ -76,11 +77,11 @@ public class Delivery {
             this.date = date;
         }
 
-        public RegisterModel getDistributor() {
+        public Distributor getDistributor() {
             return distributor;
         }
 
-        public void setDistributor(RegisterModel distributor) {
+        public void setDistributor(Distributor distributor) {
             this.distributor = distributor;
         }
 
@@ -98,7 +99,7 @@ public class Delivery {
 
     @ManyToOne
     @JoinColumn(name = "distributor_id")
-    private RegisterModel distributor;  
+    private Distributor distributor;  
 
     @ManyToOne
     @JoinColumn(name = "station_id")
@@ -108,7 +109,7 @@ public class Delivery {
 
     public Delivery(String vehicle, String conductor, Integer volume,
                     String fuelType, Integer price, Station station,
-                    RegisterModel distributor) {
+                    Distributor distributor) {
         this.vehicle = vehicle;
         this.conductor = conductor;
         this.volume = volume;

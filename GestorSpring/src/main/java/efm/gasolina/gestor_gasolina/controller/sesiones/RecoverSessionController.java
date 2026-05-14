@@ -10,32 +10,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import efm.gasolina.gestor_gasolina.dto.sesion.RecoverRequest;
-import efm.gasolina.gestor_gasolina.service.sesion.SesionService;
+import efm.gasolina.gestor_gasolina.dto.sesion.RecoverRequestDTO;
+import efm.gasolina.gestor_gasolina.service.sesion.SessionRecoverService;
 
 @RestController
 @RequestMapping("/sesion")
 public class RecoverSessionController {
 
-    private final SesionService sesionService;
+    private final SessionRecoverService sessionRecover;
 
-    public RecoverSessionController(SesionService sesionService){
-        this.sesionService = sesionService;
+    public RecoverSessionController(SessionRecoverService sessionRecover){
+        this.sessionRecover = sessionRecover;
     }
     
     @PostMapping("/forgotPassword")    
     public ResponseEntity<Map<String, Object>> forgotPassword(@RequestBody Map<String, Object> response){                  
-        return ResponseEntity.ok(sesionService.sendEmail(response.get("email").toString()));
+        return ResponseEntity.ok(sessionRecover.sendEmail(response.get("email").toString()));
     }
 
     @PostMapping("/codeVerifier")
-    public ResponseEntity<Object> codeVerifier(@RequestBody RecoverRequest request) {                
-        return sesionService.verifyCode(request);
+    public ResponseEntity<Object> codeVerifier(@RequestBody RecoverRequestDTO request) {                
+        return sessionRecover.verifyCode(request);
     }
 
     @PatchMapping("/changePassword")
-    public ResponseEntity<Object> postMethodName(@RequestBody RecoverRequest request) {            
-        return sesionService.changePassword(request);
+    public ResponseEntity<Object> postMethodName(@RequestBody RecoverRequestDTO request) {            
+        return sessionRecover.changePassword(request);
     }
     
     

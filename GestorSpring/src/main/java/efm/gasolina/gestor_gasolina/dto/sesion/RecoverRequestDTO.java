@@ -1,10 +1,10 @@
 package efm.gasolina.gestor_gasolina.dto.sesion;
 
-public class RecoverRequest {
+public class RecoverRequestDTO {
     private String token;
     private String value;
     
-    public RecoverRequest(){
+    public RecoverRequestDTO(){
         
     }
 

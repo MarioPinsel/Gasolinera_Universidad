@@ -7,6 +7,7 @@ import efm.gasolina.model.delivery.DeliveryRequest;
 import efm.gasolina.model.auth.LoginRequest;
 import efm.gasolina.model.auth.PasswordRequest;
 import efm.gasolina.model.auth.LoginResponse;
+import efm.gasolina.model.pqrs.PqrsRequest;
 import efm.gasolina.model.sale.Sale;
 import efm.gasolina.model.sale.SaleRequest;
 import efm.gasolina.model.sation.Station;
@@ -22,6 +23,7 @@ import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -43,10 +45,10 @@ public interface ApiService {
     Call<List<User>> getPendingUsers();
 
     @PUT("developer/approve/{id}")
-    Call<Void> approveUser(@Path("id") Long id);
+    Call<Void> approveUser(@Path("id") Long id,@Query("role") String role);
 
     @PUT("developer/reject/{id}")
-    Call<Void> rejectUser(@Path("id") Long id);
+    Call<Void> rejectUser(@Path("id") Long id, @Query("role") String role);
 
     @GET("/consult/prices/{zone}/{type}/{vehicle}")
     Call<List<PricesRequest>> getPrices(
@@ -91,4 +93,6 @@ public interface ApiService {
     @POST("/legal/newDecree")
     Call<Void>guardarDecreto(@Body Map<String, Object> body);
 
+    @POST("/pqrs/send")
+    Call<Void> enviarPqrs(@Body PqrsRequest request);
 }

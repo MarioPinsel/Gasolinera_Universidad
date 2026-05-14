@@ -1,5 +1,7 @@
 package efm.gasolina.ui.developer;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 import efm.gasolina.model.auth.User;
 import efm.gasolina.network.ApiClient;
@@ -57,8 +60,8 @@ public class DeveloperViewModel extends ViewModel {
         });
     }
 
-    public void aprobar(Long id) {
-        apiService.approveUser(id).enqueue(new Callback<Void>() {
+    public void aprobar(Long id, String role) {
+        apiService.approveUser(id, role).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
@@ -69,12 +72,14 @@ public class DeveloperViewModel extends ViewModel {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 actionResult.postValue("ERROR:Sin conexión");
+                Log.e("------------", t.getMessage());
+
             }
         });
     }
 
-    public void rechazar(Long id) {
-        apiService.rejectUser(id).enqueue(new Callback<Void>() {
+    public void rechazar(Long id, String role) {
+        apiService.rejectUser(id, role).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
