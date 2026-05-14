@@ -1,30 +1,12 @@
 package efm.gasolina.gestor_gasolina.dto.station;
 
-public class StationRequestDTO {
-    private String franchise;
-    private String price;
+import jakarta.validation.constraints.NotNull;
 
-    public StationRequestDTO() {
-    }
-
+public record StationRequestDTO(
+        @NotNull String franchise,
+        @NotNull String price
+) {
     public StationRequestDTO(String franchise, Integer price) {
-        this.franchise = franchise;
-        this.price = "$"+ price.toString();
-    }
-
-    public String getFranchise() {
-        return franchise;
-    }
-
-    public void setFranchise(String franchise) {
-        this.franchise = franchise;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
+        this(franchise, "$" + price);
     }
 }

@@ -1,11 +1,13 @@
 package efm.gasolina.gestor_gasolina.dto.wholesaler;
 
+import jakarta.validation.constraints.*;
+
 public record DeliveryDTO(
-    String vehicle,
-    String conductor,
-    Integer volume,
-    String fuelType,
-    Integer price, 
-    Long stationId,
-    String distributorEmail
+    @NotBlank String vehicle,
+    @NotEmpty String conductor,
+    @Positive Integer volume,
+    @NotEmpty String fuelType,
+    @Positive Integer price,
+    @PositiveOrZero Long stationId,
+    @Email String distributorEmail
 ) {}
