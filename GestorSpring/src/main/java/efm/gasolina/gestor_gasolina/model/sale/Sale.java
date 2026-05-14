@@ -1,6 +1,6 @@
 package efm.gasolina.gestor_gasolina.model.sale;
 
-import efm.gasolina.gestor_gasolina.model.sesion.RegisterModel;
+import efm.gasolina.gestor_gasolina.model.sesion.Operator;
 import efm.gasolina.gestor_gasolina.model.station.Station;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -26,14 +26,14 @@ public class Sale {
 
     @ManyToOne
     @JoinColumn(name = "operator_id")
-    private RegisterModel operator;
+    private Operator operator;
 
     public Sale() {
     }
 
     public Sale(String fuelType, String vehicleType, Integer volume,
             Integer pricePerGallon, String plate,
-            Station station, RegisterModel operator) {
+            Station station, Operator operator) {
         this.fuelType = fuelType;
         this.vehicleType = vehicleType;
         this.volume = volume;
@@ -77,7 +77,7 @@ public class Sale {
         return station;
     }
 
-    public RegisterModel getOperator() {
+    public Operator getOperator() {
         return operator;
     }
 
@@ -121,7 +121,7 @@ public class Sale {
         this.station = station;
     }
 
-    public void setOperator(RegisterModel operator) {
+    public void setOperator(Operator operator) {
         this.operator = operator;
     }
 }

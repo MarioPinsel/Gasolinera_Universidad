@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 
 import efm.gasolina.gestor_gasolina.dto.wholesaler.DeliveryDTO;
 import efm.gasolina.gestor_gasolina.handler.ExceedsCapacityException;
-import efm.gasolina.gestor_gasolina.model.sesion.RegisterModel;
+import efm.gasolina.gestor_gasolina.model.sesion.Distributor;
 import efm.gasolina.gestor_gasolina.model.station.Station;
 import efm.gasolina.gestor_gasolina.model.wholesaler.Delivery;
-import efm.gasolina.gestor_gasolina.repository.sesion.SesionRepository;
+import efm.gasolina.gestor_gasolina.repository.sesion.DistributorRepository;
 import efm.gasolina.gestor_gasolina.repository.station.StationRepository;
 import efm.gasolina.gestor_gasolina.repository.wholesaler.DeliveryRepository;
 
@@ -24,14 +24,14 @@ public class DeliveryService {
     private StationRepository stationRepository;
 
     @Autowired
-    private SesionRepository sesionRepository;
+    private DistributorRepository distributorRepo;
 
     public Delivery registerDelivery(DeliveryDTO request) {
 
         Station station = stationRepository.findById(request.stationId())
                 .orElseThrow(() -> new RuntimeException("STATION_NOT_FOUND"));
 
-        RegisterModel distributor = sesionRepository.findByEmail(request.distributorEmail())
+        Distributor distributor = distributorRepo.findByEmail(request.distributorEmail())
                 .orElseThrow(() -> new RuntimeException("DISTRIBUTOR_NOT_FOUND"));
 
         if (request.fuelType().equals("Corriente")) {
@@ -57,7 +57,7 @@ public class DeliveryService {
     }
 
     public List<Delivery> getDeliveriesByDistributor(String email) {
-        RegisterModel distributor = sesionRepository.findByEmail(email)
+        Distributor distributor = distributorRepo.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("DISTRIBUTOR_NOT_FOUND"));
         return deliveryRepository.findByDistributor(distributor);
     }
