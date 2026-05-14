@@ -34,7 +34,7 @@ public class StationDeliveryAdapter extends RecyclerView.Adapter<StationDelivery
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_delivery_action, parent, false); // con botones
+                .inflate(R.layout.item_delivery_action, parent, false);
         return new ViewHolder(view);
     }
 
@@ -44,11 +44,18 @@ public class StationDeliveryAdapter extends RecyclerView.Adapter<StationDelivery
 
         holder.tvVehicle.setText("🚛 " + d.getVehicle());
         holder.tvConductor.setText("Conductor: " + d.getConductor());
-        holder.tvVolume.setText(d.getVolume() + " gal");
-        holder.tvFuelType.setText(d.getFuelType());
-        holder.tvDate.setText(d.getDate());
+        holder.tvVolume.setText("Volumen: " + d.getVolume() + " gal");
+        holder.tvFuelType.setText("Combustible: " + d.getFuelType());
+        holder.tvDate.setText("Fecha: " + d.getDate());
         holder.tvDistributor.setText("📦 " + (d.getDistributor() != null
                 ? d.getDistributor().getName() : "—"));
+
+
+        if (d.getPrice() != null) {
+            holder.tvPrice.setText("💰 Precio: $" + d.getPrice());
+        } else {
+            holder.tvPrice.setText("💰 Precio: No especificado");
+        }
 
         holder.btnAccept.setOnClickListener(v -> listener.onAccept(d));
         holder.btnReject.setOnClickListener(v -> listener.onReject(d));
@@ -66,19 +73,21 @@ public class StationDeliveryAdapter extends RecyclerView.Adapter<StationDelivery
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvVehicle, tvConductor, tvVolume, tvFuelType, tvDistributor, tvDate;
+        TextView tvVehicle, tvConductor, tvVolume,
+                tvFuelType, tvDistributor, tvDate, tvPrice;
         MaterialButton btnAccept, btnReject;
 
         ViewHolder(View itemView) {
             super(itemView);
-            tvVehicle = itemView.findViewById(R.id.tv_vehicle);
-            tvConductor = itemView.findViewById(R.id.tv_conductor);
-            tvVolume = itemView.findViewById(R.id.tv_volume);
-            tvFuelType = itemView.findViewById(R.id.tv_fuel_type);
+            tvVehicle     = itemView.findViewById(R.id.tv_vehicle);
+            tvConductor   = itemView.findViewById(R.id.tv_conductor);
+            tvVolume      = itemView.findViewById(R.id.tv_volume);
+            tvFuelType    = itemView.findViewById(R.id.tv_fuel_type);
             tvDistributor = itemView.findViewById(R.id.tv_distributor);
-            tvDate = itemView.findViewById(R.id.tv_date);
-            btnAccept = itemView.findViewById(R.id.btn_accept);
-            btnReject = itemView.findViewById(R.id.btn_reject);
+            tvDate        = itemView.findViewById(R.id.tv_date);
+            tvPrice       = itemView.findViewById(R.id.tv_price);
+            btnAccept     = itemView.findViewById(R.id.btn_accept);
+            btnReject     = itemView.findViewById(R.id.btn_reject);
         }
     }
 }
