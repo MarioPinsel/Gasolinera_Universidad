@@ -57,6 +57,8 @@
             android:exported="false"/>
         <activity android:name=".ui.client.ClientActivity"
             android:exported="false"/>
+        <activity android:name=".ui.client.pqrs.PqrsActivity"
+            android:exported="false" />
 <!--        <activity android:name=".ui.client.history.HistorialMovimientosActivity"-->
 <!--            android:exported="false"/>-->
         <activity

@@ -7,6 +7,7 @@ import efm.gasolina.model.delivery.DeliveryRequest;
 import efm.gasolina.model.auth.LoginRequest;
 import efm.gasolina.model.auth.PasswordRequest;
 import efm.gasolina.model.auth.LoginResponse;
+import efm.gasolina.model.pqrs.PqrsRequest;
 import efm.gasolina.model.sale.Sale;
 import efm.gasolina.model.sale.SaleRequest;
 import efm.gasolina.model.sation.Station;
@@ -92,4 +93,6 @@ public interface ApiService {
     @POST("/legal/newDecree")
     Call<Void>guardarDecreto(@Body Map<String, Object> body);
 
+    @POST("/pqrs/send")
+    Call<Void> enviarPqrs(@Body PqrsRequest request);
 }
