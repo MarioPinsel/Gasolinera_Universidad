@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.Map;
 
 import efm.gasolina.model.DTO.HistorialDTO;
+import efm.gasolina.model.clients.ClientHistoryDTO;
+import efm.gasolina.model.clients.ClientSaleRequest;
 import efm.gasolina.model.delivery.Delivery;
 import efm.gasolina.model.delivery.DeliveryRequest;
 import efm.gasolina.model.auth.LoginRequest;
@@ -101,4 +103,9 @@ public interface ApiService {
     Call<List<HistorialDTO>> getHistorialOperador(
             @Path("email") String email,
             @Path("stationId") Long stationId);
+    @POST("client/sale")
+    Call<Void> realizarCompra(@Body ClientSaleRequest request);
+
+    @GET("client/history/{email}")
+    Call<List<ClientHistoryDTO>> getClientHistory(@Path("email") String email);
 }

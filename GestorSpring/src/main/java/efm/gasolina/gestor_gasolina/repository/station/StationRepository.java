@@ -25,4 +25,6 @@ public interface StationRepository extends JpaRepository<Station, Long> {
 
     @Query("SELECT s.diesel_price_difference FROM Station s WHERE s.id = ?1")
     Optional<Integer> findDieselDiffByStation(Long id);
+
+    Optional<Station> findByBrandAndZone(String brand, String zone);
 }

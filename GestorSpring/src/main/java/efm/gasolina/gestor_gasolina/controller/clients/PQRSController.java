@@ -1,6 +1,6 @@
-package efm.gasolina.gestor_gasolina.controller.pqrs;
+package efm.gasolina.gestor_gasolina.controller.clients;
 
-import efm.gasolina.gestor_gasolina.dto.pqrs.PqrsDTO;
+import efm.gasolina.gestor_gasolina.dto.clients.pqrs.PqrsDTO;
 import efm.gasolina.gestor_gasolina.service.Pqrs.PqrsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package efm.gasolina.gestor_gasolina.dto.pqrs;
+package efm.gasolina.gestor_gasolina.dto.clients.pqrs;
 
 public record PqrsDTO(
         String email,

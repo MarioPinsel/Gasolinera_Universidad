@@ -46,16 +46,31 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_historial_movimientos"
+        android:id="@+id/btn_comprar"
         android:layout_width="280dp"
         android:layout_height="56dp"
-        android:text="Ver historial de movimientos"
+        android:text="Comprar gasolina"
         android:textSize="14sp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
         app:backgroundTint="#1565C0"
         style="@style/Widget.MaterialComponents.Button"
         app:layout_constraintTop_toBottomOf="@id/btn_revision_precios"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_historial_movimientos"
+        android:layout_width="280dp"
+        android:layout_height="56dp"
+        android:text="Ver historial"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        app:strokeColor="#1565C0"
+        app:strokeWidth="2dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintTop_toBottomOf="@id/btn_comprar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
