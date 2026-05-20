@@ -20,6 +20,7 @@ public class Station {
     private Integer regular_capacity;     
     private Integer diesel_price_difference;
     private Integer regular_price_difference;
+    private String address;
 
     public Long getId() {
         return id;
@@ -91,5 +92,8 @@ public class Station {
     public void setRegular_capacity(Integer regular_capacity) {
         this.regular_capacity = regular_capacity;
     }
+    public String getAddress() { return address; }
+    
+    public void setAddress(String address) { this.address = address; }
 
 }

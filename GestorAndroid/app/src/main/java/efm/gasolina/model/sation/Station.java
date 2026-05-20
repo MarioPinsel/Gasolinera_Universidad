@@ -7,6 +7,7 @@ public class Station {
     private String brand;
     private Integer price_difference;
     private Integer quantity;
+    private String address;
 
     public Long getId() { return id; }
     public String getType() { return type; }
@@ -21,4 +22,8 @@ public class Station {
     public void setBrand(String brand) { this.brand = brand; }
     public void setPrice_difference(Integer price_difference) { this.price_difference = price_difference; }
     public void setQuantity(Integer quantity) { this.quantity = quantity; }
+
+    public String getAddress() { return address; }
+
+    public void setAddress(String address) { this.address = address; }
 }
