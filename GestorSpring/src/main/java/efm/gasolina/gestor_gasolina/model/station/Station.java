@@ -14,12 +14,14 @@ public class Station {
 
     private String zone;
     private String brand;
-    private Integer diesel_quantity;    
-    private Integer diesel_capacity;   
-    private Integer regular_quantity;  
-    private Integer regular_capacity;     
+    private Integer diesel_quantity;
+    private Integer diesel_capacity;
+    private Integer regular_quantity;
+    private Integer regular_capacity;
     private Integer diesel_price_difference;
     private Integer regular_price_difference;
+    private Double latitude;
+    private Double longitude;
 
     public Long getId() {
         return id;
@@ -76,6 +78,7 @@ public class Station {
     public void setRegular_price_difference(Integer regular_price_difference) {
         this.regular_price_difference = regular_price_difference;
     }
+
     public Integer getDiesel_capacity() {
         return diesel_capacity;
     }
@@ -90,6 +93,22 @@ public class Station {
 
     public void setRegular_capacity(Integer regular_capacity) {
         this.regular_capacity = regular_capacity;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
 }
