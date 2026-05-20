@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -14,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gestor_gasolina"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.client.stations.StationMapActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.operator.AvailabilityActivity"
             android:exported="false" />
@@ -53,14 +58,16 @@
         <activity
             android:name=".ui.station.RevisionDeliveriesActivity"
             android:exported="false" />
-        <activity android:name=".ui.movimientos.MovementHistoryActivity"
-            android:exported="false"/>
-        <activity android:name=".ui.client.ClientActivity"
-            android:exported="false"/>
-        <activity android:name=".ui.client.pqrs.PqrsActivity"
+        <activity
+            android:name=".ui.movimientos.MovementHistoryActivity"
             android:exported="false" />
-<!--        <activity android:name=".ui.client.history.HistorialMovimientosActivity"-->
-<!--            android:exported="false"/>-->
+        <activity
+            android:name=".ui.client.ClientActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.client.pqrs.PqrsActivity"
+            android:exported="false" /> <!-- <activity android:name=".ui.client.history.HistorialMovimientosActivity" -->
+        <!-- android:exported="false"/> -->
         <activity
             android:name=".ui.home.MainActivity"
             android:exported="true">
