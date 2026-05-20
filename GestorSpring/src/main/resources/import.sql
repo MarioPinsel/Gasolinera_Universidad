@@ -1,6 +1,6 @@
 INSERT INTO station (zone, brand, diesel_capacity, diesel_quantity, regular_capacity, regular_quantity, diesel_price_difference, regular_price_difference, latitude, longitude) VALUES ('Ciudad Bolivar', 'Terpel', 45000, 0, 35000, 0, 250, 180, 4.546924329204683, -74.13717606438114);
 
-INSERT INTO station (zone, brand, diesel_capacity, diesel_quantity, regular_capacity, regular_quantity, diesel_price_difference, regular_price_difference, latitude, longitude) VALUES ('Ciudad Bolivar', 'Primax', 38000, 0, 28000, 0, 300, 220, 4.554445464361865, -74.13615091986742);
+INSERT INTO station (zone, brand, diesel_capacity, diesel_quantity, regular_capacity, regular_quantity, diesel_price_difference, regular_price_difference, latitude, longitude) VALUES ('Ciudad Bolivar', 'Primax', 38000, 0, 28000, 0, 300, 220, 4.589313764315432, -74.16166695750607);
 
 INSERT INTO station (zone, brand, diesel_capacity, diesel_quantity, regular_capacity, regular_quantity, diesel_price_difference, regular_price_difference, latitude, longitude) VALUES ('Ciudad Bolivar', 'Biomax', 52000, 0, 32000, 0, 150, 100, 4.539912539233625, -74.13282394528547);
 
