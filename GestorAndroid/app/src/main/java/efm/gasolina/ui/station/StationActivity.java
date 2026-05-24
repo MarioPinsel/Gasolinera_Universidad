@@ -10,11 +10,12 @@ import com.google.android.material.button.MaterialButton;
 import efm.gasolina.R;
 import efm.gasolina.ui.operator.AvailabilityActivity;
 import efm.gasolina.ui.operator.OperatorActivity;
+import efm.gasolina.ui.operator.PqrsOperatorActivity;
 import efm.gasolina.ui.movimientos.MovementHistoryActivity;
 
 public class StationActivity extends AppCompatActivity {
 
-    private MaterialButton btnRevisionEntregas, btnRealizarVenta, btnDisponibilidad, btnHistorialMovimientos;
+    private MaterialButton btnRevisionEntregas, btnRealizarVenta, btnDisponibilidad, btnHistorialMovimientos, btnPqrs;
     private String operatorEmail;
 
     @Override
@@ -27,6 +28,7 @@ public class StationActivity extends AppCompatActivity {
         btnRealizarVenta        = findViewById(R.id.btn_realizar_venta);
         btnDisponibilidad       = findViewById(R.id.btn_disponibilidad);
         btnHistorialMovimientos = findViewById(R.id.btn_historial_movimientos);
+        btnPqrs                 = findViewById(R.id.btn_pqrs);
 
         btnRevisionEntregas.setOnClickListener(v ->
                 startActivity(new Intent(this, RevisionDeliveriesActivity.class)));
@@ -48,5 +50,8 @@ public class StationActivity extends AppCompatActivity {
             intent.putExtra("email", operatorEmail);
             startActivity(intent);
         });
+
+        btnPqrs.setOnClickListener(v ->
+                startActivity(new Intent(this, PqrsOperatorActivity.class)));
     }
 }

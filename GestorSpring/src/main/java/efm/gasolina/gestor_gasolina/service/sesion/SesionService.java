@@ -103,28 +103,42 @@ public class SesionService {
 
         if (role.equals("OPERADOR")) {
             Operator operator = (Operator) currentUser;
-            return new LoginResponseDTO(operator.getId(),role, currentUser.getEmail(), operator.getId_station(), operator.getName());
+            return new LoginResponseDTO(
+                    operator.getId(),
+                    role,
+                    currentUser.getEmail(),
+                    operator.getId_station(),
+                    operator.getName(),
+                    operator.getBrand()  // <- agregar
+            );
         }
-        return new LoginResponseDTO(currentUser.getId(), role, currentUser.getEmail(), null, currentUser.getName());
+        return new LoginResponseDTO(
+                currentUser.getId(),
+                role,
+                currentUser.getEmail(),
+                null,
+                currentUser.getName(),
+                null  // <- agregar null para los demás roles
+        );
     }
 
     public List<LoginResponseDTO> getPendingUsers() {
         List<LoginResponseDTO> pending = new ArrayList<>();
 
         clientsRepo.findByVerified("PENDING").stream()
-                .map(c -> new LoginResponseDTO(c.getId(), "CLIENTE", c.getEmail(), null, c.getName()))
+                .map(c -> new LoginResponseDTO(c.getId(), "CLIENTE", c.getEmail(), null, c.getName(), null))
                 .forEach(pending::add);
 
         operatorRepo.findByVerified("PENDING").stream()
-                .map(o -> new LoginResponseDTO(o.getId(),"OPERADOR", o.getEmail(), o.getId_station(), o.getName()))
+                .map(o -> new LoginResponseDTO(o.getId(),"OPERADOR", o.getEmail(), o.getId_station(), o.getName(), o.getBrand()))
                 .forEach(pending::add);
 
         distributorRepo.findByVerified("PENDING").stream()
-                .map(d -> new LoginResponseDTO(d.getId(),"DISTRIBUIDOR", d.getEmail(), null, d.getName()))
+                .map(d -> new LoginResponseDTO(d.getId(),"DISTRIBUIDOR", d.getEmail(), null, d.getName(), null))
                 .forEach(pending::add);
 
         legalAdminRepo.findByVerified("PENDING").stream()
-                .map(a -> new LoginResponseDTO(a.getId(),"ADMINISTRADORLEGAL", a.getEmail(), null, a.getName()))
+                .map(a -> new LoginResponseDTO(a.getId(),"ADMINISTRADORLEGAL", a.getEmail(), null, a.getName(), null))
                 .forEach(pending::add);
 
         return pending;

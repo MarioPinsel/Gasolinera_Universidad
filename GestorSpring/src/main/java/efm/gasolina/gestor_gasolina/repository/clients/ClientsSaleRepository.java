@@ -1,4 +1,4 @@
-package efm.gasolina.gestor_gasolina.repository.clientsale;
+package efm.gasolina.gestor_gasolina.repository.clients;
 
 import efm.gasolina.gestor_gasolina.model.clients.ClientsSale;
 import org.springframework.data.jpa.repository.JpaRepository;
