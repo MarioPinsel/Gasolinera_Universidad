@@ -5,7 +5,7 @@ import efm.gasolina.gestor_gasolina.dto.clients.ClientSaleDTO;
 import efm.gasolina.gestor_gasolina.model.clients.ClientsSale;
 import efm.gasolina.gestor_gasolina.model.sesion.Clients;
 import efm.gasolina.gestor_gasolina.model.station.Station;
-import efm.gasolina.gestor_gasolina.repository.clientsale.ClientsSaleRepository;
+import efm.gasolina.gestor_gasolina.repository.clients.ClientsSaleRepository;
 import efm.gasolina.gestor_gasolina.repository.sesion.ClientsRepository;
 import efm.gasolina.gestor_gasolina.repository.station.StationRepository;
 import jakarta.transaction.Transactional;

@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
                     .edit()
                     .putString("rol", user.getRol())
                     .putString("email", user.getEmail())
+                    .putString("brand", user.getBrand() != null ? user.getBrand() : "")
                     .putLong("stationId", user.getIdStation() != null ? user.getIdStation() : -1L)
                     .apply();
 

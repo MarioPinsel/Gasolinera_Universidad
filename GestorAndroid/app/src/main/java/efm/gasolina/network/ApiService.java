@@ -11,6 +11,8 @@ import efm.gasolina.model.auth.LoginRequest;
 import efm.gasolina.model.auth.PasswordRequest;
 import efm.gasolina.model.auth.LoginResponse;
 import efm.gasolina.model.pqrs.PqrsRequest;
+import efm.gasolina.model.pqrs.Pqrs;
+import efm.gasolina.model.pqrs.PqrsResponseRequest;
 import efm.gasolina.model.sale.Sale;
 import efm.gasolina.model.sale.SaleRequest;
 import efm.gasolina.model.sation.Station;
@@ -98,6 +100,15 @@ public interface ApiService {
 
     @POST("/pqrs/send")
     Call<Void> enviarPqrs(@Body PqrsRequest request);
+
+    @GET("/pqrs/pending/{brand}")
+    Call<List<Pqrs>> getPendingPqrs(@Path("brand") String brand);
+
+    @PUT("/pqrs/{id}/respond")
+    Call<Void> respondPqrs(@Path("id") Long id, @Body PqrsResponseRequest request);
+
+    @GET("/pqrs/responded/{email}")
+    Call<List<Pqrs>> getRespondedPqrs(@Path("email") String email);
 
     @GET("historial/operador/{email}/{stationId}")
     Call<List<HistorialDTO>> getHistorialOperador(

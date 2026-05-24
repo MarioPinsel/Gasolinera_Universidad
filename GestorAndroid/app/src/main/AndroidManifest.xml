@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -16,6 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gestor_gasolina"
         android:usesCleartextTraffic="true">
+        <service
+            android:name=".service.PqrsNotificationService"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.operator.PqrsOperatorActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.client.stations.StationMapActivity"
             android:exported="false" />
@@ -64,7 +72,8 @@
         <activity
             android:name=".ui.client.ClientActivity"
             android:exported="false" />
-
+        <activity android:name=".ui.client.pqrs.PqrsActivity"
+            android:exported="false" />
         <activity android:name=".ui.client.sales.ClientSaleActivity"
             android:exported="false"/>
         <activity android:name=".ui.client.sales.ClientHistoryActivity"
