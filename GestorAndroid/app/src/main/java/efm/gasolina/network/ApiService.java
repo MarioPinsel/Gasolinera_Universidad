@@ -119,4 +119,7 @@ public interface ApiService {
 
     @GET("client/history/{email}")
     Call<List<ClientHistoryDTO>> getClientHistory(@Path("email") String email);
+
+    @GET("sale/reporting/{id}")
+    Call<Void> generateStationReport(@Path("id") Long id);
 }
