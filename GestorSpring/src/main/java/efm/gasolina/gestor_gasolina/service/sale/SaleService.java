@@ -3,12 +3,10 @@ package efm.gasolina.gestor_gasolina.service.sale;
 import efm.gasolina.gestor_gasolina.dto.sale.SaleDTO;
 import efm.gasolina.gestor_gasolina.model.sale.Sale;
 import efm.gasolina.gestor_gasolina.model.sesion.Operator;
-import efm.gasolina.gestor_gasolina.model.sesion.RegisterModel;
 import efm.gasolina.gestor_gasolina.model.station.Station;
 import efm.gasolina.gestor_gasolina.repository.legal.LegalRepository;
 import efm.gasolina.gestor_gasolina.repository.sale.SaleRepository;
 import efm.gasolina.gestor_gasolina.repository.sesion.OperatorRepository;
-import efm.gasolina.gestor_gasolina.repository.sesion.SesionRepository;
 import efm.gasolina.gestor_gasolina.repository.station.StationRepository;
 import efm.gasolina.gestor_gasolina.repository.station.VehicleRepository;
 
@@ -22,8 +20,6 @@ public class SaleService {
 
     @Autowired
     private SaleRepository saleRepository;
-    @Autowired
-    private SesionRepository sesionRepository;
     @Autowired
     private OperatorRepository operatorRepo;
     @Autowired
